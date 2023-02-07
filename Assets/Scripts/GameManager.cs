@@ -8,10 +8,9 @@ public class GameManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance is null)
+        if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
             return;
         }
         Destroy(gameObject);
@@ -25,5 +24,23 @@ public class GameManager : MonoBehaviour
     public bool CanSpawnEnemy()
     {
         return m_enemiesOnScreen < m_enemyLimit;
+    }
+
+    private bool m_gameIsPaused = false;
+
+    public void PauseGame()
+    {
+        if (!m_gameIsPaused)
+        {
+            Time.timeScale = 0;
+            m_gameIsPaused = true;
+            UIManager.Instance.OpenPauseView();
+        }
+        else
+        {
+            Time.timeScale = 1;
+            m_gameIsPaused = false;
+            UIManager.Instance.ClosePauseView();
+        }
     }
 }

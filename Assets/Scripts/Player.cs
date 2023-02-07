@@ -9,10 +9,9 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance is null)
+        if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
             return;
         }
         Destroy(gameObject);
@@ -29,8 +28,17 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        Pause();
         Move();
         Attack();
+    }
+
+    private void Pause()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            GameManager.Instance.PauseGame();
+        }
     }
 
     private void Move()
