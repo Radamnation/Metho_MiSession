@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IPoolable
+public interface ICollidable
 {
-    public void Repool();
+    public void Collide(Player _player);
 }

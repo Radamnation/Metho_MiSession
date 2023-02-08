@@ -24,13 +24,25 @@ public class Player : MonoBehaviour
 
     [SerializeField] private List<PlayerAttack> m_attackList;
 
+    [SerializeField] private int m_maxHealth = 10;
+    private int m_currentHealth;
+
     private float m_attackTimer;
+
+    private int m_currentLevel = 1;
+    private int m_currentExperience = 0;
+    private int m_nextLevel = 8;
+
+    public int CurrentLevel { get => m_currentLevel; }
+    public int CurrentExperience { get => m_currentExperience; }
+    public int NextLevel { get => m_nextLevel; }
 
     private void Start()
     {
         m_animator = GetComponent<Animator>();
-
+        m_currentHealth = m_maxHealth;
         m_attackTimer = m_attackSpeed;
+        UIManager.Instance.UpdateExperience();
     }
 
     private void Update()
@@ -78,6 +90,46 @@ public class Player : MonoBehaviour
         {
             m_attackList.ForEach(attack => attack.Execute());
             m_attackTimer = m_attackSpeed;
+        }
+    }
+
+    public void TakeDamage(int _damage)
+    {
+        m_currentHealth -= _damage;
+        if (m_currentHealth <= 0)
+        {
+            Death();
+        }
+    }
+
+    private void Death()
+    {
+        Destroy(gameObject);
+    }
+
+    public void IncreaseExperience(int _experience)
+    {
+        m_currentExperience += _experience;
+        if (m_currentExperience >= m_nextLevel)
+        {
+            LevelUp();
+        }
+        UIManager.Instance.UpdateExperience();
+    }
+
+    private void LevelUp()
+    {
+        m_currentLevel++;
+        m_currentExperience = 0;
+        m_nextLevel = (int) (m_nextLevel * 1.5f);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        var collidable = collision.GetComponent<ICollidable>();
+        if (collidable != null)
+        {
+            collidable.Collide(this);
         }
     }
 }

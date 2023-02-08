@@ -131,6 +131,11 @@ public class UIManager : MonoBehaviour
         SwitchView(m_previousView);
     }
 
+    public void UpdateExperience()
+    {
+        m_mainView.UpdateExperience();
+    }
+
     public void ReturnToDesktop()
     {
 #if UNITY_EDITOR

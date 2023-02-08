@@ -2,9 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : PoolableObject
+public class Enemy : PoolableObject, ICollidable
 {
     [SerializeField] private float m_speed = 2f;
+    [SerializeField] private int m_damage = 1;
 
     private bool m_canMove = true;
 
@@ -61,7 +62,13 @@ public class Enemy : PoolableObject
     public IEnumerator RepoolAfterDelay()
     {
         yield return new WaitForSeconds(0.5f);
+        PoolManager.Instance.GetPickup(transform.position, Quaternion.identity);
         Repool();
+    }
+
+    public void Collide(Player _player)
+    {
+        _player.TakeDamage(m_damage);
     }
 
     private void OnBecameVisible()
