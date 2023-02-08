@@ -17,13 +17,20 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
-    [SerializeField] private float m_speed = 8f;
-
     private Animator m_animator;
+
+    [SerializeField] private float m_movementSpeed = 4f;
+    [SerializeField] private float m_attackSpeed = 0.5f;
+
+    [SerializeField] private List<PlayerAttack> m_attackList;
+
+    private float m_attackTimer;
 
     private void Start()
     {
         m_animator = GetComponent<Animator>();
+
+        m_attackTimer = m_attackSpeed;
     }
 
     private void Update()
@@ -48,14 +55,14 @@ public class Player : MonoBehaviour
         
         if (verticalMovement != 0)
         {
-            transform.Translate(new Vector3(0, verticalMovement, 0) * m_speed * Time.deltaTime, Space.World);
+            transform.Translate(new Vector3(0, verticalMovement, 0) * m_movementSpeed * Time.deltaTime, Space.World);
             m_animator.SetFloat("MoveY", verticalMovement);
             m_animator.SetFloat("MoveX", 0);
         }
 
         if (horizontalMovement != 0)
         {
-            transform.Translate(new Vector3(horizontalMovement, 0, 0) * m_speed * Time.deltaTime, Space.World);
+            transform.Translate(new Vector3(horizontalMovement, 0, 0) * m_movementSpeed * Time.deltaTime, Space.World);
             transform.localScale = new Vector3(-horizontalMovement, 1, 1);
             m_animator.SetFloat("MoveX", horizontalMovement);
             m_animator.SetFloat("MoveY", 0);
@@ -66,6 +73,11 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-
+        m_attackTimer -= Time.deltaTime;
+        if (m_attackTimer <= 0 && GameManager.Instance.EnemyList.Count > 0)
+        {
+            m_attackList.ForEach(attack => attack.Execute());
+            m_attackTimer = m_attackSpeed;
+        }
     }
 }

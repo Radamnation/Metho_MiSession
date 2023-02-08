@@ -17,16 +17,16 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] private int m_enemyLimit;
-    private int m_enemiesOnScreen;
+    private List<Enemy> m_enemyList = new List<Enemy>();
 
-    public int EnemiesOnScreen { get => m_enemiesOnScreen; set => m_enemiesOnScreen = value; }
+    private bool m_gameIsPaused = false;
+
+    public List<Enemy> EnemyList { get => m_enemyList; set => m_enemyList = value; }
 
     public bool CanSpawnEnemy()
     {
-        return m_enemiesOnScreen < m_enemyLimit;
+        return m_enemyList.Count < m_enemyLimit;
     }
-
-    private bool m_gameIsPaused = false;
 
     public void PauseGame()
     {

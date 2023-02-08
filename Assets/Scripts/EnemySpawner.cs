@@ -21,7 +21,7 @@ public class EnemySpawner : MonoBehaviour
         if (timer <= 0 && GameManager.Instance.CanSpawnEnemy())
         {
             var randomHeight = Random.Range(-m_height, m_height);
-            Instantiate(m_enemy, transform.position + new Vector3(0, randomHeight, 0), Quaternion.identity);
+            PoolManager.Instance.GetEnemy(transform.position + new Vector3(0, randomHeight, 0), Quaternion.identity);
             timer = m_spawnRate;
         }
     }
