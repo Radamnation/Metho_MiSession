@@ -398,6 +398,7 @@ MonoBehaviour:
   m_enemyPool: {fileID: 53216518}
   m_vfxPool: {fileID: 447580352}
   m_pickupPool: {fileID: 985445027}
+  m_projectilePool: {fileID: 2014615555}
 --- !u!4 &391846070
 Transform:
   m_ObjectHideFlags: 0
@@ -413,6 +414,7 @@ Transform:
   - {fileID: 53216517}
   - {fileID: 447580351}
   - {fileID: 985445026}
+  - {fileID: 2014615554}
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1436,6 +1438,52 @@ MonoBehaviour:
   m_enemy: {fileID: 179879035017597515, guid: 9af8294b71ef2f04d9494264b80f55ae, type: 3}
   m_height: 10
   m_spawnRate: 0.1
+--- !u!1 &2014615553
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2014615554}
+  - component: {fileID: 2014615555}
+  m_Layer: 0
+  m_Name: ProjectilePool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2014615554
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014615553}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 391846070}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2014615555
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2014615553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d69d3c293213bd4392bfa0261d5b1c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_poolObjectPrefab: {fileID: 215850936402079953, guid: 4fccc23a27466b84dae85c8df5bec6e8, type: 3}
+  m_poolObjectCount: 50
 --- !u!1 &2031617148
 GameObject:
   m_ObjectHideFlags: 0
@@ -1559,10 +1607,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_movementSpeed: 4
-  m_attackSpeed: 0.1
+  m_attackSpeed: 0.5
   m_attackList:
-  - {fileID: 11400000, guid: c2d6d11dc99e1f64a8d7560a192b1338, type: 2}
+  - mode: 0
+    unityReference: {fileID: 11400000, guid: 56dafbb50e8221f49b2b4668e0173420, type: 2}
+    rawReference:
+      rid: -2
+  - mode: 0
+    unityReference: {fileID: 11400000, guid: c2d6d11dc99e1f64a8d7560a192b1338, type: 2}
+    rawReference:
+      rid: -2
   m_maxHealth: 10
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!58 &2031617153
 CircleCollider2D:
   m_ObjectHideFlags: 0

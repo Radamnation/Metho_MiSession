@@ -18,11 +18,6 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        
-    }
-
     public void Depool(Vector3 _position, Quaternion _rotation)
     {
         var objectToSpawn = m_poolQueue.Dequeue();

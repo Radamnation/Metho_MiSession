@@ -31,6 +31,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PauseView m_pauseView;
     [SerializeField] private OptionsView m_optionsView;
 
+    [SerializeField] private SceneData m_titleScene;
+    [SerializeField] private SceneData m_gameScene;
+
     private UIView m_previousView;
 
     public TitleView TitleView { get => m_titleView; }
@@ -88,12 +91,12 @@ public class UIManager : MonoBehaviour
 
     public void GoToTitleScreen()
     {
-        SceneManager.LoadScene("TitleScreen");
+        SceneManager.LoadScene(m_titleScene.SceneName);
     }
 
     public void GoToGameScreen()
     {
-        SceneManager.LoadScene("GameScreen");
+        SceneManager.LoadScene(m_gameScene.SceneName);
     }
 
     public void OnPause()

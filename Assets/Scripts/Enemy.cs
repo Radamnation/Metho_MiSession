@@ -1,16 +1,19 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Enemy : PoolableObject, ICollidable
 {
-    [SerializeField] private float m_speed = 2f;
-    [SerializeField] private int m_damage = 1;
+    [FormerlySerializedAs("m_speed")] [SerializeField] private float speed = 1.5f;
+    [FormerlySerializedAs("m_damage")] [SerializeField] private int damage = 1;
 
     private bool m_canMove = true;
 
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
+    
+    private static readonly int MoveY = Animator.StringToHash("MoveY");
+    private static readonly int MoveX = Animator.StringToHash("MoveX");
 
     private void Awake()
     {
@@ -35,20 +38,25 @@ public class Enemy : PoolableObject, ICollidable
         if (!m_canMove) return;
 
         var playerDirection = (Player.Instance.transform.position - transform.position).normalized;
-        transform.Translate(playerDirection * m_speed * Time.deltaTime, Space.World);
+        transform.Translate(playerDirection * (speed * Time.deltaTime), Space.World);
 
         if (Mathf.Abs(playerDirection.y) > 0.7f)
         {
-            m_animator.SetFloat("MoveY", playerDirection.y);
-            m_animator.SetFloat("MoveX", 0);
+            m_animator.SetFloat(MoveX, 0);
+            m_animator.SetFloat(MoveY, playerDirection.y);
         }
 
         if (Mathf.Abs(playerDirection.x) > 0.7f)
         {
             transform.localScale = new Vector3(-Mathf.Sign(playerDirection.x), 1, 1);
-            m_animator.SetFloat("MoveX", playerDirection.x);
-            m_animator.SetFloat("MoveY", 0);
+            m_animator.SetFloat(MoveX, playerDirection.x);
+            m_animator.SetFloat(MoveY, 0);
         }
+    }
+
+    public void TakeDamage()
+    {
+        Death();
     }
 
     public void Death()
@@ -68,7 +76,7 @@ public class Enemy : PoolableObject, ICollidable
 
     public void Collide(Player _player)
     {
-        _player.TakeDamage(m_damage);
+        _player.TakeDamage(damage);
     }
 
     private void OnBecameVisible()

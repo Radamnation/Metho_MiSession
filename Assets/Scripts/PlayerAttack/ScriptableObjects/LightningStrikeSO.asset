@@ -10,6 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af6950f954a5e8d449093374c867cfa5, type: 3}
-  m_Name: LightningStrike
+  m_Name: LightningStrikeSO
   m_EditorClassIdentifier: 
   m_particleSystem: {fileID: 8063354733524884902, guid: 40cc74bf886800e429fef77d58580186, type: 3}
