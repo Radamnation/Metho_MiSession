@@ -8,16 +8,33 @@ public class Enemy : PoolableObject, ICollidable
     [FormerlySerializedAs("m_damage")] [SerializeField] private int damage = 1;
 
     private bool m_canMove = true;
-
-    private SpriteRenderer m_spriteRenderer;
-    private Animator m_animator;
     
+    private SpriteRenderer m_spriteRenderer;
+    private CircleCollider2D m_collider;
+    private Animator m_animator;
+
+    private Vector3 m_currentScale;
+
     private static readonly int MoveY = Animator.StringToHash("MoveY");
     private static readonly int MoveX = Animator.StringToHash("MoveX");
+    private static readonly int IsDead = Animator.StringToHash("IsDead");
+
+    public Animator Animator
+    {
+        get => m_animator;
+        set => m_animator = value;
+    }
+
+    public CircleCollider2D Collider
+    {
+        get => m_collider;
+        set => m_collider = value;
+    }
 
     private void Awake()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_collider = GetComponent<CircleCollider2D>();
         m_animator = GetComponent<Animator>();
     }
 
@@ -26,6 +43,7 @@ public class Enemy : PoolableObject, ICollidable
         m_canMove = true;
         m_animator.speed = 1;
         m_spriteRenderer.color = Color.white;
+        m_animator.SetBool(IsDead, false);
     }
 
     private void Update()
@@ -48,7 +66,7 @@ public class Enemy : PoolableObject, ICollidable
 
         if (Mathf.Abs(playerDirection.x) > 0.7f)
         {
-            transform.localScale = new Vector3(-Mathf.Sign(playerDirection.x), 1, 1);
+            transform.localScale = new Vector3(-Mathf.Sign(playerDirection.x),  1,  1);
             m_animator.SetFloat(MoveX, playerDirection.x);
             m_animator.SetFloat(MoveY, 0);
         }
@@ -61,6 +79,7 @@ public class Enemy : PoolableObject, ICollidable
 
     public void Death()
     {
+        m_animator.SetBool(IsDead, true);
         m_canMove = false;
         m_animator.speed = 0;
         m_spriteRenderer.color = Color.grey;

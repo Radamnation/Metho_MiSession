@@ -18,7 +18,7 @@ public class ObjectPool : MonoBehaviour
         }
     }
 
-    public void Depool(Vector3 _position, Quaternion _rotation)
+    public PoolableObject Depool(Vector3 _position, Quaternion _rotation)
     {
         var objectToSpawn = m_poolQueue.Dequeue();
 
@@ -26,6 +26,7 @@ public class ObjectPool : MonoBehaviour
         objectToSpawn.gameObject.SetActive(true);
         objectToSpawn.Initialize();
         objectToSpawn.Pool = this;
+        return objectToSpawn;
     }
 
     public void Repool(PoolableObject _poolObject)

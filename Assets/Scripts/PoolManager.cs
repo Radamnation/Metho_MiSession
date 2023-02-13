@@ -21,9 +21,9 @@ public class PoolManager : MonoBehaviour
     [SerializeField] private ObjectPool m_pickupPool;
     [SerializeField] private ObjectPool m_projectilePool;
 
-    public void GetEnemy(Vector3 _position, Quaternion _rotation)
+    public Enemy GetEnemy(Vector3 _position, Quaternion _rotation)
     {
-        m_enemyPool.Depool(_position, _rotation);
+        return (Enemy) m_enemyPool.Depool(_position, _rotation);
     }
 
     public void GetVFX(Vector3 _position, Quaternion _rotation)

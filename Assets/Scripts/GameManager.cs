@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
     private List<Enemy> m_enemyList = new List<Enemy>();
 
     private bool m_gameIsPaused = false;
+    
 
     public List<Enemy> EnemyList { get => m_enemyList; set => m_enemyList = value; }
 

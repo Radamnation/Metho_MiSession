@@ -1,0 +1,16 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5c83a7733b56ab4e9400f28a80b3e5c, type: 3}
+  m_Name: Hench02DataSO
+  m_EditorClassIdentifier: 
+  animatorController: {fileID: 9100000, guid: 2a8127838bf43e343b32902d2c4d3c24, type: 2}
+  colliderRadius: 0.6
