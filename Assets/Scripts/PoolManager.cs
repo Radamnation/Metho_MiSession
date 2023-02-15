@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PoolManager : MonoBehaviour
 {
@@ -16,28 +17,28 @@ public class PoolManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    [SerializeField] private ObjectPool m_enemyPool;
-    [SerializeField] private ObjectPool m_vfxPool;
-    [SerializeField] private ObjectPool m_pickupPool;
-    [SerializeField] private ObjectPool m_projectilePool;
+    [SerializeField] private ObjectPool enemyPool;
+    [SerializeField] private ObjectPool vfxPool;
+    [SerializeField] private ObjectPool pickupPool;
+    [SerializeField] private ObjectPool projectilePool;
 
-    public Enemy GetEnemy(Vector3 _position, Quaternion _rotation)
+    public Enemy GetEnemy()
     {
-        return (Enemy) m_enemyPool.Depool(_position, _rotation);
+        return (Enemy) enemyPool.Depool();
     }
 
     public void GetVFX(Vector3 _position, Quaternion _rotation)
     {
-        m_vfxPool.Depool(_position, _rotation);
+        vfxPool.Depool(_position, _rotation);
     }
 
-    public void GetPickup(Vector3 _position, Quaternion _rotation)
+    public Pickup GetPickup(Vector3 _position, Quaternion _rotation)
     {
-        m_pickupPool.Depool(_position, _rotation);
+        return (Pickup) pickupPool.Depool(_position, _rotation);
     }
 
-    public void GetProjectile(Vector3 _position, Quaternion _rotation)
+    public Projectile GetProjectile(Vector3 _position, Quaternion _rotation)
     {
-        m_projectilePool.Depool(_position, _rotation);
+        return (Projectile) projectilePool.Depool(_position, _rotation);
     }
 }

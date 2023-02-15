@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class GameManager : MonoBehaviour
 {
@@ -16,17 +17,16 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
-    [SerializeField] private int m_enemyLimit;
+    [SerializeField] private int enemyLimit;
     private List<Enemy> m_enemyList = new List<Enemy>();
 
     private bool m_gameIsPaused = false;
-    
 
     public List<Enemy> EnemyList { get => m_enemyList; set => m_enemyList = value; }
 
     public bool CanSpawnEnemy()
     {
-        return m_enemyList.Count < m_enemyLimit;
+        return m_enemyList.Count < enemyLimit;
     }
 
     public void PauseGame()

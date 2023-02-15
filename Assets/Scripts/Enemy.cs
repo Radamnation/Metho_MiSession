@@ -4,8 +4,8 @@ using UnityEngine.Serialization;
 
 public class Enemy : PoolableObject, ICollidable
 {
-    [FormerlySerializedAs("m_speed")] [SerializeField] private float speed = 1.5f;
-    [FormerlySerializedAs("m_damage")] [SerializeField] private int damage = 1;
+    [SerializeField] private float speed = 1.5f;
+    [SerializeField] private int damage = 1;
 
     private bool m_canMove = true;
     
@@ -14,6 +14,8 @@ public class Enemy : PoolableObject, ICollidable
     private Animator m_animator;
 
     private Vector3 m_currentScale;
+
+    private int m_goldValue;
 
     private static readonly int MoveY = Animator.StringToHash("MoveY");
     private static readonly int MoveX = Animator.StringToHash("MoveX");
@@ -31,15 +33,23 @@ public class Enemy : PoolableObject, ICollidable
         set => m_collider = value;
     }
 
+    public int GoldValue
+    {
+        get => m_goldValue;
+    }
+
     private void Awake()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_collider = GetComponent<CircleCollider2D>();
         m_animator = GetComponent<Animator>();
+
+        m_goldValue = Random.Range(10, 101);
     }
 
     public override void Initialize()
     {
+        m_currentScale = transform.localScale;
         m_canMove = true;
         m_animator.speed = 1;
         m_spriteRenderer.color = Color.white;
@@ -66,7 +76,7 @@ public class Enemy : PoolableObject, ICollidable
 
         if (Mathf.Abs(playerDirection.x) > 0.7f)
         {
-            transform.localScale = new Vector3(-Mathf.Sign(playerDirection.x),  1,  1);
+            transform.localScale = new Vector3(-Mathf.Sign(playerDirection.x) * m_currentScale.x, m_currentScale.y,  m_currentScale.z);
             m_animator.SetFloat(MoveX, playerDirection.x);
             m_animator.SetFloat(MoveY, 0);
         }
@@ -101,10 +111,12 @@ public class Enemy : PoolableObject, ICollidable
     private void OnBecameVisible()
     {
         GameManager.Instance.EnemyList.Add(this);
+        EnemyChecker.Instance.SortedEnemy.Add(this);
     }
 
     private void OnBecameInvisible()
     {
         GameManager.Instance.EnemyList.Remove(this);
+        EnemyChecker.Instance.SortedEnemy.Remove(this);
     }
 }

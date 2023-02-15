@@ -1,21 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class ObjectPool : MonoBehaviour
 {
-    [SerializeField] private PoolableObject m_poolObjectPrefab;
-    [SerializeField] private int m_poolObjectCount;
+    [SerializeField] private PoolableObject poolObjectPrefab;
+    [SerializeField] private int poolObjectCount;
     private Queue<PoolableObject> m_poolQueue = new Queue<PoolableObject>();
 
     private void Awake()
     {
-        for (int i = 0; i < m_poolObjectCount; i++)
+        for (int i = 0; i < poolObjectCount; i++)
         {
-            var newPoolObject = Instantiate(m_poolObjectPrefab, transform);
+            var newPoolObject = Instantiate(poolObjectPrefab, transform);
             newPoolObject.gameObject.SetActive(false);
             m_poolQueue.Enqueue(newPoolObject);
         }
+    }
+    
+    public PoolableObject Depool()
+    {
+        var objectToSpawn = m_poolQueue.Dequeue();
+        objectToSpawn.gameObject.SetActive(true);
+        objectToSpawn.Pool = this;
+        return objectToSpawn;
     }
 
     public PoolableObject Depool(Vector3 _position, Quaternion _rotation)
