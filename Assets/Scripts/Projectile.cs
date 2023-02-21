@@ -29,7 +29,7 @@ public class Projectile : PoolableObject
         var enemy = _collision.GetComponent<Enemy>();
         if (enemy != null)
         {
-            // enemy.TakeDamage();
+            enemy.TakeDamage();
             enemy.AddForce(transform.position);
             m_circleCollider2D.enabled = false;
             Repool();
