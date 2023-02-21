@@ -4,12 +4,13 @@ using UnityEngine.Serialization;
 
 public class Enemy : PoolableObject, ICollidable
 {
-    [SerializeField] private float speed = 1.5f;
+    [FormerlySerializedAs("speed")] [SerializeField] private float movementSpeed = 1.5f;
     [SerializeField] private int damage = 1;
 
     private bool m_canMove = true;
     
     private SpriteRenderer m_spriteRenderer;
+    private Rigidbody2D m_rigidbody2D;
     private CircleCollider2D m_collider;
     private Animator m_animator;
 
@@ -41,6 +42,7 @@ public class Enemy : PoolableObject, ICollidable
     private void Awake()
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
+        m_rigidbody2D = GetComponent<Rigidbody2D>();
         m_collider = GetComponent<CircleCollider2D>();
         m_animator = GetComponent<Animator>();
 
@@ -52,6 +54,7 @@ public class Enemy : PoolableObject, ICollidable
         m_currentScale = transform.localScale;
         m_canMove = true;
         m_animator.speed = 1;
+        m_collider.enabled = true;
         m_spriteRenderer.color = Color.white;
         m_animator.SetBool(IsDead, false);
     }
@@ -66,7 +69,8 @@ public class Enemy : PoolableObject, ICollidable
         if (!m_canMove) return;
 
         var playerDirection = (Player.Instance.transform.position - transform.position).normalized;
-        transform.Translate(playerDirection * (speed * Time.deltaTime), Space.World);
+        m_rigidbody2D.velocity = playerDirection * movementSpeed;
+        // transform.Translate(playerDirection * (speed * Time.deltaTime), Space.World);
 
         if (Mathf.Abs(playerDirection.y) > 0.7f)
         {
@@ -87,11 +91,18 @@ public class Enemy : PoolableObject, ICollidable
         Death();
     }
 
+    public void AddForce(Vector3 _impact)
+    {
+        var direction = transform.position - _impact;
+        m_rigidbody2D.AddForce(direction * 1f, ForceMode2D.Impulse);
+    }
+
     public void Death()
     {
         m_animator.SetBool(IsDead, true);
         m_canMove = false;
         m_animator.speed = 0;
+        m_collider.enabled = false;
         m_spriteRenderer.color = Color.grey;
         StartCoroutine(RepoolAfterDelay());
     }

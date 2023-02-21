@@ -17,6 +17,7 @@ public class Player : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private Rigidbody2D m_rigidbody2D;
     private Animator m_animator;
     private Transform m_transform;
 
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        m_rigidbody2D = GetComponent<Rigidbody2D>();
         m_animator = GetComponent<Animator>();
         m_transform = GetComponent<Transform>();
         
@@ -75,17 +77,27 @@ public class Player : MonoBehaviour
         
         if (verticalMovement != 0)
         {
-            m_transform.Translate(new Vector2(0, verticalMovement) * (movementSpeed * Time.deltaTime), Space.World);
+            m_rigidbody2D.velocity = new Vector2(m_rigidbody2D.velocity.x, verticalMovement * movementSpeed);
+            // m_transform.Translate(new Vector2(0, verticalMovement) * (movementSpeed * Time.deltaTime), Space.World);
             m_animator.SetFloat(MoveX, 0);
             m_animator.SetFloat(MoveY, verticalMovement);
+        }
+        else
+        {
+            m_rigidbody2D.velocity = new Vector2(m_rigidbody2D.velocity.x, 0);
         }
 
         if (horizontalMovement != 0)
         {
-            m_transform.Translate(new Vector2(horizontalMovement, 0) * (movementSpeed * Time.deltaTime), Space.World);
+            m_rigidbody2D.velocity = new Vector2(horizontalMovement * movementSpeed , m_rigidbody2D.velocity.y);
+            // m_transform.Translate(new Vector2(horizontalMovement, 0) * (movementSpeed * Time.deltaTime), Space.World);
             m_transform.localScale = new Vector3(-horizontalMovement, 1, 1);
             m_animator.SetFloat(MoveX, horizontalMovement);
             m_animator.SetFloat(MoveY, 0);
+        }
+        else
+        {
+            m_rigidbody2D.velocity = new Vector2(0, m_rigidbody2D.velocity.y);
         }
 
         m_animator.SetFloat(Velocity, new Vector2(horizontalMovement, verticalMovement).magnitude);
