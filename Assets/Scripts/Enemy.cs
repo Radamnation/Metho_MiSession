@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Enemy : PoolableObject, ICollidable
 {
@@ -117,6 +119,14 @@ public class Enemy : PoolableObject, ICollidable
     public void Collide(Player _player)
     {
         _player.TakeDamage(damage);
+    }
+
+    private void OnTriggerExit2D(Collider2D _other)
+    {
+        if (_other.gameObject.layer == LayerMask.NameToLayer("Confiner"))
+        {
+            Repool();
+        }
     }
 
     private void OnBecameVisible()

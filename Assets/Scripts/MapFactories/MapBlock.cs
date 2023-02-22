@@ -1,18 +1,22 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
+using Random = UnityEngine.Random;
 
 public class MapBlock : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private List<GameObject> obstacles;
 
-    // Update is called once per frame
-    void Update()
+    public void Initialize()
     {
-        
+        var seed = (int) transform.position.x;
+        Random.InitState(seed);
+
+        for (int i = 0; i < obstacles.Count; i++)
+        {
+            obstacles[i].SetActive(Random.Range(0, 100) < 10);
+        }
     }
 }
