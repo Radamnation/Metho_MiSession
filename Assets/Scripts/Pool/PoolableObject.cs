@@ -6,7 +6,7 @@ public abstract class PoolableObject : MonoBehaviour
 {
     private ObjectPool m_pool;
 
-    public ObjectPool Pool { get => m_pool; set => m_pool = value; }
+    public ObjectPool Pool { set => m_pool = value; }
 
     public abstract void Initialize();
 

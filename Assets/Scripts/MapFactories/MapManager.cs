@@ -18,15 +18,11 @@ public class MapManager : MonoBehaviour
             return;
         }
         Destroy(gameObject);
-
-        m_compositeCollider2D = GetComponent<CompositeCollider2D>();
     }
 
     [SerializeField] private AbstractMapFactory currentMap;
-    public List<MapBlock> mapBlocks = new List<MapBlock>();
-    private int m_playerPosition = 0;
-
-    private CompositeCollider2D m_compositeCollider2D;
+    public List<MapBlock> mapBlocks = new();
+    private int m_playerPosition;
 
     [SerializeField] private CinemachineConfiner m_cinemachineConfiner;
 

@@ -7,7 +7,7 @@ public class ObjectPool : MonoBehaviour
 {
     [SerializeField] private PoolableObject poolObjectPrefab;
     [SerializeField] private int poolObjectCount;
-    private Queue<PoolableObject> m_poolQueue = new Queue<PoolableObject>();
+    private Queue<PoolableObject> m_poolQueue = new();
 
     private void Awake()
     {

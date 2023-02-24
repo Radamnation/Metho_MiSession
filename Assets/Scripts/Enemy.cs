@@ -6,7 +6,7 @@ using Random = UnityEngine.Random;
 
 public class Enemy : PoolableObject, ICollidable
 {
-    [FormerlySerializedAs("speed")] [SerializeField] private float movementSpeed = 1.5f;
+    [SerializeField] private float movementSpeed = 1.5f;
     [SerializeField] private int damage = 1;
 
     private bool m_canMove = true;
@@ -123,7 +123,7 @@ public class Enemy : PoolableObject, ICollidable
 
     private void OnTriggerExit2D(Collider2D _other)
     {
-        if (_other.gameObject.layer == LayerMask.NameToLayer("Confiner"))
+        if (m_collider.enabled)
         {
             Repool();
         }
@@ -132,12 +132,12 @@ public class Enemy : PoolableObject, ICollidable
     private void OnBecameVisible()
     {
         GameManager.Instance.EnemyList.Add(this);
-        EnemyChecker.Instance.SortedEnemy.Add(this);
+        // EnemyChecker.Instance.SortedEnemy.Add(this);
     }
 
     private void OnBecameInvisible()
     {
         GameManager.Instance.EnemyList.Remove(this);
-        EnemyChecker.Instance.SortedEnemy.Remove(this);
+        // EnemyChecker.Instance.SortedEnemy.Remove(this);
     }
 }
