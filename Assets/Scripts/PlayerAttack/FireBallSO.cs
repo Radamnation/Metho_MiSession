@@ -9,6 +9,6 @@ public class FireBallSO : ScriptableObject, IAttack
     {
         var randomEnemy = GameManager.Instance.EnemyList[Random.Range(0, GameManager.Instance.EnemyList.Count)];
         var shootingDirection = randomEnemy.transform.position - Player.Instance.transform.position;
-        PoolManager.Instance.GetProjectile(Player.Instance.transform.position, Quaternion.LookRotation(randomEnemy.transform.forward, shootingDirection));
+        ProjectileFactory.Instance.SpawnRandomProjectile(Player.Instance.transform.position, Quaternion.LookRotation(randomEnemy.transform.forward, shootingDirection));
     }
 }

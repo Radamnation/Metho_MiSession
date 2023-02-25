@@ -10,7 +10,7 @@ public abstract class PoolableObject : MonoBehaviour
 
     public abstract void Initialize();
 
-    public void Repool()
+    protected virtual void Repool()
     {
         m_pool.Repool(this);
     }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TNRD;
 using UnityEngine;
@@ -21,13 +22,11 @@ public class Player : MonoBehaviour
     private Animator m_animator;
     private Transform m_transform;
 
-    [FormerlySerializedAs("m_movementSpeed")] [SerializeField] private float movementSpeed = 4f;
-    [FormerlySerializedAs("m_attackSpeed")] [SerializeField] private float attackSpeed = 0.5f;
-    
-    [FormerlySerializedAs("m_attackList")] [SerializeField] private List<SerializableInterface<IAttack>> attackList;
-    
-    [FormerlySerializedAs("m_maxHealth")] [SerializeField] private int maxHealth = 10;
-    private int m_currentHealth;
+    [SerializeField] private float movementSpeed = 4f;
+    [SerializeField] private float attackSpeed = 0.5f;
+    [SerializeField] private List<SerializableInterface<IAttack>> attackList;
+    [SerializeField] private float maxHealth = 10;
+    private float m_currentHealth;
 
     private float m_attackTimer;
 
@@ -59,6 +58,10 @@ public class Player : MonoBehaviour
     {
         Pause();
         Move();
+    }
+
+    private void FixedUpdate()
+    {
         Attack();
     }
 
@@ -105,7 +108,7 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        m_attackTimer -= Time.deltaTime;
+        m_attackTimer -= Time.fixedDeltaTime;
         if (m_attackTimer <= 0 && GameManager.Instance.EnemyList.Count > 0)
         {
             attackList.ForEach(_attack => _attack.Value.Execute());
@@ -113,7 +116,7 @@ public class Player : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int _damage)
+    public void TakeDamage(float _damage)
     {
         m_currentHealth -= _damage;
         if (m_currentHealth <= 0)

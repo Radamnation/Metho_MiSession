@@ -4,10 +4,12 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
-public class Enemy : PoolableObject, ICollidable
+public class Enemy : PoolableObject, ICollidable, IDamagable
 {
     [SerializeField] private float movementSpeed = 1.5f;
-    [SerializeField] private int damage = 1;
+    [SerializeField] private float damage = 1;
+    [SerializeField] private float maxHealth = 10;
+    private float m_currentHealth;
 
     private bool m_canMove = true;
     
@@ -17,6 +19,7 @@ public class Enemy : PoolableObject, ICollidable
     private Animator m_animator;
 
     private Vector3 m_currentScale;
+    private bool m_isVisible;
 
     private int m_goldValue;
 
@@ -53,6 +56,7 @@ public class Enemy : PoolableObject, ICollidable
 
     public override void Initialize()
     {
+        m_currentHealth = maxHealth;
         m_currentScale = transform.localScale;
         m_canMove = true;
         m_animator.speed = 1;
@@ -88,9 +92,15 @@ public class Enemy : PoolableObject, ICollidable
         }
     }
 
-    public void TakeDamage()
+    public void TakeDamage(float _damage)
     {
-        Death();
+        Debug.Log("STaking " + _damage + "damages");
+        m_currentHealth -= _damage;
+        if (m_currentHealth <= 0)
+        {
+            Debug.Log("Enemy is dead");
+            Death();
+        }
     }
 
     public void AddForce(Vector3 _impact)
@@ -106,13 +116,13 @@ public class Enemy : PoolableObject, ICollidable
         m_animator.speed = 0;
         m_collider.enabled = false;
         m_spriteRenderer.color = Color.grey;
+        PoolManager.Instance.GetPickup(transform.position, Quaternion.identity);
         StartCoroutine(RepoolAfterDelay());
     }
 
     public IEnumerator RepoolAfterDelay()
     {
         yield return new WaitForSeconds(0.5f);
-        PoolManager.Instance.GetPickup(transform.position, Quaternion.identity);
         Repool();
     }
 
@@ -123,7 +133,7 @@ public class Enemy : PoolableObject, ICollidable
 
     private void OnTriggerExit2D(Collider2D _other)
     {
-        if (m_collider.enabled)
+        if (!m_isVisible)
         {
             Repool();
         }
@@ -131,12 +141,14 @@ public class Enemy : PoolableObject, ICollidable
 
     private void OnBecameVisible()
     {
+        m_isVisible = true;
         GameManager.Instance.EnemyList.Add(this);
         // EnemyChecker.Instance.SortedEnemy.Add(this);
     }
 
     private void OnBecameInvisible()
     {
+        m_isVisible = false;
         GameManager.Instance.EnemyList.Remove(this);
         // EnemyChecker.Instance.SortedEnemy.Remove(this);
     }

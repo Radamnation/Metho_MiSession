@@ -2,53 +2,92 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Animations;
 using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class Projectile : PoolableObject
 {
     [SerializeField] private float speed = 6f;
+    [SerializeField] private float damage = 5f;
+    [SerializeField] private float orbitDistance = 3f;
+    [SerializeField] private Transform orbitFocus;
     
-    private CircleCollider2D m_circleCollider2D;
+    private PositionConstraint m_positionConstraint;
     private Rigidbody2D m_rigidbody2D;
+    
+    public bool IsOrbital { get; set; }
+    public CircleCollider2D Collider { get; private set; }
+    public Animator Animator { get; private set; }
 
-    private bool m_spawned;
+    private bool m_isSpawned;
 
     private void Awake()
     {
-        m_circleCollider2D = GetComponent<CircleCollider2D>();
-        m_rigidbody2D = GetComponent<Rigidbody2D>();
+        m_positionConstraint = GetComponentInChildren<PositionConstraint>();
+        m_rigidbody2D = GetComponentInChildren<Rigidbody2D>();
+        
+        Collider = GetComponentInChildren<CircleCollider2D>();
+        Animator = GetComponentInChildren<Animator>();
     }
 
     public override void Initialize()
     {
-        m_spawned = false;
-        m_circleCollider2D.enabled = true;
-        m_rigidbody2D.velocity = transform.up * speed;
+        m_isSpawned = false;
+        Collider.enabled = true;
+
+        if (!IsOrbital)
+        {
+            m_rigidbody2D.velocity = transform.up * speed;
+        }
+        else
+        {
+            m_rigidbody2D.angularVelocity = 2 * Mathf.PI * orbitDistance * speed;
+            Collider.transform.localPosition = new Vector2(orbitDistance, 0);
+            var constraintSource = new ConstraintSource
+            {
+                sourceTransform = Player.Instance.transform,
+                weight = 1f
+            };
+            m_positionConstraint.AddSource(constraintSource);
+            m_positionConstraint.constraintActive = true;
+        }
+    }
+    
+    protected override void Repool()
+    {
+        m_isSpawned = false;
+        Collider.enabled = false;
+
+        m_rigidbody2D.velocity = Vector3.zero;
+        m_rigidbody2D.transform.localPosition = Vector3.zero;
+        
+        m_rigidbody2D.angularVelocity = 0;
+        m_rigidbody2D.transform.localRotation = Quaternion.identity;
+        Collider.transform.localPosition = Vector3.zero;
+        m_positionConstraint.constraintActive = false;
+        
+        base.Repool();
     }
 
-    private void OnTriggerEnter2D(Collider2D _collision)
+    public void Hit(Collider2D _collision)
     {
-        if (!m_spawned)
+        if (!m_isSpawned)
         {
-            m_spawned = true;
+            m_isSpawned = true;
             return;
         }
-        
-        Debug.Log(_collision.gameObject);
-        
-        var enemy = _collision.GetComponent<Enemy>();
-        if (enemy != null)
-        {
-            enemy.TakeDamage();
-            enemy.AddForce(transform.position);
-        }
-        m_circleCollider2D.enabled = false;
-        m_spawned = false;
-        Repool();
-    }
 
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        Repool();
+        var enemyShield = _collision.GetComponent<EnemyShield>();
+        if (enemyShield != null)
+        {
+            enemyShield.TakeDamage(damage);
+            enemyShield.AddForce(transform.position);
+        }
+
+        if (!IsOrbital)
+        {
+            Repool();
+        }
     }
 }
