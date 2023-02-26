@@ -7,8 +7,8 @@ public class OrbitalSO : PlayerAttackSO
 {
     public override void ExecuteAttack()
     {
-        var intervals = 360 / currentLevel;
-        for (int i = 0; i < currentLevel; i++)
+        var intervals = 360 / CurrentLevel;
+        for (int i = 0; i < CurrentLevel; i++)
         {
             ProjectileFactory.Instance.SpawnProjectile(projectileData, Player.Instance.transform.position, Quaternion.Euler(0, 0, i * intervals));
         }

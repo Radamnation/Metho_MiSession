@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
 {
@@ -18,11 +20,26 @@ public class GameManager : MonoBehaviour
     }
 
     [SerializeField] private int enemyLimit;
+    [SerializeField] private List<PlayerAttackSO> playerAttackList;
     private List<Enemy> m_enemyList = new();
+    
 
     private bool m_gameIsPaused;
 
     public List<Enemy> EnemyList { get => m_enemyList; set => m_enemyList = value; }
+
+    private void Start()
+    {
+        foreach (var playerAttack in playerAttackList)
+        {
+            playerAttack.Initialize();
+        }
+    }
+
+    public PlayerAttackSO GetRandomAttack()
+    {
+        return playerAttackList[Random.Range(0, playerAttackList.Count)];
+    }
 
     public bool CanSpawnEnemy()
     {
@@ -35,13 +52,13 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             m_gameIsPaused = true;
-            UIManager.Instance.OpenPauseView();
+            //UIManager.Instance.OpenPauseView();
         }
         else
         {
             Time.timeScale = 1;
             m_gameIsPaused = false;
-            UIManager.Instance.ClosePauseView();
+            //UIManager.Instance.ClosePauseView();
         }
     }
 }

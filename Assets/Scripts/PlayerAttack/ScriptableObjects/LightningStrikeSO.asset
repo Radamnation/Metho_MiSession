@@ -12,7 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af6950f954a5e8d449093374c867cfa5, type: 3}
   m_Name: LightningStrikeSO
   m_EditorClassIdentifier: 
-  currentLevel: 1
-  attackSpeed: 0.5
+  attackName: Lightning Strike
+  attackDescription: 
+  currentLevel: 0
+  attackSpeed: 2
   projectileData: {fileID: 0}
   affectVisibleEnemy: 1
+  levelAccelarateCasting: 1
+  accelarationRate: 0.25

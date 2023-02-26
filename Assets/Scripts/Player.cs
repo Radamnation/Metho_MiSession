@@ -48,11 +48,6 @@ public class Player : MonoBehaviour
         m_currentHealth = maxHealth;
 
         UIManager.Instance.UpdateExperience();
-        
-        foreach (var attack in attackList)
-        {
-            attack.Initialize();
-        }
     }
 
     private void Update()
@@ -70,7 +65,7 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            GameManager.Instance.PauseGame();
+            UIManager.Instance.TogglePauseView();
         }
     }
 
@@ -144,6 +139,7 @@ public class Player : MonoBehaviour
         m_currentLevel++;
         m_currentExperience = 0;
         m_nextLevel = (int) (m_nextLevel * 1.5f);
+        UIManager.Instance.ToggleLevelUpView();
     }
 
     private void OnTriggerEnter2D(Collider2D _collision)
