@@ -30,4 +30,17 @@ public class ProjectileFactory : MonoBehaviour
         
         randomProjectile.Initialize();
     }
+    
+    public void SpawnProjectile(ProjectileData _projectileData, Vector3 _position, Quaternion _rotation)
+    {
+        var newProjectile = PoolManager.Instance.GetProjectile();
+        
+        newProjectile.transform.SetPositionAndRotation(_position, _rotation);
+        newProjectile.IsOrbital = _projectileData.IsOrbital;
+        newProjectile.LifeTime = _projectileData.lifeTime;
+        newProjectile.Animator.runtimeAnimatorController = _projectileData.animatorController;
+        newProjectile.Collider.radius = _projectileData.colliderRadius;
+        
+        newProjectile.Initialize();
+    }
 }

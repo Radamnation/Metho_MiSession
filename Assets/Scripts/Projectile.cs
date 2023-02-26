@@ -12,15 +12,17 @@ public class Projectile : PoolableObject
     [SerializeField] private float damage = 5f;
     [SerializeField] private float orbitDistance = 3f;
     [SerializeField] private Transform orbitFocus;
-    
+
     private PositionConstraint m_positionConstraint;
     private Rigidbody2D m_rigidbody2D;
     
+    public float LifeTime { get; set; }
     public bool IsOrbital { get; set; }
     public CircleCollider2D Collider { get; private set; }
     public Animator Animator { get; private set; }
 
     private bool m_isSpawned;
+    private float lifeTimer;
 
     private void Awake()
     {
@@ -35,6 +37,7 @@ public class Projectile : PoolableObject
     {
         m_isSpawned = false;
         Collider.enabled = true;
+        lifeTimer = LifeTime;
 
         if (!IsOrbital)
         {
@@ -53,7 +56,18 @@ public class Projectile : PoolableObject
             m_positionConstraint.constraintActive = true;
         }
     }
-    
+
+    private void FixedUpdate()
+    {
+        if (LifeTime == 0 || !m_isSpawned) return;
+        
+        lifeTimer -= Time.fixedDeltaTime;
+        if (lifeTimer <= 0)
+        {
+            Repool();
+        }
+    }
+
     protected override void Repool()
     {
         m_isSpawned = false;

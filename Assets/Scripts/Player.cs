@@ -23,12 +23,9 @@ public class Player : MonoBehaviour
     private Transform m_transform;
 
     [SerializeField] private float movementSpeed = 4f;
-    [SerializeField] private float attackSpeed = 0.5f;
-    [SerializeField] private List<SerializableInterface<IAttack>> attackList;
+    [SerializeField] private List<PlayerAttackSO> attackList;
     [SerializeField] private float maxHealth = 10;
     private float m_currentHealth;
-
-    private float m_attackTimer;
 
     private int m_currentLevel = 1;
     private int m_currentExperience = 0;
@@ -49,9 +46,13 @@ public class Player : MonoBehaviour
         m_transform = GetComponent<Transform>();
         
         m_currentHealth = maxHealth;
-        m_attackTimer = attackSpeed;
-        
+
         UIManager.Instance.UpdateExperience();
+        
+        foreach (var attack in attackList)
+        {
+            attack.Initialize();
+        }
     }
 
     private void Update()
@@ -108,11 +109,9 @@ public class Player : MonoBehaviour
 
     private void Attack()
     {
-        m_attackTimer -= Time.fixedDeltaTime;
-        if (m_attackTimer <= 0 && GameManager.Instance.EnemyList.Count > 0)
+        foreach (var attack in attackList)
         {
-            attackList.ForEach(_attack => _attack.Value.Execute());
-            m_attackTimer = attackSpeed;
+            attack.Refresh(Time.fixedDeltaTime);
         }
     }
 

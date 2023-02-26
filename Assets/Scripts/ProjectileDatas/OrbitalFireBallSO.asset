@@ -15,3 +15,4 @@ MonoBehaviour:
   IsOrbital: 1
   animatorController: {fileID: 9100000, guid: 3a29d5a98d2b71743937083edfc79565, type: 2}
   colliderRadius: 0.5
+  lifeTime: 3

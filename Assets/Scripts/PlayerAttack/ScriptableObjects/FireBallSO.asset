@@ -12,3 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a07d52ebd608a742bbb8cd003a20015, type: 3}
   m_Name: FireBallSO
   m_EditorClassIdentifier: 
+  currentLevel: 1
+  attackSpeed: 1
+  projectileData: {fileID: 11400000, guid: 65376a07a4086f54fa316d51610e8849, type: 2}
+  affectVisibleEnemy: 1

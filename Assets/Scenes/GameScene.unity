@@ -1850,18 +1850,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 4
-  attackSpeed: 1
+  attackSpeed: 0.6
   attackList:
-  - mode: 0
-    unityReference: {fileID: 11400000, guid: 56dafbb50e8221f49b2b4668e0173420, type: 2}
-    rawReference:
-      rid: -2
+  - {fileID: 11400000, guid: 56dafbb50e8221f49b2b4668e0173420, type: 2}
+  - {fileID: 11400000, guid: c2d6d11dc99e1f64a8d7560a192b1338, type: 2}
+  - {fileID: 11400000, guid: 85b5a95ad91c780489efb38f8c6a75a7, type: 2}
   maxHealth: 10
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }
 --- !u!58 &2031617153
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2085,5 +2079,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   projectileDataList:
-  - {fileID: 11400000, guid: 65376a07a4086f54fa316d51610e8849, type: 2}
   - {fileID: 11400000, guid: 11402f417d21b3644b2ad735483a1e6e, type: 2}

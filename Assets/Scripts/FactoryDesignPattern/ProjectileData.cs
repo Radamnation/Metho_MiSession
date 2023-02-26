@@ -8,4 +8,5 @@ public class ProjectileData : ScriptableObject
     public bool IsOrbital;
     public RuntimeAnimatorController animatorController;
     public float colliderRadius;
+    public float lifeTime;
 }
