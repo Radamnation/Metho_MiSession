@@ -34,6 +34,7 @@ public class GameManager : MonoBehaviour
         {
             playerAttack.Initialize();
         }
+        playerAttackList[Random.Range(0, playerAttackList.Count)].LevelUp();
     }
 
     public PlayerAttackSO GetRandomAttack()

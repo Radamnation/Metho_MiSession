@@ -1,10 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class MapManager : MonoBehaviour
 {
@@ -20,6 +16,7 @@ public class MapManager : MonoBehaviour
         Destroy(gameObject);
     }
 
+    [SerializeField] private List<AbstractMapFactory> mapList;
     [SerializeField] private AbstractMapFactory currentMap;
     public List<MapBlock> mapBlocks = new();
     private int m_playerPosition;
@@ -28,6 +25,10 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
+        if (currentMap == null)
+        {
+            currentMap = mapList[Random.Range(0, mapList.Count)];
+        }
         mapBlocks = currentMap.GenerateMap();
     }
 

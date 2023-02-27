@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db3f7481032b2f44bbecc5da93f7c4a4, type: 3}
   m_Name: KittyClawSO
   m_EditorClassIdentifier: 
-  attackName: KittyClaw
+  attackName: Kitty Claw
   attackDescription: 
   currentLevel: 1
   attackSpeed: 1

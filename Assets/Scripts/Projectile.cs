@@ -108,6 +108,7 @@ public class Projectile : PoolableObject
         m_rigidbody2D.transform.localRotation = Quaternion.identity;
         collider.transform.localPosition = Vector3.zero;
         m_positionConstraint.constraintActive = false;
+        Animator.transform.localRotation = Quaternion.identity;
         
         base.Repool();
     }
