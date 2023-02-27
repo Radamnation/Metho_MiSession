@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObject/PlayerAttack/Claw", fileName = "ClawSO")]
-public class ClawSO : PlayerAttackSO
+public class KittyClawSO : PlayerAttackSO
 {
     public override void ExecuteAttack()
     {

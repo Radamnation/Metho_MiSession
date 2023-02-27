@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float movementSpeed = 4f;
     [SerializeField] private List<PlayerAttackSO> attackList;
     [SerializeField] private float maxHealth = 10;
+    [SerializeField] private AudioClip levelUpSFX;
     private float m_currentHealth;
 
     private int m_currentLevel = 1;
@@ -136,7 +137,8 @@ public class Player : MonoBehaviour
     {
         m_currentLevel++;
         m_currentExperience = 0;
-        m_nextLevel = (int) (m_nextLevel * 1.5f);
+        m_nextLevel = (int) (m_nextLevel * 1.2f);
+        AudioManager.Instance.SfxAudioSource.PlayOneShot(levelUpSFX);
         UIManager.Instance.ToggleLevelUpView();
     }
 

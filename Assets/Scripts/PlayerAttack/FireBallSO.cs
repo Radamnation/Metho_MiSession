@@ -7,8 +7,11 @@ public class FireBallSO : PlayerAttackSO
 {
     public override void ExecuteAttack()
     {
-        var randomEnemy = GameManager.Instance.EnemyList[Random.Range(0, GameManager.Instance.EnemyList.Count)];
-        var shootingDirection = randomEnemy.transform.position - Player.Instance.transform.position;
-        ProjectileFactory.Instance.SpawnProjectile(projectileData, Player.Instance.transform.position, Quaternion.LookRotation(randomEnemy.transform.forward, shootingDirection));
+        for (int i = 0; i < (CurrentLevel + 1) / 2; i++)
+        {
+            var randomEnemy = GameManager.Instance.EnemyList[Random.Range(0, GameManager.Instance.EnemyList.Count)];
+            var shootingDirection = randomEnemy.transform.position - Player.Instance.transform.position;
+            ProjectileFactory.Instance.SpawnProjectile(projectileData, Player.Instance.transform.position, Quaternion.LookRotation(randomEnemy.transform.forward, shootingDirection));
+        }
     }
 }

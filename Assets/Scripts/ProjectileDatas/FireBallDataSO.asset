@@ -12,12 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba950db86c954184088d45239253d6b5, type: 3}
   m_Name: FireBallDataSO
   m_EditorClassIdentifier: 
+  SpawnSFX: {fileID: 8300000, guid: 15fe3ffb5b93c0c46baee21a04eb6ff4, type: 3}
+  LoopSFX: 0
   HitOnSpawn: 0
   Scale: {x: 0.75, y: 0.75, z: 0.75}
   Speed: 6
   IsOrbital: 0
+  OrbitDistance: 0
   animatorController: {fileID: 9100000, guid: 3a29d5a98d2b71743937083edfc79565, type: 2}
   UseBoxCollider: 0
   colliderRadius: 0.5
   colliderSize: {x: 0, y: 0}
   lifeTime: 0
+  Rotate: 0
+  RotationSpeed: 0

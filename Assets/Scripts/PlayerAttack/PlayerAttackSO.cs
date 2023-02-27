@@ -10,6 +10,7 @@ public abstract class PlayerAttackSO : ScriptableObject, IAttack
     [SerializeField] private String attackDescription;
     [SerializeField] private int currentLevel;
     
+    [SerializeField] private AudioClip spawnSFX;
     [SerializeField] protected float attackSpeed;
     [SerializeField] protected ProjectileData projectileData;
     
@@ -39,6 +40,7 @@ public abstract class PlayerAttackSO : ScriptableObject, IAttack
         if (attackTimer > 0) return;
         
         ExecuteAttack();
+        AudioManager.Instance.SfxAudioSource.PlayOneShot(spawnSFX);
 
         if (!levelAccelarateCasting)
         {

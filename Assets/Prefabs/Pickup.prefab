@@ -138,3 +138,4 @@ MonoBehaviour:
   m_experienceValue: 1
   m_healthValue: 0
   m_goldValue: 0
+  pickupSFX: {fileID: 8300000, guid: 88cbc7e1f132f1c4b89d06901a520c36, type: 3}

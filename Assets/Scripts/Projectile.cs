@@ -10,10 +10,12 @@ public class Projectile : PoolableObject
 {
     [SerializeField] private float damage = 5f;
     [SerializeField] private Transform orbitFocus;
-
+    
     private PositionConstraint m_positionConstraint;
+    private SpriteRenderer m_spriteRenderer;
     private Rigidbody2D m_rigidbody2D;
     
+    public AudioClip SpawnSFX { get; set; }
     public bool Rotate { get; set; }
     public float RotationSpeed { get; set; }
     public float OrbitDistance { get; set; }
@@ -33,6 +35,7 @@ public class Projectile : PoolableObject
     private void Awake()
     {
         m_positionConstraint = GetComponentInChildren<PositionConstraint>();
+        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         m_rigidbody2D = GetComponentInChildren<Rigidbody2D>();
         
         CircleCollider2D = GetComponentInChildren<CircleCollider2D>();
@@ -45,6 +48,7 @@ public class Projectile : PoolableObject
 
     public override void Initialize()
     {
+        m_spriteRenderer.sprite = null;
         m_isSpawned = false;
         if (!UseBoxCollider)
         {

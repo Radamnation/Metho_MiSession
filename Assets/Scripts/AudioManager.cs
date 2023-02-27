@@ -3,9 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MusicManager : MonoBehaviour
+public class AudioManager : MonoBehaviour
 {
-    public static MusicManager Instance;
+    public static AudioManager Instance;
+
+
 
     private void Awake()
     {
@@ -15,13 +17,13 @@ public class MusicManager : MonoBehaviour
             return;
         }
         Destroy(gameObject);
-
-        musicAudioSource = GetComponent<AudioSource>();
     }
 
     [SerializeField] private AudioClip mainSong;
-
-    private AudioSource musicAudioSource;
+    [SerializeField] private AudioSource musicAudioSource;
+    [SerializeField] private AudioSource sfxAudioSource;
+    
+    public AudioSource SfxAudioSource => sfxAudioSource;
 
     private void Start()
     {

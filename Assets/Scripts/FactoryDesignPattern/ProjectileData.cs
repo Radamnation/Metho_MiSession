@@ -5,6 +5,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObject/ProjectileData", fileName = "ProjectileDataSO")]
 public class ProjectileData : ScriptableObject
 {
+    public AudioClip SpawnSFX;
     public bool HitOnSpawn;
     public Vector3 Scale;
     public float Speed;
