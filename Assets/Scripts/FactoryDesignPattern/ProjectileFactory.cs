@@ -26,7 +26,7 @@ public class ProjectileFactory : MonoBehaviour
         randomProjectile.transform.SetPositionAndRotation(_position, _rotation);
         randomProjectile.IsOrbital = projectileData.IsOrbital;
         randomProjectile.Animator.runtimeAnimatorController = projectileData.animatorController;
-        randomProjectile.Collider.radius = projectileData.colliderRadius;
+        randomProjectile.CircleCollider2D.radius = projectileData.colliderRadius;
         
         randomProjectile.Initialize();
     }
@@ -36,11 +36,26 @@ public class ProjectileFactory : MonoBehaviour
         var newProjectile = PoolManager.Instance.GetProjectile();
         
         newProjectile.transform.SetPositionAndRotation(_position, _rotation);
+        newProjectile.Speed = _projectileData.Speed;
+        newProjectile.HitOnSpawn = _projectileData.HitOnSpawn;
+        newProjectile.UseBoxCollider = _projectileData.UseBoxCollider;
+        if (!newProjectile.UseBoxCollider)
+        {
+            newProjectile.CircleCollider2D.radius = _projectileData.colliderRadius;
+        }
+        else
+        {
+            newProjectile.BoxCollider2D.size = _projectileData.colliderSize;
+        }
         newProjectile.IsOrbital = _projectileData.IsOrbital;
+        if (newProjectile.IsOrbital)
+        {
+            newProjectile.OrbitDistance = _projectileData.OrbitDistance;
+        }
         newProjectile.LifeTime = _projectileData.lifeTime;
         newProjectile.Animator.runtimeAnimatorController = _projectileData.animatorController;
-        newProjectile.Collider.radius = _projectileData.colliderRadius;
-        
+        newProjectile.Animator.gameObject.transform.localScale =  new Vector3(-Player.Instance.transform.localScale.x * _projectileData.Scale.x, _projectileData.Scale.y, _projectileData.Scale.z);
+
         newProjectile.Initialize();
     }
 }

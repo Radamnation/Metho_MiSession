@@ -10,9 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba950db86c954184088d45239253d6b5, type: 3}
-  m_Name: OrbitalFireBallSO
+  m_Name: OrbitalFishDataSO
   m_EditorClassIdentifier: 
+  HitOnSpawn: 0
+  Scale: {x: 0.75, y: 0.75, z: 0.75}
+  Speed: 6
   IsOrbital: 1
-  animatorController: {fileID: 9100000, guid: 3a29d5a98d2b71743937083edfc79565, type: 2}
+  OrbitDistance: 2
+  animatorController: {fileID: 9100000, guid: ac2adab8300d80c47820d7f9a35f3f40, type: 2}
+  UseBoxCollider: 0
   colliderRadius: 0.5
+  colliderSize: {x: 0, y: 0}
   lifeTime: 5

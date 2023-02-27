@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a07d52ebd608a742bbb8cd003a20015, type: 3}
-  m_Name: FireBallSO
+  m_Script: {fileID: 11500000, guid: 93acc5e474aae9b4594a334fa70a9a79, type: 3}
+  m_Name: OrbitalFishSO
   m_EditorClassIdentifier: 
-  attackName: Fire Ball
+  attackName: Orbital
   attackDescription: 
   currentLevel: 1
-  attackSpeed: 2
-  projectileData: {fileID: 11400000, guid: 65376a07a4086f54fa316d51610e8849, type: 2}
-  affectVisibleEnemy: 1
-  levelAccelarateCasting: 1
-  accelarationRate: 0.25
+  attackSpeed: 10
+  projectileData: {fileID: 11400000, guid: 11402f417d21b3644b2ad735483a1e6e, type: 2}
+  affectVisibleEnemy: 0
+  levelAccelarateCasting: 0
+  accelarationRate: 0

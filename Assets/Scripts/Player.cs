@@ -44,7 +44,7 @@ public class Player : MonoBehaviour
         m_rigidbody2D = GetComponent<Rigidbody2D>();
         m_animator = GetComponent<Animator>();
         m_transform = GetComponent<Transform>();
-        
+
         m_currentHealth = maxHealth;
 
         UIManager.Instance.UpdateExperience();
@@ -77,7 +77,6 @@ public class Player : MonoBehaviour
         if (verticalMovement != 0)
         {
             m_rigidbody2D.velocity = new Vector2(m_rigidbody2D.velocity.x, verticalMovement * movementSpeed);
-            // m_transform.Translate(new Vector2(0, verticalMovement) * (movementSpeed * Time.deltaTime), Space.World);
             m_animator.SetFloat(MoveX, 0);
             m_animator.SetFloat(MoveY, verticalMovement);
         }
@@ -89,7 +88,6 @@ public class Player : MonoBehaviour
         if (horizontalMovement != 0)
         {
             m_rigidbody2D.velocity = new Vector2(horizontalMovement * movementSpeed , m_rigidbody2D.velocity.y);
-            // m_transform.Translate(new Vector2(horizontalMovement, 0) * (movementSpeed * Time.deltaTime), Space.World);
             m_transform.localScale = new Vector3(-horizontalMovement, 1, 1);
             m_animator.SetFloat(MoveX, horizontalMovement);
             m_animator.SetFloat(MoveY, 0);
