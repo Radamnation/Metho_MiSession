@@ -14,7 +14,7 @@ public class Projectile : PoolableObject
     private PositionConstraint m_positionConstraint;
     private Rigidbody2D m_rigidbody2D;
     
-    public bool Rotate { get; set; }
+    public float Rotate { get; set; }
     public float RotationSpeed { get; set; }
     public float OrbitDistance { get; set; }
     public float Speed { get; set; }
@@ -83,11 +83,6 @@ public class Projectile : PoolableObject
     private void FixedUpdate()
     {
         if (LifeTime == 0 || !m_isSpawned) return;
-
-        if (Rotate)
-        {
-            Animator.transform.Rotate(new Vector3(0, 0, RotationSpeed));
-        }
         
         lifeTimer -= Time.fixedDeltaTime;
         if (lifeTimer <= 0)

@@ -36,6 +36,11 @@ public class ProjectileFactory : MonoBehaviour
         var newProjectile = PoolManager.Instance.GetProjectile();
         
         newProjectile.transform.SetPositionAndRotation(_position, _rotation);
+        newProjectile.Rotate = _projectileData.Rotate;
+        if (newProjectile.Rotate)
+        {
+            newProjectile.RotationSpeed = _projectileData.RotationSpeed;
+        }
         newProjectile.Speed = _projectileData.Speed;
         newProjectile.HitOnSpawn = _projectileData.HitOnSpawn;
         newProjectile.UseBoxCollider = _projectileData.UseBoxCollider;

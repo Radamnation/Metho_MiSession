@@ -26,7 +26,7 @@ public abstract class PlayerAttackSO : ScriptableObject, IAttack
 
     public void Initialize()
     {
-        currentLevel = 1;
+        currentLevel = 5;
         attackTimer = 0;
     }
     

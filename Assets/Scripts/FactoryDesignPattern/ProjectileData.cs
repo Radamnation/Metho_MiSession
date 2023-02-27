@@ -15,4 +15,6 @@ public class ProjectileData : ScriptableObject
     public float colliderRadius;
     public Vector2 colliderSize;
     public float lifeTime;
+    public bool Rotate;
+    public float RotationSpeed;
 }

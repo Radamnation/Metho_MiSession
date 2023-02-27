@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ba950db86c954184088d45239253d6b5, type: 3}
-  m_Name: OrbitalFishDataSO
+  m_Name: OrbitalShurikenDataSO
   m_EditorClassIdentifier: 
   HitOnSpawn: 0
-  Scale: {x: 0.75, y: 0.75, z: 0.75}
+  Scale: {x: 1, y: 1, z: 1}
   Speed: 6
   IsOrbital: 1
   OrbitDistance: 2
@@ -22,3 +22,5 @@ MonoBehaviour:
   colliderRadius: 0.5
   colliderSize: {x: 0, y: 0}
   lifeTime: 5
+  Rotate: 1
+  RotationSpeed: -10
