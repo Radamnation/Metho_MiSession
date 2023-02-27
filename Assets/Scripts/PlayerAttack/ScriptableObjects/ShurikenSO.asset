@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Shuriken
   attackDescription: 
-  currentLevel: 51
+  currentLevel: 80
   spawnSFX: {fileID: 8300000, guid: e60d7e37a82400344b582509b342e607, type: 3}
   attackSpeed: 10
   projectileData: {fileID: 11400000, guid: 11402f417d21b3644b2ad735483a1e6e, type: 2}

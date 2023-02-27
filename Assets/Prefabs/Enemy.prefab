@@ -161,6 +161,12 @@ MonoBehaviour:
   movementSpeed: 1.5
   damage: 1
   maxHealth: 5
+  hitSFXList:
+  - {fileID: 8300000, guid: ad1e14f3fc6217049932186a7c3452fb, type: 3}
+  - {fileID: 8300000, guid: db5604c029323524d99e76ada0bb1873, type: 3}
+  - {fileID: 8300000, guid: c4be2d4e56e97e34fa3394a9ff72f55d, type: 3}
+  - {fileID: 8300000, guid: cf6e7fdeeed7c6b41bfc84cd16bc9c0d, type: 3}
+  - {fileID: 8300000, guid: 2364c47ac3b17b14f8c10f3ec64c8520, type: 3}
 --- !u!114 &2226115129558906438
 MonoBehaviour:
   m_ObjectHideFlags: 0

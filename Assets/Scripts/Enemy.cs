@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -9,6 +10,7 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     [SerializeField] private float movementSpeed = 1.5f;
     [SerializeField] private float damage = 1;
     [SerializeField] private float maxHealth = 10;
+    [SerializeField] private List<AudioClip> hitSFXList;
     private float m_currentHealth;
 
     private bool m_canMove = true;
@@ -94,11 +96,10 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 
     public void TakeDamage(float _damage)
     {
-        Debug.Log("STaking " + _damage + "damages");
+        AudioManager.Instance.SfxAudioSource.PlayOneShot(hitSFXList[Random.Range(0, hitSFXList.Count)]);
         m_currentHealth -= _damage;
         if (m_currentHealth <= 0)
         {
-            Debug.Log("Enemy is dead");
             Death();
         }
     }
