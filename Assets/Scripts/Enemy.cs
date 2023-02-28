@@ -10,9 +10,11 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     [SerializeField] private List<AudioClip> hitSFXList;
     [SerializeField] private float stuntTime;
     private float m_hitvalue;
+    private float m_dissolveValue;
     private float m_currentHealth;
 
     private bool m_canMove = true;
+    private bool m_isDead;
     
     private SpriteRenderer m_spriteRenderer;
     private Rigidbody2D m_rigidbody2D;
@@ -29,6 +31,7 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     private static readonly int MoveX = Animator.StringToHash("MoveX");
     private static readonly int IsDead = Animator.StringToHash("IsDead");
     private static readonly int HitValue = Shader.PropertyToID("_HitValue");
+    private static readonly int Dissolve = Shader.PropertyToID("_Dissolve");
 
     public Animator Animator => m_animator;
     public CircleCollider2D Collider => m_collider;
@@ -50,6 +53,9 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 
     public override void Initialize()
     {
+        m_isDead = false;
+        m_dissolveValue = 1;
+        m_spriteRenderer.material.SetFloat(Dissolve, m_dissolveValue);
         GameManager.Instance.EnemyList.Add(this);
         m_shield.Initialize(ShieldHealth);
         m_currentHealth = MaxHealth;
@@ -64,13 +70,17 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     private void Update()
     {
         Move();
-        m_hitvalue = Mathf.Lerp(m_hitvalue, 0, Time.deltaTime * 5f);
+        m_hitvalue = Mathf.Lerp(m_hitvalue, 0, Time.deltaTime * 10f);
         m_spriteRenderer.material.SetFloat(HitValue, m_hitvalue);
+        
+        if (!m_isDead) return;
+        m_dissolveValue = Mathf.Lerp(m_dissolveValue, 0, Time.deltaTime * 3f);
+        m_spriteRenderer.material.SetFloat(Dissolve, m_dissolveValue);
     }
 
     private void Move()
     {
-        if (!m_canMove) return;
+        if (!m_canMove || m_isDead) return;
 
         var playerDirection = (Player.Instance.transform.position - transform.position).normalized;
         m_rigidbody2D.velocity = playerDirection * movementSpeed;
@@ -91,18 +101,19 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 
     public void TakeDamage(float _damage)
     {
-        m_hitvalue = 1;
         AudioManager.Instance.SfxAudioSource.PlayOneShot(hitSFXList[Random.Range(0, hitSFXList.Count)]);
         m_currentHealth -= _damage;
         if (m_currentHealth <= 0)
         {
             Death();
+            return;
         }
+        m_hitvalue = 1;
     }
 
     public void AddForce(Vector3 _impact)
     {
-        var direction = (transform.position - _impact).normalized;
+        var direction = (transform.position - Player.Instance.transform.position).normalized;
         StartCoroutine(Stunt(direction));
     }
     
@@ -110,25 +121,25 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     {
         m_canMove = false;
         m_rigidbody2D.velocity = Vector2.zero;
-        m_rigidbody2D.AddForce(_direction * 5f, ForceMode2D.Impulse);
+        m_rigidbody2D.AddForce(_direction, ForceMode2D.Impulse);
         yield return new WaitForSeconds(stuntTime);
         m_canMove = true;
     }
 
     public void Death()
     {
+        m_isDead = true;
         m_animator.SetBool(IsDead, true);
-        m_canMove = false;
         m_animator.speed = 0;
         m_collider.enabled = false;
-        m_spriteRenderer.color = Color.grey;
+        m_spriteRenderer.color = new Color(0.75f, 0.75f, 0.75f);
         PoolManager.Instance.GetPickup(transform.position, Quaternion.identity);
         StartCoroutine(RepoolAfterDelay());
     }
 
     public IEnumerator RepoolAfterDelay()
     {
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(2f);
         Repool();
     }
 
