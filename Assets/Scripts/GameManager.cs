@@ -62,4 +62,10 @@ public class GameManager : MonoBehaviour
             m_gameIsPaused = false;
         }
     }
+    
+    public void UnpauseGame()
+    {
+        Time.timeScale = 1;
+        m_gameIsPaused = false;
+    }
 }

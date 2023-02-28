@@ -51,6 +51,12 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        StartCoroutine(DelayedStart());
+    }
+
+    private IEnumerator DelayedStart()
+    {
+        yield return new WaitForEndOfFrame();
         if (m_isTitleScreen)
         {
             SwitchView(m_titleView);
@@ -95,6 +101,7 @@ public class UIManager : MonoBehaviour
 
     public void GoToTitleScreen()
     {
+        GameManager.Instance.UnpauseGame();
         SceneManager.LoadScene(m_titleScene.SceneName);
     }
 
