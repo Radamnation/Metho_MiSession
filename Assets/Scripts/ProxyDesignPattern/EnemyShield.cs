@@ -1,21 +1,24 @@
-using System.Collections;
-using System.Collections.Generic;
 using TNRD;
 using UnityEngine;
 
-public class EnemyShield : MonoBehaviour, IDamagable
+public class EnemyShield : MonoBehaviour, IDamagable, ICollidable
 {
-    [SerializeField] private SerializableInterface<IDamagable> enemy;
+    [SerializeField] private SerializableInterface<IDamagable> realDamagable;
+    [SerializeField] private SerializableInterface<ICollidable> realCollidable;
     [SerializeField] private float shieldPercentage = 0.5f;
 
     public void TakeDamage(float _damage)
     {
-        Debug.Log("Shield reduce damage by " + shieldPercentage * 100 + "%");
-        enemy.Value.TakeDamage(_damage * shieldPercentage);
+        realDamagable.Value.TakeDamage(_damage * shieldPercentage);
     }
 
     public void AddForce(Vector3 _impact)
     {
-        enemy.Value.AddForce(_impact);
+        realDamagable.Value.AddForce(_impact);
+    }
+
+    public void Collide(Player _player)
+    {
+        realCollidable.Value.Collide(_player);
     }
 }

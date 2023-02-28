@@ -1,8 +1,6 @@
-using System;
+using System.Collections;
 using System.Collections.Generic;
-using TNRD;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class Player : MonoBehaviour
 {
@@ -19,6 +17,7 @@ public class Player : MonoBehaviour
     }
 
     private Rigidbody2D m_rigidbody2D;
+    private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
     private Transform m_transform;
 
@@ -26,7 +25,12 @@ public class Player : MonoBehaviour
     [SerializeField] private List<PlayerAttackSO> attackList;
     [SerializeField] private float maxHealth = 10;
     [SerializeField] private AudioClip levelUpSFX;
+    [SerializeField] private PlayerCanvas playerCanvas;
+    [SerializeField] private float invulnerabilityTime;
+    [SerializeField] private List<AudioClip> hitSFXList;
     private float m_currentHealth;
+    
+    private bool canBeDamaged = true;
 
     private int m_currentLevel = 1;
     private int m_currentExperience = 0;
@@ -43,8 +47,9 @@ public class Player : MonoBehaviour
     private void Start()
     {
         m_rigidbody2D = GetComponent<Rigidbody2D>();
-        m_animator = GetComponent<Animator>();
-        m_transform = GetComponent<Transform>();
+        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        m_animator = GetComponentInChildren<Animator>();
+        m_transform = m_animator.transform;
 
         m_currentHealth = maxHealth;
 
@@ -111,11 +116,28 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
+        if (!canBeDamaged) { return; }
+        
+        AudioManager.Instance.SfxAudioSource.PlayOneShot(hitSFXList[Random.Range(0, hitSFXList.Count)]);
         m_currentHealth -= _damage;
         if (m_currentHealth <= 0)
         {
             Death();
         }
+        playerCanvas.UpdateHealth(m_currentHealth / maxHealth);
+        StartCoroutine(StartInvulnerability());
+    }
+
+    private IEnumerator StartInvulnerability()
+    {
+        canBeDamaged = false;
+        var color = m_spriteRenderer.color;
+        color.a = 0.25f;
+        m_spriteRenderer.color = color;
+        yield return new WaitForSeconds(invulnerabilityTime);
+        canBeDamaged = true;
+        color.a = 1f;
+        m_spriteRenderer.color = color;
     }
 
     private void Death()

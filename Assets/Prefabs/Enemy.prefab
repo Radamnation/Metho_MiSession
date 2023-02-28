@@ -1,5 +1,82 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &86501843796167362
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6094786141593020873}
+  - component: {fileID: 5693042518957573706}
+  - component: {fileID: 1921944973308322107}
+  m_Layer: 7
+  m_Name: Shield
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6094786141593020873
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86501843796167362}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 179879035017597514}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &5693042518957573706
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86501843796167362}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
+--- !u!114 &1921944973308322107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 86501843796167362}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdb02655a3f59049873e1579c963dff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  realDamagable:
+    mode: 0
+    unityReference: {fileID: 179879035017597515}
+    rawReference:
+      rid: -2
+  realCollidable:
+    mode: 0
+    unityReference: {fileID: 179879035017597515}
+    rawReference:
+      rid: -2
+  shieldPercentage: 0.5
+  references:
+    version: 2
+    RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
 --- !u!1 &179879035017597513
 GameObject:
   m_ObjectHideFlags: 0
@@ -10,11 +87,9 @@ GameObject:
   m_Component:
   - component: {fileID: 179879035017597514}
   - component: {fileID: 1084435513593852747}
-  - component: {fileID: 179879035017597518}
   - component: {fileID: 179879035017597517}
   - component: {fileID: 179879035017597516}
   - component: {fileID: 179879035017597515}
-  - component: {fileID: 2226115129558906438}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -33,7 +108,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6094786141593020873}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -58,22 +134,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &179879035017597518
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179879035017597513}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.6
 --- !u!212 &179879035017597517
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -167,26 +227,3 @@ MonoBehaviour:
   - {fileID: 8300000, guid: c4be2d4e56e97e34fa3394a9ff72f55d, type: 3}
   - {fileID: 8300000, guid: cf6e7fdeeed7c6b41bfc84cd16bc9c0d, type: 3}
   - {fileID: 8300000, guid: 2364c47ac3b17b14f8c10f3ec64c8520, type: 3}
---- !u!114 &2226115129558906438
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 179879035017597513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: abdb02655a3f59049873e1579c963dff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemy:
-    mode: 0
-    unityReference: {fileID: 179879035017597515}
-    rawReference:
-      rid: -2
-  shieldPercentage: 0.5
-  references:
-    version: 2
-    RefIds:
-    - rid: -2
-      type: {class: , ns: , asm: }

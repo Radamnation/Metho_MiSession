@@ -1,10 +1,7 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Animations;
-using UnityEngine.Serialization;
-using UnityEngine.UIElements;
 
 public class Projectile : PoolableObject
 {
@@ -127,11 +124,11 @@ public class Projectile : PoolableObject
         
         if (HitOnSpawn) return;
 
-        var enemyShield = _collision.GetComponent<EnemyShield>();
-        if (enemyShield != null)
+        var damagable = _collision.GetComponent<IDamagable>();
+        if (damagable != null)
         {
-            enemyShield.TakeDamage(damage);
-            enemyShield.AddForce(transform.position);
+            damagable.TakeDamage(damage);
+            damagable.AddForce(transform.position);
         }
 
         if (!IsOrbital)
@@ -150,11 +147,11 @@ public class Projectile : PoolableObject
         collider.OverlapCollider(filter, results);
         foreach (var collider in results)
         {
-            var enemyShield = collider.GetComponent<EnemyShield>();
-            if (enemyShield != null)
+            var damagable = collider.GetComponent<IDamagable>();
+            if (damagable != null)
             {
-                enemyShield.TakeDamage(damage);
-                enemyShield.AddForce(transform.position);
+                damagable.TakeDamage(damage);
+                damagable.AddForce(transform.position);
             }
         }
     }

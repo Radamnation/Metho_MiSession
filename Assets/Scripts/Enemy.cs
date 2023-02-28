@@ -1,8 +1,6 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class Enemy : PoolableObject, ICollidable, IDamagable
@@ -50,7 +48,7 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     {
         m_spriteRenderer = GetComponent<SpriteRenderer>();
         m_rigidbody2D = GetComponent<Rigidbody2D>();
-        m_collider = GetComponent<CircleCollider2D>();
+        m_collider = GetComponentInChildren<CircleCollider2D>();
         m_animator = GetComponent<Animator>();
 
         m_goldValue = Random.Range(10, 101);
