@@ -2403,7 +2403,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1aff9e41ed5d71e4d9ff82b7b03cf88b, type: 2}
   - {fileID: 11400000, guid: 66a7ab0c9ed6a8443972ab2ded3e2683, type: 2}
   - {fileID: 11400000, guid: 81d0ef0933e4e4b4bbf708d6c2f879ec, type: 2}
-  bossChance: 1
+  bossChance: 2
 --- !u!4 &1575526149
 Transform:
   m_ObjectHideFlags: 0
