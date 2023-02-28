@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animatorController: {fileID: 9100000, guid: a573ca65aa1555f4ab66ae24870ce62a, type: 2}
   colliderRadius: 0.6
+  maxHealth: 50
+  shieldHealth: 0

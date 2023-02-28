@@ -7,8 +7,9 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 {
     [SerializeField] private float movementSpeed = 1.5f;
     [SerializeField] private float damage = 1;
-    [SerializeField] private float maxHealth = 10;
     [SerializeField] private List<AudioClip> hitSFXList;
+    [SerializeField] private float stuntTime;
+    private float m_hitvalue;
     private float m_currentHealth;
 
     private bool m_canMove = true;
@@ -17,6 +18,7 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     private Rigidbody2D m_rigidbody2D;
     private CircleCollider2D m_collider;
     private Animator m_animator;
+    private EnemyShield m_shield;
 
     private Vector3 m_currentScale;
     private bool m_isVisible;
@@ -26,23 +28,14 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     private static readonly int MoveY = Animator.StringToHash("MoveY");
     private static readonly int MoveX = Animator.StringToHash("MoveX");
     private static readonly int IsDead = Animator.StringToHash("IsDead");
+    private static readonly int HitValue = Shader.PropertyToID("_HitValue");
 
-    public Animator Animator
-    {
-        get => m_animator;
-        set => m_animator = value;
-    }
+    public Animator Animator => m_animator;
+    public CircleCollider2D Collider => m_collider;
+    public int GoldValue => m_goldValue;
 
-    public CircleCollider2D Collider
-    {
-        get => m_collider;
-        set => m_collider = value;
-    }
-
-    public int GoldValue
-    {
-        get => m_goldValue;
-    }
+    public float MaxHealth { get; set; }
+    public float ShieldHealth { get; set; }
 
     private void Awake()
     {
@@ -50,13 +43,16 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
         m_rigidbody2D = GetComponent<Rigidbody2D>();
         m_collider = GetComponentInChildren<CircleCollider2D>();
         m_animator = GetComponent<Animator>();
+        m_shield = GetComponentInChildren<EnemyShield>();
 
         m_goldValue = Random.Range(10, 101);
     }
 
     public override void Initialize()
     {
-        m_currentHealth = maxHealth;
+        GameManager.Instance.EnemyList.Add(this);
+        m_shield.Initialize(ShieldHealth);
+        m_currentHealth = MaxHealth;
         m_currentScale = transform.localScale;
         m_canMove = true;
         m_animator.speed = 1;
@@ -68,6 +64,8 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     private void Update()
     {
         Move();
+        m_hitvalue = Mathf.Lerp(m_hitvalue, 0, Time.deltaTime * 5f);
+        m_spriteRenderer.material.SetFloat(HitValue, m_hitvalue);
     }
 
     private void Move()
@@ -76,7 +74,6 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 
         var playerDirection = (Player.Instance.transform.position - transform.position).normalized;
         m_rigidbody2D.velocity = playerDirection * movementSpeed;
-        // transform.Translate(playerDirection * (speed * Time.deltaTime), Space.World);
 
         if (Mathf.Abs(playerDirection.y) > 0.7f)
         {
@@ -94,6 +91,7 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 
     public void TakeDamage(float _damage)
     {
+        m_hitvalue = 1;
         AudioManager.Instance.SfxAudioSource.PlayOneShot(hitSFXList[Random.Range(0, hitSFXList.Count)]);
         m_currentHealth -= _damage;
         if (m_currentHealth <= 0)
@@ -104,8 +102,17 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 
     public void AddForce(Vector3 _impact)
     {
-        var direction = transform.position - _impact;
-        m_rigidbody2D.AddForce(direction * 1f, ForceMode2D.Impulse);
+        var direction = (transform.position - _impact).normalized;
+        StartCoroutine(Stunt(direction));
+    }
+    
+    private IEnumerator Stunt(Vector3 _direction)
+    {
+        m_canMove = false;
+        m_rigidbody2D.velocity = Vector2.zero;
+        m_rigidbody2D.AddForce(_direction * 5f, ForceMode2D.Impulse);
+        yield return new WaitForSeconds(stuntTime);
+        m_canMove = true;
     }
 
     public void Death()
@@ -138,17 +145,21 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
         }
     }
 
+    protected override void Repool()
+    {
+        GameManager.Instance.EnemyList.Remove(this);
+        base.Repool();
+    }
+
     private void OnBecameVisible()
     {
         m_isVisible = true;
-        GameManager.Instance.EnemyList.Add(this);
-        // EnemyChecker.Instance.SortedEnemy.Add(this);
+        GameManager.Instance.EnemyOnScreenList.Add(this);
     }
 
     private void OnBecameInvisible()
     {
         m_isVisible = false;
-        GameManager.Instance.EnemyList.Remove(this);
-        // EnemyChecker.Instance.SortedEnemy.Remove(this);
+        GameManager.Instance.EnemyOnScreenList.Remove(this);
     }
 }

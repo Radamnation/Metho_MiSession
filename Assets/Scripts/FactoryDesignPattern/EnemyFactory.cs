@@ -1,7 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 public class EnemyFactory : MonoBehaviour
 {
@@ -20,23 +18,26 @@ public class EnemyFactory : MonoBehaviour
     [SerializeField] private List<EnemyData> enemiesData;
     [SerializeField] private float bossChance = 0f;
 
-    public void SpawnRandomEnemy(Vector3 _position, Quaternion _rotation)
+    public void SpawnEnemy(Vector3 _position, Quaternion _rotation)
     {
-        var enemyData = enemiesData[Random.Range(0, enemiesData.Count)];
+        var enemyData = enemiesData[Player.Instance.CurrentLevel / 5];
         
-        Enemy randomEnemy = PoolManager.Instance.GetEnemy();
-        randomEnemy.transform.SetPositionAndRotation(_position, _rotation);
-        randomEnemy.Animator.runtimeAnimatorController = enemyData.animatorController;
-        randomEnemy.Collider.radius = enemyData.colliderRadius;
+        Enemy newEnemy = PoolManager.Instance.GetEnemy();
+        newEnemy.transform.SetPositionAndRotation(_position, _rotation);
+        newEnemy.Animator.runtimeAnimatorController = enemyData.animatorController;
+        newEnemy.Collider.radius = enemyData.colliderRadius;
+        newEnemy.ShieldHealth = enemyData.shieldHealth;
         
         if (Random.Range(0, 100) < bossChance)
         {
-            randomEnemy.transform.localScale *= 1.2f;
+            newEnemy.MaxHealth = enemyData.maxHealth * 5f;
+            newEnemy.transform.localScale *= 1.2f;
         }
         else
         {
-            randomEnemy.transform.localScale = Vector3.one;
+            newEnemy.MaxHealth = enemyData.maxHealth;
+            newEnemy.transform.localScale = Vector3.one;
         }
-        randomEnemy.Initialize();
+        newEnemy.Initialize();
     }
 }

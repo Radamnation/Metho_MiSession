@@ -17,9 +17,10 @@ public class Player : MonoBehaviour
     }
 
     private Rigidbody2D m_rigidbody2D;
+    private Collider2D m_collider2D;
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
-    private Transform m_transform;
+    private Transform m_visualTransform;
 
     [SerializeField] private float movementSpeed = 4f;
     [SerializeField] private List<PlayerAttackSO> attackList;
@@ -28,8 +29,9 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerCanvas playerCanvas;
     [SerializeField] private float invulnerabilityTime;
     [SerializeField] private List<AudioClip> hitSFXList;
+    [SerializeField] private List<AudioClip> deathSFXList;
     private float m_currentHealth;
-    
+
     private bool canBeDamaged = true;
 
     private int m_currentLevel = 1;
@@ -43,13 +45,15 @@ public class Player : MonoBehaviour
     public int CurrentLevel { get => m_currentLevel; }
     public int CurrentExperience { get => m_currentExperience; }
     public int NextLevel { get => m_nextLevel; }
+    public Transform VisualTransform => m_visualTransform;
 
     private void Start()
     {
         m_rigidbody2D = GetComponent<Rigidbody2D>();
+        m_collider2D = GetComponent<Collider2D>();
         m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
         m_animator = GetComponentInChildren<Animator>();
-        m_transform = m_animator.transform;
+        m_visualTransform = m_animator.transform;
 
         m_currentHealth = maxHealth;
 
@@ -94,7 +98,7 @@ public class Player : MonoBehaviour
         if (horizontalMovement != 0)
         {
             m_rigidbody2D.velocity = new Vector2(horizontalMovement * movementSpeed , m_rigidbody2D.velocity.y);
-            m_transform.localScale = new Vector3(-horizontalMovement, 1, 1);
+            m_visualTransform.localScale = new Vector3(-horizontalMovement, 1, 1);
             m_animator.SetFloat(MoveX, horizontalMovement);
             m_animator.SetFloat(MoveY, 0);
         }
@@ -118,31 +122,46 @@ public class Player : MonoBehaviour
     {
         if (!canBeDamaged) { return; }
         
-        AudioManager.Instance.SfxAudioSource.PlayOneShot(hitSFXList[Random.Range(0, hitSFXList.Count)]);
         m_currentHealth -= _damage;
+        playerCanvas.UpdateHealth(m_currentHealth / maxHealth);
         if (m_currentHealth <= 0)
         {
             Death();
+            return;
         }
-        playerCanvas.UpdateHealth(m_currentHealth / maxHealth);
+        AudioManager.Instance.SfxAudioSource.PlayOneShot(hitSFXList[Random.Range(0, hitSFXList.Count)]);
         StartCoroutine(StartInvulnerability());
     }
 
     private IEnumerator StartInvulnerability()
     {
         canBeDamaged = false;
+        m_collider2D.enabled = false;
         var color = m_spriteRenderer.color;
         color.a = 0.25f;
         m_spriteRenderer.color = color;
         yield return new WaitForSeconds(invulnerabilityTime);
-        canBeDamaged = true;
+        m_collider2D.enabled = true;
         color.a = 1f;
         m_spriteRenderer.color = color;
+        canBeDamaged = true;
     }
 
     private void Death()
     {
-        Destroy(gameObject);
+        canBeDamaged = false;
+        m_rigidbody2D.velocity = Vector2.zero;
+        AudioManager.Instance.SfxAudioSource.PlayOneShot(deathSFXList[Random.Range(0, deathSFXList.Count)]);
+        m_spriteRenderer.enabled = false;
+        playerCanvas.gameObject.SetActive(false);
+        StartCoroutine(ShowDeathView());
+        enabled = false;
+    }
+
+    private IEnumerator ShowDeathView()
+    {
+        yield return new WaitForSeconds(2f);
+        UIManager.Instance.ToggleDeathView();
     }
 
     public void IncreaseExperience(int _experience)

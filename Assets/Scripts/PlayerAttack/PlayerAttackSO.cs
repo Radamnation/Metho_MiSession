@@ -31,7 +31,7 @@ public abstract class PlayerAttackSO : ScriptableObject, IAttack
     public void Refresh(float _delta)
     {
         if (currentLevel <= 0) return;
-        if (affectVisibleEnemy && GameManager.Instance.EnemyList.Count <= 0) return;
+        if (affectVisibleEnemy && GameManager.Instance.EnemyOnScreenList.Count <= 0) return;
 
         attackTimer -= _delta;
         if (attackTimer > 0) return;

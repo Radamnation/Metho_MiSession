@@ -31,6 +31,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private PauseView m_pauseView;
     [SerializeField] private OptionsView m_optionsView;
     [SerializeField] private LevelUpView m_levelUpView;
+    [SerializeField] private DeathView m_deathView;
 
     [SerializeField] private SceneData m_titleScene;
     [SerializeField] private SceneData m_gameScene;
@@ -42,6 +43,7 @@ public class UIManager : MonoBehaviour
     public PauseView PauseView => m_pauseView;
     public OptionsView OptionsView => m_optionsView;
     public LevelUpView LevelUpView => m_levelUpView;
+    public DeathView DeathView => m_deathView;
 
     public UIView PreviousView { get => m_previousView; set => m_previousView = value; }
 
@@ -101,14 +103,9 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene(m_gameScene.SceneName);
     }
 
-    public void OnPause()
-    {
-        GameManager.Instance.PauseGame();
-    }
-
     public void TogglePauseView()
     {
-        if (m_currentView == m_levelUpView) return;
+        if (m_currentView == m_levelUpView || m_currentView == m_deathView) return;
         
         GameManager.Instance.PauseGame();
         if (m_currentView == m_mainView)
@@ -128,42 +125,28 @@ public class UIManager : MonoBehaviour
         GameManager.Instance.PauseGame();
         if (m_currentView == m_mainView)
         {
-            m_pauseView.PreviousView = m_currentView;
+            m_levelUpView.PreviousView = m_currentView;
             SwitchView(m_levelUpView, true);
         }
         else
         {
-            m_pauseView.PreviousView = m_currentView;
+            m_currentView.PreviousView = null;
             SwitchView(m_mainView);
         }
     }
-
-    public void OpenPauseView()
-    {
-        GameManager.Instance.PauseGame();
-        m_pauseView.PreviousView = m_currentView;
-        SwitchView(m_pauseView, true);
-    }
-
-    public void ClosePauseView()
-    {
-        GameManager.Instance.PauseGame();
-        m_currentView.CurrentSelectable = null;
-        SwitchView(m_mainView);
-    }
     
-    public void OpenLevelUpView()
+    public void ToggleDeathView()
     {
-        GameManager.Instance.PauseGame();
-        m_pauseView.PreviousView = m_currentView;
-        SwitchView(m_levelUpView, true);
-    }
-    
-    public void CloseLevelUpView()
-    {
-        GameManager.Instance.PauseGame();
-        m_pauseView.PreviousView = m_currentView;
-        SwitchView(m_mainView);
+        if (m_currentView == m_mainView)
+        {
+            m_deathView.PreviousView = m_currentView;
+            SwitchView(m_deathView, true);
+        }
+        else
+        {
+            m_currentView.PreviousView = null;
+            SwitchView(m_mainView);
+        }
     }
 
     public void OpenOptionsView()

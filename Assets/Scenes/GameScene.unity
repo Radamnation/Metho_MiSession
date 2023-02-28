@@ -739,7 +739,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144107900bb201443a8e32c8e1aa2c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 9
+  height: 6
   spawnRate: 0.1
 --- !u!1001 &509665822
 PrefabInstance:
@@ -1333,6 +1333,38 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 412736576709805308, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412736576709805308, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412736576709805308, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 412736576709805308, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427235629370886866, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427235629370886866, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427235629370886866, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1427235629370886866, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1630546079043188953, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1654,6 +1686,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6849238907190090706, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7020472746234380342, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7020472746234380342, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7020472746234380342, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7020472746234380342, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
@@ -2298,14 +2346,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemiesData:
-  - {fileID: 11400000, guid: 669304d03b45a3a4491b131b4afcbb87, type: 2}
   - {fileID: 11400000, guid: 6f8c4960c05ac614cb3faa9edb374341, type: 2}
-  - {fileID: 11400000, guid: c9fb6611a6e2a9148a1343d4ba66c66f, type: 2}
-  - {fileID: 11400000, guid: 66a7ab0c9ed6a8443972ab2ded3e2683, type: 2}
-  - {fileID: 11400000, guid: 41ba6ee005281994383eef7e1bc4547c, type: 2}
   - {fileID: 11400000, guid: 3d713815c36c4534094d2d54cc528e6c, type: 2}
-  - {fileID: 11400000, guid: 1aff9e41ed5d71e4d9ff82b7b03cf88b, type: 2}
+  - {fileID: 11400000, guid: c9fb6611a6e2a9148a1343d4ba66c66f, type: 2}
   - {fileID: 11400000, guid: 5b92e8efc6cf8274686cea2f0b9b4261, type: 2}
+  - {fileID: 11400000, guid: 669304d03b45a3a4491b131b4afcbb87, type: 2}
+  - {fileID: 11400000, guid: 1aff9e41ed5d71e4d9ff82b7b03cf88b, type: 2}
+  - {fileID: 11400000, guid: 66a7ab0c9ed6a8443972ab2ded3e2683, type: 2}
   - {fileID: 11400000, guid: 81d0ef0933e4e4b4bbf708d6c2f879ec, type: 2}
   bossChance: 5
 --- !u!4 &1575526149
@@ -2443,7 +2490,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 144107900bb201443a8e32c8e1aa2c69, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  height: 9
+  height: 6
   spawnRate: 0.1
 --- !u!1 &2014615553
 GameObject:
@@ -2548,12 +2595,14 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 56dafbb50e8221f49b2b4668e0173420, type: 2}
   - {fileID: 11400000, guid: c2d6d11dc99e1f64a8d7560a192b1338, type: 2}
   - {fileID: 11400000, guid: 85b5a95ad91c780489efb38f8c6a75a7, type: 2}
-  maxHealth: 10
+  maxHealth: 5
   levelUpSFX: {fileID: 8300000, guid: 4da4957e2e8016e4283156c81016f8b6, type: 3}
   playerCanvas: {fileID: 146154309}
   invulnerabilityTime: 1.5
   hitSFXList:
   - {fileID: 8300000, guid: e16a224825aa53a4fa774de2b7b139cb, type: 3}
+  deathSFXList:
+  - {fileID: 8300000, guid: 14607c8c770163249959ab4a5e43b9a7, type: 3}
 --- !u!58 &2031617153
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -2635,7 +2684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 189471707e495844e8972f3eacd5decd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyLimit: 10
+  enemyLimit: 5
   playerAttackList:
   - {fileID: 11400000, guid: 7c91cf80870b41541bef99b282eb024d, type: 2}
   - {fileID: 11400000, guid: 56dafbb50e8221f49b2b4668e0173420, type: 2}

@@ -34,8 +34,9 @@ public class ProjectileFactory : MonoBehaviour
     public void SpawnProjectile(ProjectileData _projectileData, Vector3 _position, Quaternion _rotation)
     {
         var newProjectile = PoolManager.Instance.GetProjectile();
-
+        
         newProjectile.transform.SetPositionAndRotation(_position, _rotation);
+        newProjectile.Damage = _projectileData.Damage;
         newProjectile.SpawnSFX = _projectileData.SpawnSFX;
         newProjectile.Rotate = _projectileData.Rotate;
         if (newProjectile.Rotate)
@@ -60,7 +61,7 @@ public class ProjectileFactory : MonoBehaviour
         }
         newProjectile.LifeTime = _projectileData.lifeTime;
         newProjectile.Animator.runtimeAnimatorController = _projectileData.animatorController;
-        newProjectile.Animator.gameObject.transform.localScale =  new Vector3(-Player.Instance.transform.localScale.x * _projectileData.Scale.x, _projectileData.Scale.y, _projectileData.Scale.z);
+        newProjectile.Animator.gameObject.transform.localScale =  new Vector3(-Player.Instance.VisualTransform.localScale.x * _projectileData.Scale.x, _projectileData.Scale.y, _projectileData.Scale.z);
 
         newProjectile.Initialize();
     }

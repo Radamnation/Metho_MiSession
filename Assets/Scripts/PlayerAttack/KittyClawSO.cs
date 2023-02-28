@@ -7,7 +7,7 @@ public class KittyClawSO : PlayerAttackSO
 {
     public override void ExecuteAttack()
     {
-        var playerTransform = Player.Instance.transform;
+        var playerTransform = Player.Instance.VisualTransform;
         ProjectileFactory.Instance.SpawnProjectile(projectileData, playerTransform.position - playerTransform.localScale.x * new Vector3(2.5f, 0, 0), Quaternion.identity);
     }
 }

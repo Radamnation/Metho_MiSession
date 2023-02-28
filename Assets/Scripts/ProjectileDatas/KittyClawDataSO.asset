@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba950db86c954184088d45239253d6b5, type: 3}
   m_Name: KittyClawDataSO
   m_EditorClassIdentifier: 
+  Damage: 25
   SpawnSFX: {fileID: 8300000, guid: 3e763f841f4b85044b839ef42a7062fe, type: 3}
   HitOnSpawn: 1
   Scale: {x: 1, y: 1, z: 1}

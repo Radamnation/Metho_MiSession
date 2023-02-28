@@ -5,13 +5,13 @@ using UnityEngine.Animations;
 
 public class Projectile : PoolableObject
 {
-    [SerializeField] private float damage = 5f;
     [SerializeField] private Transform orbitFocus;
     
     private PositionConstraint m_positionConstraint;
     private SpriteRenderer m_spriteRenderer;
     private Rigidbody2D m_rigidbody2D;
     
+    public float Damage { get; set; }
     public AudioClip SpawnSFX { get; set; }
     public bool Rotate { get; set; }
     public float RotationSpeed { get; set; }
@@ -127,8 +127,8 @@ public class Projectile : PoolableObject
         var damagable = _collision.GetComponent<IDamagable>();
         if (damagable != null)
         {
-            damagable.TakeDamage(damage);
-            damagable.AddForce(transform.position);
+            damagable.TakeDamage(Damage);
+            damagable.AddForce(Animator.transform.position);
         }
 
         if (!IsOrbital)
@@ -150,7 +150,7 @@ public class Projectile : PoolableObject
             var damagable = collider.GetComponent<IDamagable>();
             if (damagable != null)
             {
-                damagable.TakeDamage(damage);
+                damagable.TakeDamage(Damage);
                 damagable.AddForce(transform.position);
             }
         }

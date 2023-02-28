@@ -71,7 +71,7 @@ MonoBehaviour:
     unityReference: {fileID: 179879035017597515}
     rawReference:
       rid: -2
-  shieldPercentage: 0.5
+  maxHealth: 5
   references:
     version: 2
     RefIds:
@@ -154,7 +154,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -220,10 +220,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1.5
   damage: 1
-  maxHealth: 5
   hitSFXList:
   - {fileID: 8300000, guid: ad1e14f3fc6217049932186a7c3452fb, type: 3}
   - {fileID: 8300000, guid: db5604c029323524d99e76ada0bb1873, type: 3}
   - {fileID: 8300000, guid: c4be2d4e56e97e34fa3394a9ff72f55d, type: 3}
   - {fileID: 8300000, guid: cf6e7fdeeed7c6b41bfc84cd16bc9c0d, type: 3}
   - {fileID: 8300000, guid: 2364c47ac3b17b14f8c10f3ec64c8520, type: 3}
+  stuntTime: 0.1

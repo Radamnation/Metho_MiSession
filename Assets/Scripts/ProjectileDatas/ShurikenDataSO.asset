@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba950db86c954184088d45239253d6b5, type: 3}
   m_Name: ShurikenDataSO
   m_EditorClassIdentifier: 
+  Damage: 10
   SpawnSFX: {fileID: 8300000, guid: e60d7e37a82400344b582509b342e607, type: 3}
-  LoopSFX: 0
   HitOnSpawn: 0
   Scale: {x: 1, y: 1, z: 1}
-  Speed: 6
+  Speed: 10
   IsOrbital: 1
   OrbitDistance: 2
   animatorController: {fileID: 9100000, guid: ac2adab8300d80c47820d7f9a35f3f40, type: 2}
