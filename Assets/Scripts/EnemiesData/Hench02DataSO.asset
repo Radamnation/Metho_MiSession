@@ -15,4 +15,5 @@ MonoBehaviour:
   animatorController: {fileID: 9100000, guid: 2a8127838bf43e343b32902d2c4d3c24, type: 2}
   colliderRadius: 0.6
   maxHealth: 50
-  shieldHealth: 0
+  shieldHealth: 30
+  shieldChance: 10

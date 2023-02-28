@@ -26,15 +26,19 @@ public class EnemyFactory : MonoBehaviour
         newEnemy.transform.SetPositionAndRotation(_position, _rotation);
         newEnemy.Animator.runtimeAnimatorController = enemyData.animatorController;
         newEnemy.Collider.radius = enemyData.colliderRadius;
-        newEnemy.ShieldHealth = enemyData.shieldHealth;
         
-        if (Random.Range(0, 100) < bossChance)
+        
+        if (Random.Range(0, 100) < bossChance * Player.Instance.CurrentLevel / 5)
         {
-            newEnemy.MaxHealth = enemyData.maxHealth * 5f;
-            newEnemy.transform.localScale *= 1.2f;
+            newEnemy.ShieldHealth = enemyData.shieldHealth * 5f;
+            newEnemy.ShieldChance = enemyData.shieldChance / 2;
+            newEnemy.MaxHealth = enemyData.maxHealth * 10f;
+            newEnemy.transform.localScale *= 1.3f;
         }
         else
         {
+            newEnemy.ShieldHealth = enemyData.shieldHealth;
+            newEnemy.ShieldChance = enemyData.shieldChance;
             newEnemy.MaxHealth = enemyData.maxHealth;
             newEnemy.transform.localScale = Vector3.one;
         }

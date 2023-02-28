@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Lightning
   attackDescription: 
-  currentLevel: 1
+  currentLevel: 2
   spawnSFX: {fileID: 8300000, guid: a3fe17d55c47a7d4ebc2ecd3f4710c17, type: 3}
-  attackSpeed: 6
+  attackSpeed: 5
   projectileData: {fileID: 11400000, guid: 77b490222e23ec04eb9329c51ead3a39, type: 2}
   affectVisibleEnemy: 1
   levelAccelarateCasting: 1

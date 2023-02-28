@@ -71,7 +71,10 @@ MonoBehaviour:
     unityReference: {fileID: 179879035017597515}
     rawReference:
       rid: -2
+  m_spriteRenderer: {fileID: 179879035017597517}
   maxHealth: 5
+  hitSFX: {fileID: 8300000, guid: 856f5aa4bf162604dbf9b6559a8450fe, type: 3}
+  breakSFX: {fileID: 8300000, guid: 40e7fabd5ec917947bc37b2d8ad0c746, type: 3}
   references:
     version: 2
     RefIds:

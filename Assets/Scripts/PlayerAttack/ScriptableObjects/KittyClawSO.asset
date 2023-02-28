@@ -16,8 +16,8 @@ MonoBehaviour:
   attackDescription: 
   currentLevel: 1
   spawnSFX: {fileID: 8300000, guid: 3e763f841f4b85044b839ef42a7062fe, type: 3}
-  attackSpeed: 3
+  attackSpeed: 2
   projectileData: {fileID: 11400000, guid: 57e523c8e7db41e43b818e085457b3a2, type: 2}
   affectVisibleEnemy: 0
   levelAccelarateCasting: 1
-  accelarationRate: 0.25
+  accelarationRate: 0.2

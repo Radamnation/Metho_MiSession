@@ -7,4 +7,5 @@ public class EnemyData : ScriptableObject
     public float colliderRadius;
     public float maxHealth;
     public float shieldHealth;
+    public float shieldChance;
 }

@@ -39,6 +39,7 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 
     public float MaxHealth { get; set; }
     public float ShieldHealth { get; set; }
+    public float ShieldChance { get; set; }
 
     private void Awake()
     {
@@ -57,7 +58,7 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
         m_dissolveValue = 1;
         m_spriteRenderer.material.SetFloat(Dissolve, m_dissolveValue);
         GameManager.Instance.EnemyList.Add(this);
-        m_shield.Initialize(ShieldHealth);
+        m_shield.Initialize(ShieldHealth, ShieldChance);
         m_currentHealth = MaxHealth;
         m_currentScale = transform.localScale;
         m_canMove = true;
@@ -83,7 +84,8 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
         if (!m_canMove || m_isDead) return;
 
         var playerDirection = (Player.Instance.transform.position - transform.position).normalized;
-        m_rigidbody2D.velocity = playerDirection * movementSpeed;
+        // m_rigidbody2D.velocity = playerDirection * movementSpeed;
+        m_rigidbody2D.AddForce(playerDirection, ForceMode2D.Force);
 
         if (Mathf.Abs(playerDirection.y) > 0.7f)
         {
@@ -96,6 +98,11 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
             transform.localScale = new Vector3(-Mathf.Sign(playerDirection.x) * m_currentScale.x, m_currentScale.y,  m_currentScale.z);
             m_animator.SetFloat(MoveX, playerDirection.x);
             m_animator.SetFloat(MoveY, 0);
+        }
+
+        if (m_rigidbody2D.velocity.magnitude >= movementSpeed)
+        {
+            m_rigidbody2D.velocity = m_rigidbody2D.velocity.normalized * movementSpeed;
         }
     }
 

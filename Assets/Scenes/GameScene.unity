@@ -312,6 +312,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolObjectPrefab: {fileID: 179879035017597515, guid: 9af8294b71ef2f04d9494264b80f55ae, type: 3}
   poolObjectCount: 1000
+--- !u!1 &63670979
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 63670981}
+  - component: {fileID: 63670980}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &63670980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63670979}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: b2f7f0d2e2c3c6a48a958bf89749b748, type: 2}
+--- !u!4 &63670981
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 63670979}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &146154304
 GameObject:
   m_ObjectHideFlags: 0
@@ -855,7 +904,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0
@@ -2354,7 +2403,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1aff9e41ed5d71e4d9ff82b7b03cf88b, type: 2}
   - {fileID: 11400000, guid: 66a7ab0c9ed6a8443972ab2ded3e2683, type: 2}
   - {fileID: 11400000, guid: 81d0ef0933e4e4b4bbf708d6c2f879ec, type: 2}
-  bossChance: 5
+  bossChance: 1
 --- !u!4 &1575526149
 Transform:
   m_ObjectHideFlags: 0
