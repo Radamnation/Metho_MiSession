@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackName: Fire Ball
   attackDescription: 
-  currentLevel: 1
+  currentLevel: 5
   spawnSFX: {fileID: 8300000, guid: 15fe3ffb5b93c0c46baee21a04eb6ff4, type: 3}
   attackSpeed: 6
   projectileData: {fileID: 11400000, guid: 65376a07a4086f54fa316d51610e8849, type: 2}
