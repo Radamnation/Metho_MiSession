@@ -9,8 +9,10 @@
 /[Bb]uilds/
 /[Ll]ogs/
 /[Mm]emoryCaptures/
-/[Ss]ecret/
-/[Ss]ecrets/
+
+# Ignore Secrets!
+/[Aa]ssets/[Ss]ecret/
+/[Aa]ssets/[Ss]ecrets/
 
 # Never ignore Asset meta data
 !/[Aa]ssets/**/*.meta
