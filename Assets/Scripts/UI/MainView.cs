@@ -1,6 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEditor.Build.Player;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,5 +10,38 @@ public class MainView : UIView
     {
         var fillAmount = (float) Player.Instance.CurrentExperience / Player.Instance.NextLevel;
         m_experienceBar.fillAmount = fillAmount;
+    }
+}
+
+
+
+public class Switch
+{
+    private Railwork test;
+    private void Start()
+    {
+        test.StartAnimation(OnAnimationEnd);
+    }
+    
+    private void OnAnimationEnd()
+    {
+        // sdkfsdkf
+    }
+}
+
+public class Railwork
+{
+    private Action action;
+    
+    public void StartAnimation(Action callback)
+    {
+        // sdfjkhdsf
+        // sdfjkhsdkjfh
+        action = callback;
+    }
+
+    public void StopAnimation()
+    {
+        action();
     }
 }
