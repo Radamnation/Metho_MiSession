@@ -1,0 +1,139 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Sprites
+  m_EditorClassIdentifier: 
+  m_GroupName: Sprites
+  m_Data:
+    m_SerializedData: []
+  m_GUID: dc80080b534464543a437c52cc3c96d3
+  m_SerializeEntries:
+  - m_GUID: 74516379a3c5c0440a41f962e0758bce
+    m_Address: Level_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f6b2a47022770fa4eb87c9ac08c0e5ef
+    m_Address: Level_0002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55e2aed3e136d32459a5faf5e7f1b6bc
+    m_Address: Beetle_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 23c61330563eb6e409a5bf060f402195
+    m_Address: Beetle_0002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 983743bb482345b4ba0bd3a501b7b416
+    m_Address: Claw_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ad7d0f755604bac4e9be9b603be72b97
+    m_Address: FireBall_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70df09b5fca98764d9732beab742a1eb
+    m_Address: Fish_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 55b3c57deca3fdb43b59986cb03b0854
+    m_Address: Grass_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 798d23cb554801d4997f66fd5cf20b3e
+    m_Address: Hench_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15a51e1727ebbf04c98023760b263329
+    m_Address: Hench_0002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d0ae3a1ed35a61a42b9f38bfce8d3a86
+    m_Address: Imp_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8096d262ca1e0b34fbeab3dd2b8a388c
+    m_Address: Imp_0002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1089d744375c6f94bba0c6023481e160
+    m_Address: Imp_0003
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 789ab967b5686ab44896217a67c9883d
+    m_Address: Items_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fe6ad8f2e74bff42b58e7b0ca3fb3d2
+    m_Address: Obstacle_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 50aa937fddcc15040a7d07b40921e8f2
+    m_Address: Player-0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1edd40a91e68a9f4c84f6e4f7dea9a50
+    m_Address: Rat_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 59c5e84687cccfa47a40487c7aa865be
+    m_Address: Rat_0002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e43453103109e5b4dbdcffaa38f634e0
+    m_Address: Shuriken_0001
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: a0b5315c4ae4de74daec1049e72b247a, type: 2}
+    - {fileID: 11400000, guid: 3b3c86475378d664583cbe07e63fc8e3, type: 2}

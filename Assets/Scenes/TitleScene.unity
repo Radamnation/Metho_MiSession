@@ -640,6 +640,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: UIManager
       objectReference: {fileID: 0}
+    - target: {fileID: 3251279777998412295, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
+      propertyPath: gameSceneName
+      value: GameScene
+      objectReference: {fileID: 0}
     - target: {fileID: 3251279778028903411, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -723,10 +727,6 @@ PrefabInstance:
     - target: {fileID: 4812529415081966573, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6036912258726081595, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
-      propertyPath: key
-      value: options_buttonaffsd
       objectReference: {fileID: 0}
     - target: {fileID: 6593033440905445779, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
       propertyPath: m_AnchorMax.y

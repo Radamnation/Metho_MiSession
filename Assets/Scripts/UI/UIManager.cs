@@ -5,6 +5,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public class UIManager : MonoBehaviour
 {
@@ -35,6 +37,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private SceneData m_titleScene;
     [SerializeField] private SceneData m_gameScene;
+
+    [SerializeField] private string gameSceneName;
 
     private UIView m_previousView;
 
@@ -107,7 +111,14 @@ public class UIManager : MonoBehaviour
 
     public void GoToGameScreen()
     {
-        SceneManager.LoadScene(m_gameScene.SceneName);
+        // SceneManager.LoadScene(m_gameScene.SceneName);
+        Addressables.LoadAssetsAsync<Object>(new List<string>() { "GameScene" },
+            _x => { },Addressables.MergeMode.Union).Completed += SceneLoader_Completed;
+    }
+
+    private void SceneLoader_Completed(AsyncOperationHandle<IList<Object>> _object)
+    {
+        Addressables.LoadSceneAsync(gameSceneName);
     }
 
     public void TogglePauseView()

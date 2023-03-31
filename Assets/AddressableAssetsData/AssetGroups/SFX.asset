@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: SFX
+  m_EditorClassIdentifier: 
+  m_GroupName: SFX
+  m_Data:
+    m_SerializedData: []
+  m_GUID: d4aee0cb4a028f946a341ce7a2877023
+  m_SerializeEntries:
+  - m_GUID: ad1e14f3fc6217049932186a7c3452fb
+    m_Address: EnemyHit01
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: db5604c029323524d99e76ada0bb1873
+    m_Address: EnemyHit02
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c4be2d4e56e97e34fa3394a9ff72f55d
+    m_Address: EnemyHit03
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cf6e7fdeeed7c6b41bfc84cd16bc9c0d
+    m_Address: EnemyHit04
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2364c47ac3b17b14f8c10f3ec64c8520
+    m_Address: EnemyHit05
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 15fe3ffb5b93c0c46baee21a04eb6ff4
+    m_Address: FireBall
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3e763f841f4b85044b839ef42a7062fe
+    m_Address: KittyClaw
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4da4957e2e8016e4283156c81016f8b6
+    m_Address: LevelUp
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a3fe17d55c47a7d4ebc2ecd3f4710c17
+    m_Address: Lightning
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88cbc7e1f132f1c4b89d06901a520c36
+    m_Address: Pickup
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 14607c8c770163249959ab4a5e43b9a7
+    m_Address: PlayerDeath
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e16a224825aa53a4fa774de2b7b139cb
+    m_Address: PlayerHit
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 40e7fabd5ec917947bc37b2d8ad0c746
+    m_Address: ShieldBreak
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 856f5aa4bf162604dbf9b6559a8450fe
+    m_Address: ShieldHit
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e60d7e37a82400344b582509b342e607
+    m_Address: Shuriken
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: ad461b4f8e5ba2446bf9636629d57e12, type: 2}
+    - {fileID: 11400000, guid: 2e7e5384bfc71154194b86cda96a2125, type: 2}
