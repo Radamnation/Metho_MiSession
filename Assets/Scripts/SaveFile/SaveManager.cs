@@ -37,6 +37,16 @@ public class SaveManager : MonoBehaviour
         if (m_saveFile == null) return;
         goldText.text = m_saveFile.gold.ToString();
     }
+    
+    public void CreateBlankSave()
+    {
+        FileStream dataStream = new FileStream(m_filePath, FileMode.Create);
+
+        BinaryFormatter converter = new BinaryFormatter();
+        converter.Serialize(dataStream, new SaveFile());
+
+        dataStream.Close();
+    }
 
     public void SaveGame(SaveFile _saveFile)
     {
@@ -52,8 +62,8 @@ public class SaveManager : MonoBehaviour
     {
         if (!File.Exists(m_filePath))
         {
-            Debug.Log("Save file not found in folder " + m_filePath);
-            return null;
+            Debug.Log("Save file not found in folder " + m_filePath + ", creating blank Save File");
+            CreateBlankSave();
         }
 
         FileStream dataStream = new FileStream(m_filePath, FileMode.Open);
