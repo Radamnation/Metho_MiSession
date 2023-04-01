@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            m_inputSystem = GetComponent<InputSystem>();
             return;
         }
         Destroy(gameObject);
@@ -24,14 +25,16 @@ public class GameManager : MonoBehaviour
     private List<Enemy> m_enemyList = new();
     private List<Enemy> m_enemyOnScreenList = new();
     
-
     private bool m_gameIsPaused;
+
+    private InputSystem m_inputSystem;
 
     public List<Enemy> EnemyList { get => m_enemyList; set => m_enemyList = value; }
     public List<Enemy> EnemyOnScreenList { get => m_enemyOnScreenList; set => m_enemyOnScreenList = value; }
 
     private void Start()
     {
+        m_inputSystem.AddHandler(Player.Instance.Controller);
         foreach (var playerAttack in playerAttackList)
         {
             playerAttack.Initialize();
@@ -55,11 +58,13 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             m_gameIsPaused = true;
+            m_inputSystem.AddHandler(UIManager.Instance.Controller);
         }
         else
         {
             Time.timeScale = 1;
             m_gameIsPaused = false;
+            m_inputSystem.RemoveHandler(UIManager.Instance.Controller);
         }
     }
     

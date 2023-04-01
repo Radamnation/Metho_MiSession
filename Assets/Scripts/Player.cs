@@ -11,6 +11,11 @@ public class Player : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            m_rigidbody2D = GetComponent<Rigidbody2D>();
+            m_collider2D = GetComponent<Collider2D>();
+            m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+            m_animator = GetComponentInChildren<Animator>();
+            m_controller = GetComponent<PlayerController>();
             return;
         }
         Destroy(gameObject);
@@ -21,6 +26,9 @@ public class Player : MonoBehaviour
     private SpriteRenderer m_spriteRenderer;
     private Animator m_animator;
     private Transform m_visualTransform;
+
+    private PlayerController m_controller;
+    public PlayerController Controller => m_controller;
 
     [SerializeField] private float movementSpeed = 4f;
     [SerializeField] private List<PlayerAttackSO> attackList;
@@ -49,21 +57,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        m_rigidbody2D = GetComponent<Rigidbody2D>();
-        m_collider2D = GetComponent<Collider2D>();
-        m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
-        m_animator = GetComponentInChildren<Animator>();
         m_visualTransform = m_animator.transform;
-
         m_currentHealth = maxHealth;
 
         UIManager.Instance.UpdateExperience();
-    }
-
-    private void Update()
-    {
-        Pause();
-        Move();
     }
 
     private void FixedUpdate()
@@ -71,16 +68,9 @@ public class Player : MonoBehaviour
         Attack();
     }
 
-    private void Pause()
+    public bool Move()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            UIManager.Instance.TogglePauseView();
-        }
-    }
-
-    private void Move()
-    {
+        var moved = false;
         var verticalMovement = Input.GetAxisRaw("Vertical");
         var horizontalMovement = Input.GetAxisRaw("Horizontal");
         
@@ -89,6 +79,7 @@ public class Player : MonoBehaviour
             m_rigidbody2D.velocity = new Vector2(m_rigidbody2D.velocity.x, verticalMovement * movementSpeed);
             m_animator.SetFloat(MoveX, 0);
             m_animator.SetFloat(MoveY, verticalMovement);
+            moved = true;
         }
         else
         {
@@ -101,6 +92,7 @@ public class Player : MonoBehaviour
             m_visualTransform.localScale = new Vector3(-horizontalMovement, 1, 1);
             m_animator.SetFloat(MoveX, horizontalMovement);
             m_animator.SetFloat(MoveY, 0);
+            moved = true;
         }
         else
         {
@@ -108,6 +100,7 @@ public class Player : MonoBehaviour
         }
 
         m_animator.SetFloat(Velocity, new Vector2(horizontalMovement, verticalMovement).magnitude);
+        return moved;
     }
 
     private void Attack()

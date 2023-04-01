@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e5d17a21594effb4e9591490b009e7aa, type: 3}
-  m_Name: SFX_BundledAssetGroupSchema
+  m_Name: Prefabs_BundledAssetGroupSchema
   m_EditorClassIdentifier: 
-  m_Group: {fileID: 11400000, guid: 1c4217d904f921d41b809376c575a709, type: 2}
+  m_Group: {fileID: 11400000, guid: ddd6a6a6da112644199b3f514c8c54dd, type: 2}
   m_InternalBundleIdMode: 1
   m_Compression: 1
   m_IncludeAddressInCatalog: 1

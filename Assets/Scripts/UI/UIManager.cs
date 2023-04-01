@@ -17,6 +17,7 @@ public class UIManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
+            m_controller = GetComponent<MenuController>();
             return;
         }
         Destroy(gameObject);
@@ -41,6 +42,9 @@ public class UIManager : MonoBehaviour
     [SerializeField] private string gameSceneName;
 
     private UIView m_previousView;
+
+    private MenuController m_controller;
+    public MenuController Controller => m_controller;
 
     public TitleView TitleView => m_titleView;
     public MainView MainView => m_mainView;
