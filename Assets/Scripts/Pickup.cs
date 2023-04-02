@@ -27,6 +27,8 @@ public class Pickup : PoolableObject, ICollidable
 
     public override void Initialize()
     {
+        base.Initialize();
+        
         m_circleCollider2D.enabled = true;
     }
 }

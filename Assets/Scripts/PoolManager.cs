@@ -14,6 +14,7 @@ public class PoolManager : MonoBehaviour
             Instance = this;
             return;
         }
+
         Destroy(gameObject);
     }
 
@@ -24,7 +25,7 @@ public class PoolManager : MonoBehaviour
 
     public Enemy GetEnemy()
     {
-        return (Enemy) enemyPool.Depool();
+        return (Enemy)enemyPool.Depool();
     }
 
     public void GetVFX(Vector3 _position, Quaternion _rotation)
@@ -34,11 +35,24 @@ public class PoolManager : MonoBehaviour
 
     public Pickup GetPickup(Vector3 _position, Quaternion _rotation)
     {
-        return (Pickup) pickupPool.Depool(_position, _rotation);
+        return (Pickup)pickupPool.Depool(_position, _rotation);
     }
 
     public Projectile GetProjectile()
     {
-        return (Projectile) projectilePool.Depool();
+        return (Projectile)projectilePool.Depool();
+    }
+
+    public void ResetPools()
+    {
+        List<PoolableObject> values = new();
+        foreach (var value in PoolableObject.ActivePoolableObjects.Values)
+        {
+            values.Add(value);
+        }
+        for (int i = 0; i < values.Count; i++)
+        {
+            values[i].Repool();
+        }
     }
 }

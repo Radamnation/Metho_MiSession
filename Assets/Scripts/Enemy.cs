@@ -6,6 +6,9 @@ using Random = UnityEngine.Random;
 
 public class Enemy : PoolableObject, ICollidable, IDamagable
 {
+    public static readonly Dictionary<GameObject, Enemy> ActiveEnemyList = new();
+    public static readonly Dictionary<GameObject, Enemy> EnemyOnScreenList = new();
+    
     [SerializeField] private float movementSpeed = 1.5f;
     [SerializeField] private float damage = 1;
     [SerializeField] private List<AudioClip> hitSFXList;
@@ -55,10 +58,12 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 
     public override void Initialize()
     {
+        base.Initialize();
+        
         m_isDead = false;
         m_dissolveValue = 1;
         m_spriteRenderer.material.SetFloat(Dissolve, m_dissolveValue);
-        GameManager.Instance.EnemyList.Add(this);
+        ActiveEnemyList.Add(gameObject, this);
         m_shield.Initialize(ShieldHealth, ShieldChance);
         m_currentHealth = MaxHealth;
         m_currentScale = transform.localScale;
@@ -164,21 +169,21 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
         }
     }
 
-    protected override void Repool()
+    public override void Repool()
     {
-        GameManager.Instance.EnemyList.Remove(this);
+        ActiveEnemyList.Remove(gameObject);
         base.Repool();
     }
 
     private void OnBecameVisible()
     {
         m_isVisible = true;
-        GameManager.Instance.EnemyOnScreenList.Add(this);
+        EnemyOnScreenList.Add(gameObject, this);
     }
 
     private void OnBecameInvisible()
     {
         m_isVisible = false;
-        GameManager.Instance.EnemyOnScreenList.Remove(this);
+        EnemyOnScreenList.Remove(gameObject);
     }
 }

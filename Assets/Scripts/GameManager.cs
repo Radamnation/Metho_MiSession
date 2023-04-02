@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
@@ -14,7 +15,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            m_inputSystem = GetComponent<InputSystem>();
             return;
         }
         Destroy(gameObject);
@@ -22,19 +22,17 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int enemyLimit;
     [SerializeField] private List<PlayerAttackSO> playerAttackList;
-    private List<Enemy> m_enemyList = new();
-    private List<Enemy> m_enemyOnScreenList = new();
+    // private List<Enemy> m_enemyList = new();
+    // private List<Enemy> m_enemyOnScreenList = new();
     
     private bool m_gameIsPaused;
+    public Scene currentScene;
 
-    private InputSystem m_inputSystem;
-
-    public List<Enemy> EnemyList { get => m_enemyList; set => m_enemyList = value; }
-    public List<Enemy> EnemyOnScreenList { get => m_enemyOnScreenList; set => m_enemyOnScreenList = value; }
+    // public List<Enemy> EnemyList { get => m_enemyList; set => m_enemyList = value; }
+    // public List<Enemy> EnemyOnScreenList { get => m_enemyOnScreenList; set => m_enemyOnScreenList = value; }
 
     private void Start()
     {
-        m_inputSystem.AddHandler(Player.Instance.Controller);
         foreach (var playerAttack in playerAttackList)
         {
             playerAttack.Initialize();
@@ -49,7 +47,7 @@ public class GameManager : MonoBehaviour
 
     public bool CanSpawnEnemy()
     {
-        return m_enemyList.Count < enemyLimit * Player.Instance.CurrentLevel;
+        return Enemy.ActiveEnemyList.Count < enemyLimit * Player.Instance.CurrentLevel;
     }
 
     public void PauseGame()
@@ -58,13 +56,13 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 0;
             m_gameIsPaused = true;
-            m_inputSystem.AddHandler(UIManager.Instance.Controller);
+            InputSystem.Instance.AddHandler(UIManager.Instance.Controller);
         }
         else
         {
             Time.timeScale = 1;
             m_gameIsPaused = false;
-            m_inputSystem.RemoveHandler(UIManager.Instance.Controller);
+            InputSystem.Instance.RemoveHandler(UIManager.Instance.Controller);
         }
     }
     

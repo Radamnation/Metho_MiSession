@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEngine;
 
 
@@ -8,7 +9,7 @@ public class LightningSO : PlayerAttackSO
     {
         for (int i = 0; i < CurrentLevel; i++)
         {
-            var randomEnemy = GameManager.Instance.EnemyOnScreenList[Random.Range(0, GameManager.Instance.EnemyOnScreenList.Count)];
+            var randomEnemy = Enemy.EnemyOnScreenList.ElementAt(Random.Range(0, Enemy.EnemyOnScreenList.Count)).Value;
             ProjectileFactory.Instance.SpawnProjectile(projectileData, randomEnemy.transform.position, Quaternion.identity);
             PoolManager.Instance.GetVFX(randomEnemy.transform.position, Quaternion.identity);
         }

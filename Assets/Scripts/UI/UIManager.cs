@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 using JetBrains.Annotations;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using UnityEngine.ResourceManagement.ResourceProviders;
 
 public class UIManager : MonoBehaviour
 {
@@ -20,6 +21,7 @@ public class UIManager : MonoBehaviour
             m_controller = GetComponent<MenuController>();
             return;
         }
+
         Destroy(gameObject);
     }
 
@@ -28,8 +30,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private bool m_isTitleScreen;
 
-    [Header("Views")]
-    [SerializeField] private TitleView m_titleView;
+    [Header("Views")] [SerializeField] private TitleView m_titleView;
+    [SerializeField] private LoginView m_loginView;
     [SerializeField] private MainView m_mainView;
     [SerializeField] private PauseView m_pauseView;
     [SerializeField] private OptionsView m_optionsView;
@@ -39,6 +41,7 @@ public class UIManager : MonoBehaviour
     [SerializeField] private SceneData m_titleScene;
     [SerializeField] private SceneData m_gameScene;
 
+    [SerializeField] private string titleSceneName;
     [SerializeField] private string gameSceneName;
 
     private UIView m_previousView;
@@ -47,15 +50,24 @@ public class UIManager : MonoBehaviour
     public MenuController Controller => m_controller;
 
     public TitleView TitleView => m_titleView;
+    public LoginView LoginView => m_loginView;
     public MainView MainView => m_mainView;
     public PauseView PauseView => m_pauseView;
     public OptionsView OptionsView => m_optionsView;
     public LevelUpView LevelUpView => m_levelUpView;
     public DeathView DeathView => m_deathView;
 
-    public UIView PreviousView { get => m_previousView; set => m_previousView = value; }
+    public UIView PreviousView
+    {
+        get => m_previousView;
+        set => m_previousView = value;
+    }
 
-    public bool IsTitleScreen { get => m_isTitleScreen; set => m_isTitleScreen = value; }
+    public bool IsTitleScreen
+    {
+        get => m_isTitleScreen;
+        set => m_isTitleScreen = value;
+    }
 
     private void Start()
     {
@@ -65,14 +77,19 @@ public class UIManager : MonoBehaviour
     private IEnumerator DelayedStart()
     {
         yield return new WaitForEndOfFrame();
-        if (m_isTitleScreen)
-        {
-            SwitchView(m_titleView);
-        }
-        else
-        {
-            SwitchView(m_mainView);
-        }
+        SwitchView(m_titleView);
+        GoToTitleScreen();
+
+        // if (m_isTitleScreen)
+        // {
+        //     SwitchView(m_titleView);
+        //     InputSystem.Instance.AddHandler(Controller);
+        // }
+        // else
+        // {
+        //     SwitchView(m_mainView);
+        //     InputSystem.Instance.AddHandler(Player.Instance.Controller);
+        // }
     }
 
     public void SwitchView(UIView _newView = null, bool _additive = false)
@@ -81,7 +98,7 @@ public class UIManager : MonoBehaviour
         {
             m_previousView = _newView.PreviousView;
         }
-        
+
         if (!_additive)
         {
             if (m_currentView)
@@ -89,7 +106,7 @@ public class UIManager : MonoBehaviour
                 m_currentView.OnHide();
             }
         }
-        
+
         m_currentView = _newView;
         if (m_currentView != null)
         {
@@ -109,26 +126,63 @@ public class UIManager : MonoBehaviour
 
     public void GoToTitleScreen()
     {
+        Addressables.LoadAssetsAsync<Object>(new List<string> { "TitleScene" },
+            _x => { }, Addressables.MergeMode.Union).Completed += LoadTitleScreen;
+    }
+
+    private void LoadTitleScreen(AsyncOperationHandle<IList<Object>> _object)
+    {
+        Addressables.LoadSceneAsync(titleSceneName, LoadSceneMode.Additive).Completed += StartTitleScene;
+    }
+    
+    private void StartTitleScene(AsyncOperationHandle<SceneInstance> _scene)
+    {
+        if (GameManager.Instance.currentScene != default)
+        {
+            SceneManager.UnloadSceneAsync(GameManager.Instance.currentScene).completed += ClearPools;
+        }
+        
+        GameManager.Instance.currentScene = SceneManager.GetSceneByName(titleSceneName);
+        SwitchView(m_mainView);
+        SwitchView(m_titleView);
+        InputSystem.Instance.ClearHandlers();
+        InputSystem.Instance.AddHandler(Controller);
         GameManager.Instance.UnpauseGame();
-        SceneManager.LoadScene(m_titleScene.SceneName);
+    }
+
+    private void ClearPools(AsyncOperation _operation)
+    {
+        PoolManager.Instance.ResetPools();
     }
 
     public void GoToGameScreen()
     {
-        // SceneManager.LoadScene(m_gameScene.SceneName);
-        Addressables.LoadAssetsAsync<Object>(new List<string>() { "GameScene" },
-            _x => { },Addressables.MergeMode.Union).Completed += SceneLoader_Completed;
+        Addressables.LoadAssetsAsync<Object>(new List<string> { "GameScene" },
+            _x => { }, Addressables.MergeMode.Union).Completed += LoadGameScene;
     }
 
-    private void SceneLoader_Completed(AsyncOperationHandle<IList<Object>> _object)
+    private void LoadGameScene(AsyncOperationHandle<IList<Object>> _object)
     {
-        Addressables.LoadSceneAsync(gameSceneName);
+        Addressables.LoadSceneAsync(gameSceneName, LoadSceneMode.Additive).Completed += StartGameScene;
+    }
+
+    private void StartGameScene(AsyncOperationHandle<SceneInstance> _scene)
+    {
+        if (GameManager.Instance.currentScene != default)
+        {
+            SceneManager.UnloadSceneAsync(GameManager.Instance.currentScene);
+        }
+        
+        GameManager.Instance.currentScene = SceneManager.GetSceneByName(gameSceneName);
+        SwitchView(m_mainView);
+        InputSystem.Instance.ClearHandlers();
+        InputSystem.Instance.AddHandler(Player.Instance.Controller);
     }
 
     public void TogglePauseView()
     {
         if (m_currentView == m_levelUpView || m_currentView == m_deathView) return;
-        
+
         GameManager.Instance.PauseGame();
         if (m_currentView == m_mainView)
         {
@@ -156,7 +210,7 @@ public class UIManager : MonoBehaviour
             SwitchView(m_mainView);
         }
     }
-    
+
     public void ToggleDeathView()
     {
         if (m_currentView == m_mainView)
@@ -181,6 +235,12 @@ public class UIManager : MonoBehaviour
     {
         m_optionsView.SaveOptions();
         ReturnToPreviousView();
+    }
+
+    public void OpenLoginView()
+    {
+        m_loginView.PreviousView = m_currentView;
+        SwitchView(m_loginView);
     }
 
     public void ReturnToPreviousView()

@@ -22,6 +22,7 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
+    - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}

@@ -18,6 +18,8 @@ public class VFXLightningStrike : PoolableObject
 
     public override void Initialize()
     {
+        base.Initialize();
+        
         m_lightningSpeed = m_particleSystem.main.duration;
         m_lightningTimer = 0;
         m_particleSystem.Play();

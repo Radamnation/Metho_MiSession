@@ -17,54 +17,54 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 1c7e3560a67766640bcea9e97719422e
   m_SerializeEntries:
-  - m_GUID: 615195653266ad24b8349b7f9a162acd
-    m_Address: UIManager
-    m_ReadOnly: 0
-    m_SerializedLabels:
-    - GameScene
-    - TitleScene
-    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 290bc2cbd6dc68a4abd6d4e3ba4699cb
     m_Address: LevelUpButton
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
+    - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 8e0b4be9c8a2905479386c6216b24728
     m_Address: BonePalaceMapBlock
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
+    - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 348beb519f1f9b944a413bd3c18d31c9
     m_Address: CastleMapBlock
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
+    - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9af8294b71ef2f04d9494264b80f55ae
     m_Address: Enemy
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
+    - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: e52889df9e1254b4da2d6355f90f965e
     m_Address: Pickup
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
+    - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4fccc23a27466b84dae85c8df5bec6e8
     m_Address: Projectile
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
+    - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 40cc74bf886800e429fef77d58580186
     m_Address: VFXLightningStrike
     m_ReadOnly: 0
     m_SerializedLabels:
     - GameScene
+    - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}

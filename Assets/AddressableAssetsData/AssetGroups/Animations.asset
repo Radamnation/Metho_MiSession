@@ -1,0 +1,459 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Animations
+  m_EditorClassIdentifier: 
+  m_GroupName: Animations
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 148cb329fcdc2ce499eafff30d47707c
+  m_SerializeEntries:
+  - m_GUID: 4cd6b51843a11414ea8add0057240546
+    m_Address: PlayerBackIdle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 89d834b5128411d4eb7d9c1002361b43
+    m_Address: PlayerFrontIdle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fe9b08948aa677e4793c6d9956b5c220
+    m_Address: PlayerSideIdle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7ceb5104d54237448953dab5c4d2137
+    m_Address: PlayerBackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7451223acefc6204fb32b0763d0e8a56
+    m_Address: PlayerFrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f4c4628634519ed42b4ad45fc93b9728
+    m_Address: PlayerSideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 643161bb27c2d5344ad5970637107745
+    m_Address: ExperienceSpining
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9bc923f8ffc23b240bf53aaf5f4f2e9a
+    m_Address: FireBall
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 324e07b9e9dadd74ba507589bc00a78c
+    m_Address: Imp01Death
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f3cfcc6fb57cab04388048467a750935
+    m_Address: Imp01BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 443b17d4ec19a0649a6301d08d2d74f0
+    m_Address: Imp01FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ea1d8022dbd7a58478bcb967fdc3f026
+    m_Address: Imp01SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 44a3c29a4bc88af4fa31fbe0959d248f
+    m_Address: Imp02Death
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3b8c783bc1c2b4b43a5817fa6524b855
+    m_Address: Imp02BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a94811881eb29bd4784f64293ba60748
+    m_Address: Imp02FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88c9fc0a6d8c9ba4eb764bcddd96275b
+    m_Address: Imp02SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3ac1a447211b9ae4fa88dcaf5eed6f9a
+    m_Address: Imp03Death
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25a397b482033964d8282c1482adc603
+    m_Address: Imp03BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b85488f5fb9b86644a20949ee0064a04
+    m_Address: Imp03FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 885a9b102eee11a47abaa9569ad13048
+    m_Address: Imp03SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4dc383745d31b2b43955b3b375046e25
+    m_Address: Rat01Death
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8ac012926cfcca34b842719c0bbc797c
+    m_Address: Rat01BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c8be86aa7d501f44d8b11f24e2c1cf5d
+    m_Address: Rat01FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f2e08dcc59fe9ee40ab53c8456baa3ee
+    m_Address: Rat01SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 258713f9d35e82648b5316c18ee6395b
+    m_Address: Rat02Death
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b77cfa2474f04b4d9271a609662907b
+    m_Address: Rat02BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0bc68dc94be5244409ecb20820988a40
+    m_Address: Rat02FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ba6c5ef203803fa428f1972a81506bd0
+    m_Address: Rat02SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b7ec23a2c6b8e24ab50c61e3d041906
+    m_Address: Beetle01Death
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5d98ec52f2ec78442b1868122f49440a
+    m_Address: Beetle01BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7cdc166ce495f7e49ad958f1f6f9dfc5
+    m_Address: Beetle01FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 92167f225ba661a48af541a5ff449d8b
+    m_Address: Beetle01SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 83e7ac88cbcadf94590cebfb68a59198
+    m_Address: Beetle02Death
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ce22df95c9dc4c74eb73761e2681f1cf
+    m_Address: Beetle02BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0bcfd654fd82a124e87e32532d6a61e2
+    m_Address: Beetle02FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 17b14a7a1abf93e4e8bcd018fa7ba562
+    m_Address: Beetle02SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0b57bab340685fd43ae0b5100be15e6a
+    m_Address: Hench01Death
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 24b8a401a6ca1894391746a9f3e68a83
+    m_Address: Hench01BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6599b4404f8ed0f48a892c03aee15d89
+    m_Address: Hench01FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 95d98fc1c12a618409c371b58fde556b
+    m_Address: Hench01SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 762d96b9fccf110409f9baf545d5da3a
+    m_Address: Hench02Death
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eeba3bdce3b452740b67e2e247dd2fc4
+    m_Address: Hench02BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fdcd17a2a0bbb8b4d94a50ca1876aa7c
+    m_Address: Hench02FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0bdd8972961bb334f957062b3f72d3de
+    m_Address: Hench02SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c7e255d23a1847540948e45909dbd385
+    m_Address: KittyClaw
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bb67b5f123186ec409b0bbe492b3428e
+    m_Address: Shuriken
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 5c7d16a7732699243a5451ee5fc39e00
+    m_Address: Lightning
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 06c2c34cbace9a045bb784aacaa22eb0
+    m_Address: PlayerAnimator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: fef458bd61a4eb3448e8167422902b82
+    m_Address: Beetle01Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c01c15b0dc0ef1c41a9419ece7ccc9f8
+    m_Address: LightningAnimator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7265c6268f505b348aed6ff1916cebb1
+    m_Address: Imp01Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: e3b640a136c660e4cb6fc7e7e82936e8
+    m_Address: Rat01Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a573ca65aa1555f4ab66ae24870ce62a
+    m_Address: Rat02Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 36833070047fdb24682178fb4af7c810
+    m_Address: Beetle02Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 49a4976db931b3e4aaa05fce9bf0bdbd
+    m_Address: Hench01Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2a8127838bf43e343b32902d2c4d3c24
+    m_Address: Hench02Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3a29d5a98d2b71743937083edfc79565
+    m_Address: FireBallAnimator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6a20edc313c50284e882a31df9630e74
+    m_Address: Imp02Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6b9d12d285bc3384995f01fea4cb68a7
+    m_Address: ExperienceAnimator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3cf7127bc09fc39439fe34a5fb1d74a7
+    m_Address: KittyClawAnimator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac2adab8300d80c47820d7f9a35f3f40
+    m_Address: ShurikenAnimator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bf66d228b43f45b439b84c10383d2e1a
+    m_Address: Imp03Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - GameScene
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: b36d1f5030e7b5742b6060c9ab9422b7, type: 2}
+    - {fileID: 11400000, guid: 3d72944e95a1c0a418b6ade4c03d5861, type: 2}

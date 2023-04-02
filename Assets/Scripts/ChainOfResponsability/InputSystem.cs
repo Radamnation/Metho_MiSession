@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +10,18 @@ public interface IHandleInput
 
 public class InputSystem : MonoBehaviour
 {
+    public static InputSystem Instance;
+    
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            return;
+        }
+        Destroy(gameObject);
+    }
+    
     private readonly List<IHandleInput> m_inputHandlers = new();
 
     private void Update()
@@ -25,4 +38,5 @@ public class InputSystem : MonoBehaviour
 
     internal void AddHandler(IHandleInput _inputHandler) => m_inputHandlers.Add(_inputHandler);
     internal void RemoveHandler(IHandleInput _inputHandler) => m_inputHandlers.Remove(_inputHandler);
+    internal void ClearHandlers() => m_inputHandlers.Clear();
 }

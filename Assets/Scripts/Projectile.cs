@@ -45,6 +45,8 @@ public class Projectile : PoolableObject
 
     public override void Initialize()
     {
+        base.Initialize();
+        
         m_spriteRenderer.sprite = null;
         m_isSpawned = false;
         if (!UseBoxCollider)
@@ -97,7 +99,7 @@ public class Projectile : PoolableObject
         }
     }
 
-    protected override void Repool()
+    public override void Repool()
     {
         m_isSpawned = false;
         collider.enabled = false;
@@ -110,7 +112,7 @@ public class Projectile : PoolableObject
         collider.transform.localPosition = Vector3.zero;
         m_positionConstraint.constraintActive = false;
         Animator.transform.localRotation = Quaternion.identity;
-        
+
         base.Repool();
     }
 

@@ -94,9 +94,12 @@ public class LoginManager : MonoBehaviour
             if (request.result != UnityWebRequest.Result.Success)
             {
                 loginInformationText.enabled = true;
-                loginInformationText.text = "Impossible to create account";
+                // loginInformationText.text = "Impossible to create account";
+                Debug.Log(request.downloadHandler.text);
+                var errorMatch = Regex.Matches(request.downloadHandler.text, "\"error\":\"([\\w\\s\\/]+)", RegexOptions.Multiline);
+                var error = errorMatch.First().Groups[1].Value;
+                loginInformationText.text = error;
                 loginInformationText.color = Color.red;
-                Debug.LogError(request.error);
                 yield break;
             }
 
@@ -129,9 +132,12 @@ public class LoginManager : MonoBehaviour
             if (request.result != UnityWebRequest.Result.Success)
             {
                 loginInformationText.enabled = true;
-                loginInformationText.text = "Incorrect Email or Password";
+                // loginInformationText.text = "Incorrect Email or Password";
+                Debug.Log(request.downloadHandler.text);
+                var errorMatch = Regex.Matches(request.downloadHandler.text, "\"error\":\"([\\w\\s\\/]+)", RegexOptions.Multiline);
+                var error = errorMatch.First().Groups[1].Value;
+                loginInformationText.text = error;
                 loginInformationText.color = Color.red;
-                Debug.LogError(request.error);
                 yield break;
             }
 
@@ -171,9 +177,9 @@ public class LoginManager : MonoBehaviour
             if (getRequest.result != UnityWebRequest.Result.Success)
             {
                 promoInformationText.enabled = true;
-                promoInformationText.text = "Invalid or already used PromoCode";
+                promoInformationText.text = "Invalid Promo Code";
                 promoInformationText.color = Color.red;
-                Debug.LogError(getRequest.error);
+                Debug.Log(getRequest.error);
                 yield break;
             }
             
@@ -183,7 +189,7 @@ public class LoginManager : MonoBehaviour
             if (usernameMatch.Count == 0)
             {
                 promoInformationText.enabled = true;
-                promoInformationText.text = "PromoCode as already been used";
+                promoInformationText.text = "Promo Code as already been used";
                 promoInformationText.color = Color.red;
                 yield break;
             }
@@ -216,12 +222,12 @@ public class LoginManager : MonoBehaviour
 
                 if (postRequest.result != UnityWebRequest.Result.Success)
                 {
-                    Debug.LogError(postRequest.error);
+                    Debug.Log(postRequest.error);
                     yield break;
                 }
 
                 promoInformationText.enabled = true;
-                promoInformationText.text = "PromoCode was linked Successfully";
+                promoInformationText.text = "Promo Code was linked Successfully";
                 promoInformationText.color = Color.green;
                 Debug.Log(postRequest.downloadHandler.text);
             }
