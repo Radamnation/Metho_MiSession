@@ -18,7 +18,6 @@ public class SaveManager : MonoBehaviour
         Destroy(gameObject);
     }
     
-    [SerializeField] private TMP_Text goldText;
     private SaveFile m_saveFile = new();
     private string m_filePath;
     
@@ -35,7 +34,7 @@ public class SaveManager : MonoBehaviour
 
         m_saveFile = LoadGame();
         if (m_saveFile == null) return;
-        goldText.text = m_saveFile.gold.ToString();
+        // goldText.text = m_saveFile.gold.ToString();
     }
     
     public void CreateBlankSave()
