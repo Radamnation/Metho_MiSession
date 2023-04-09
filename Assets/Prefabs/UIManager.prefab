@@ -818,8 +818,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8324759853917257088}
-        m_TargetAssemblyTypeName: LoginManager, KittySurvivor
+      - m_Target: {fileID: 8566995348307308277}
+        m_TargetAssemblyTypeName: LoginView, KittySurvivor
         m_MethodName: CreateAccount
         m_Mode: 1
         m_Arguments:
@@ -1219,7 +1219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Extra Skin, 2x XP, '
+  m_text: Extra Skin, Extra Map, 2x XP
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
   m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
@@ -1412,7 +1412,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3251279777998412295}
         m_TargetAssemblyTypeName: UIManager, KittySurvivor
-        m_MethodName: OpenLoginView
+        m_MethodName: OpenLoginAccountView
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2745,6 +2745,9 @@ MonoBehaviour:
   m_defaultSelectable: {fileID: 3251279777380389207}
   m_currentSelectable: {fileID: 0}
   m_previousView: {fileID: 0}
+  loginButtonText: {fileID: 4478238952362663905}
+  playButtonText: {fileID: 3251279777243664738}
+  currentLoginText: {fileID: 2013256036428385485}
 --- !u!1 &3251279776524579701
 GameObject:
   m_ObjectHideFlags: 0
@@ -4407,7 +4410,7 @@ MonoBehaviour:
   m_isTitleScreen: 1
   m_titleView: {fileID: 3251279776431368504}
   m_loginView: {fileID: 8566995348307308277}
-  m_accountView: {fileID: 0}
+  m_accountView: {fileID: 5941589195075889765}
   m_mainView: {fileID: 3251279776308859199}
   m_pauseView: {fileID: 3251279778278401920}
   m_optionsView: {fileID: 3251279777764442365}
@@ -5422,9 +5425,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8324759853917257088}
-        m_TargetAssemblyTypeName: LoginManager, KittySurvivor
-        m_MethodName: LoginAccount
+      - m_Target: {fileID: 5941589195075889765}
+        m_TargetAssemblyTypeName: AccountView, KittySurvivor
+        m_MethodName: Logout
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6959,8 +6962,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8324759853917257088}
-        m_TargetAssemblyTypeName: LoginManager, KittySurvivor
+      - m_Target: {fileID: 8566995348307308277}
+        m_TargetAssemblyTypeName: LoginView, KittySurvivor
         m_MethodName: LoginAccount
         m_Mode: 1
         m_Arguments:
@@ -7712,7 +7715,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5104327647937795089}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 73.63637}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7722,7 +7725,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -20, y: 10}
-  m_SizeDelta: {x: 500, y: 40}
+  m_SizeDelta: {x: 1000, y: 40}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &6515578174523233684
 CanvasRenderer:
@@ -7752,7 +7755,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Not currently logged
+  m_text: Not currently logged in
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
   m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
@@ -7961,8 +7964,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5360482650450674089}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 73.63636}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3251279776431368507}
@@ -7971,7 +7974,7 @@ RectTransform:
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: -20, y: 10}
-  m_SizeDelta: {x: 1000, y: 4}
+  m_SizeDelta: {x: 1000, y: 40}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &2534126542022592492
 CanvasRenderer:
@@ -8001,7 +8004,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Current Logged as Null
+  m_text: Not currently logged in
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
   m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
@@ -8528,7 +8531,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Gold Amount : '
+  m_text: 'Gold Amount : XXXXX G'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
   m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
@@ -8786,6 +8789,12 @@ MonoBehaviour:
   m_defaultSelectable: {fileID: 0}
   m_currentSelectable: {fileID: 0}
   m_previousView: {fileID: 0}
+  usernameText: {fileID: 8673949064170511545}
+  currentLoginText: {fileID: 7763678366605151598}
+  promoInformationText: {fileID: 8458531120697557830}
+  promoCodeInputField: {fileID: 3396302809635261738}
+  portraitImage: {fileID: 1587906929996955513}
+  defaultPortrait: {fileID: 2800000, guid: da700b39b97149640a1cdc9bf6c0e103, type: 3}
 --- !u!1 &6593600962220109100
 GameObject:
   m_ObjectHideFlags: 0
@@ -9044,7 +9053,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3251279777998412295}
         m_TargetAssemblyTypeName: UIManager, KittySurvivor
-        m_MethodName: ReturnToPreviousView
+        m_MethodName: SwitchToTitleScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -9446,8 +9455,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8324759853917257088}
-        m_TargetAssemblyTypeName: LoginManager, KittySurvivor
+      - m_Target: {fileID: 5941589195075889765}
+        m_TargetAssemblyTypeName: AccountView, KittySurvivor
         m_MethodName: UploadPortrait
         m_Mode: 1
         m_Arguments:
@@ -9580,8 +9589,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8324759853917257088}
-        m_TargetAssemblyTypeName: LoginManager, KittySurvivor
+      - m_Target: {fileID: 5941589195075889765}
+        m_TargetAssemblyTypeName: AccountView, KittySurvivor
         m_MethodName: ValidatePromoCode
         m_Mode: 1
         m_Arguments:
@@ -9602,7 +9611,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6701034068119216482}
   - component: {fileID: 8566995348307308277}
-  - component: {fileID: 8324759853917257088}
   m_Layer: 5
   m_Name: LoginView
   m_TagString: Untagged
@@ -9647,27 +9655,9 @@ MonoBehaviour:
   m_defaultSelectable: {fileID: 0}
   m_currentSelectable: {fileID: 0}
   m_previousView: {fileID: 0}
---- !u!114 &8324759853917257088
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7573547425554221479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7b958174b83805643b4a04cd25f77a4d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  currentUserText: {fileID: 2465226865720577972}
   loginInformationText: {fileID: 5908855064876258404}
   emailInputField: {fileID: 9004035250070766573}
   passwordInputField: {fileID: 5329715081844062372}
-  promoInformationText: {fileID: 0}
-  promoCodeInputField: {fileID: 0}
-  portraitImage: {fileID: 0}
-  defaultPortrait: {fileID: 2800000, guid: da700b39b97149640a1cdc9bf6c0e103, type: 3}
-  imageUploadButton: {fileID: 0}
 --- !u!1 &7578772801474545790
 GameObject:
   m_ObjectHideFlags: 0
@@ -10062,7 +10052,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 3251279777998412295}
         m_TargetAssemblyTypeName: UIManager, KittySurvivor
-        m_MethodName: ReturnToPreviousView
+        m_MethodName: SwitchToTitleScreen
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -10514,8 +10504,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8566610237283164810}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 73.63636}
-  m_LocalScale: {x: 0.4999986, y: 0.4999986, z: 0.4999986}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 0.75}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2227309082092637910}
@@ -10523,8 +10513,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -19.999878, y: 10}
-  m_SizeDelta: {x: 1000, y: 50}
+  m_AnchoredPosition: {x: -20, y: 10}
+  m_SizeDelta: {x: 1000, y: 40}
   m_Pivot: {x: 1, y: 0}
 --- !u!222 &86347324376682097
 CanvasRenderer:
@@ -10556,8 +10546,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Current Logged as Null
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
+  m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []

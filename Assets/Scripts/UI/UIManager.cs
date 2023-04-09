@@ -30,7 +30,8 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private bool m_isTitleScreen;
 
-    [Header("Views")] [SerializeField] private TitleView m_titleView;
+    [Header("Views")]
+    [SerializeField] private TitleView m_titleView;
     [SerializeField] private LoginView m_loginView;
     [SerializeField] private AccountView m_accountView;
     [SerializeField] private MainView m_mainView;
@@ -114,6 +115,11 @@ public class UIManager : MonoBehaviour
         {
             m_currentView.OnShow();
         }
+    }
+
+    public void SwitchToTitleScreen()
+    {
+        SwitchView(m_titleView);
     }
 
     public Selectable GetCurrentSelectable()
@@ -239,10 +245,18 @@ public class UIManager : MonoBehaviour
         ReturnToPreviousView();
     }
 
-    public void OpenLoginView()
+    public void OpenLoginAccountView()
     {
-        m_loginView.PreviousView = m_currentView;
-        SwitchView(m_loginView);
+        if (LoginManager.Instance.IsLoggedIn(out var userName))
+        {
+            m_accountView.PreviousView = m_currentView;
+            SwitchView(m_accountView);
+        }
+        else
+        {
+            m_loginView.PreviousView = m_currentView;
+            SwitchView(m_loginView);
+        }
     }
 
     public void ReturnToPreviousView()

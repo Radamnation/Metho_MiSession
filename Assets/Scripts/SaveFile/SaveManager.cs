@@ -1,7 +1,11 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
+using System.Collections;
+using System;
+using PlasticGui.Configuration.CloudEdition;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Networking;
 
 public class SaveManager : MonoBehaviour
 {
@@ -20,23 +24,16 @@ public class SaveManager : MonoBehaviour
     
     private SaveFile m_saveFile = new();
     private string m_filePath;
+
+    private string saveFileUrl;
+
+    public string FilePath => m_filePath;
     
     private void Initialize()
     {
         m_filePath = Application.persistentDataPath + "/SaveFile.data";
-        m_saveFile.gold = 100;
     }
 
-    private void Start()
-    {
-        // goldText.text = saveFile.gold.ToString();
-        // SaveGame(saveFile);
-
-        m_saveFile = LoadGame();
-        if (m_saveFile == null) return;
-        // goldText.text = m_saveFile.gold.ToString();
-    }
-    
     public void CreateBlankSave()
     {
         FileStream dataStream = new FileStream(m_filePath, FileMode.Create);
@@ -55,15 +52,43 @@ public class SaveManager : MonoBehaviour
         converter.Serialize(dataStream, _saveFile);
 
         dataStream.Close();
+        
+        LoginManager.Instance.UploadSaveFile();
     }
 
-    public SaveFile LoadGame()
+    public void LoadGame()
     {
-        if (!File.Exists(m_filePath))
+        saveFileUrl = LoginManager.Instance.SaveFileURL;
+        if (!string.IsNullOrEmpty(saveFileUrl))
         {
-            Debug.Log("Save file not found in folder " + m_filePath + ", creating blank Save File");
-            CreateBlankSave();
+            StartCoroutine(GetSaveFileFromURL());
         }
+        else
+        {
+            SaveGame(m_saveFile);
+        }
+    }
+
+    public IEnumerator GetSaveFileFromURL()
+    {
+        using (var request = UnityWebRequest.Get(LoginManager.Instance.SaveFileURL))
+        {
+            yield return request.SendWebRequest();
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(request.error);
+                Debug.Log(request.downloadHandler.text);
+            }
+            
+            // var data = request.downloadHandler.data;
+            File.WriteAllBytes(m_filePath, request.downloadHandler.data);
+        }
+        
+        // if (!File.Exists(m_filePath))
+        // {
+        //     Debug.Log("Save file not found in folder " + m_filePath + ", creating blank Save File");
+        //     CreateBlankSave();
+        // }
 
         FileStream dataStream = new FileStream(m_filePath, FileMode.Open);
 
@@ -71,6 +96,6 @@ public class SaveManager : MonoBehaviour
         SaveFile saveFile = converter.Deserialize(dataStream) as SaveFile;
 
         dataStream.Close();
-        return saveFile;
+        m_saveFile = saveFile;
     }
 }

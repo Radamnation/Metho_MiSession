@@ -4,19 +4,9 @@ using System;
 public class SaveFile
 {
     public int gold;
+    public int bestTime;
 
-    public void AddGold(int _amount)
-    {
-        gold += _amount;
-    }
-    
-    public void RemoveGold(int _amount)
-    {
-        gold -= _amount;
-    }
-    
-    public void ResetGold()
-    {
-        gold = 0;
-    }
+    public bool extraSkinUnlocked;
+    public bool extraLevelUnlocked;
+    public bool doubleXPUnlocked;
 }

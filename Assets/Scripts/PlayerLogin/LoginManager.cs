@@ -13,134 +13,101 @@ using UnityEngine.Networking;
 
 public class LoginManager : MonoBehaviour
 {
-    [SerializeField] private TMP_Text currentUserText;
+    public static LoginManager Instance;
 
-    [SerializeField] private TMP_Text loginInformationText;
-    [SerializeField] private TMP_InputField emailInputField;
-    [SerializeField] private TMP_InputField passwordInputField;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            return;
+        }
 
-    [SerializeField] private TMP_Text promoInformationText;
-    [SerializeField] private TMP_InputField promoCodeInputField;
+        Destroy(gameObject);
+    }
 
-    [SerializeField] private Image portraitImage;
-    [SerializeField] private Texture2D defaultPortrait;
-
-    [SerializeField] private Button imageUploadButton;
+    private string inputPassword;
+    private string inputUsername;
+    private string inputEmail;
+    
+    private string inputPromoCode;
 
     private string m_currentLogin = "";
 
     private string userObjectId = "";
     private string userSessionToken = "";
-    private string userName = "";
+    private string username = "";
     private string imageName = "";
     private string imageUrl = "";
+    private string saveFileName = "";
+    private string saveFileUrl = "";
+    
+    public string Username => username;
+    public string ImageUrl => imageUrl;
+    public string SaveFileURL => saveFileUrl;
 
     private void Start()
     {
-        currentUserText.text = "Not currently logged in";
-
-        loginInformationText.enabled = false;
-        loginInformationText.text = "";
-
+        // currentUserText.text = "Not currently logged in";
+        
         // promoInformationText.enabled = false;
-        loginInformationText.text = "";
-
         // UpdatePortrait(defaultPortrait);
         // imageUploadButton.gameObject.SetActive(false);
     }
 
-    private void UpdatePortrait(Texture2D _texture)
+    public bool IsLoggedIn(out string _userName)
     {
-        var sprite = Sprite.Create(_texture, new Rect(0, 0, _texture.width, _texture.height), new Vector2(0.5f, 0.5f),
-            100f);
-        portraitImage.sprite = sprite;
+        if (userSessionToken != "")
+        {
+            _userName = username;
+            return true;
+        }
+
+        _userName = null;
+        return false;
     }
 
-    public void CreateAccount()
+    public void Logout()
     {
+        userSessionToken = "";
+    }
+
+    public void CreateAccount(string _email, string _password)
+    {
+        inputUsername = inputEmail = _email;
+        inputPassword = _password;
         StartCoroutine(PostAccount());
     }
 
-    public void LoginAccount()
+    public void LoginAccount(string _email, string _password)
     {
-        StartCoroutine(GetAccount(UpdateVisual));
+        inputUsername = inputEmail = _email;
+        inputPassword = _password;
+        StartCoroutine(GetAccount());
     }
 
     public void UploadPortrait()
     {
         StartCoroutine(PostPortrait());
     }
-
-    private void UpdateVisual()
+    
+    public void UploadSaveFile()
     {
-        if (m_currentLogin == "")
-        {
-            currentUserText.text = "Not currently logged in";
-            return;
-        }
-
-        
-        var usernameMatch = Regex.Matches(m_currentLogin, "\"username\":\"(\\w+)", RegexOptions.Multiline);
-        var username = usernameMatch.First().Groups[1].Value;
-        currentUserText.text = "Currently logged in as " + username;
-
-        imageUploadButton.gameObject.SetActive(true);
-        if (imageUrl != "")
-        {
-            StartCoroutine(GetPortraitFromURL());
-        }
+        StartCoroutine(PostSaveFile());
     }
 
-    public void ValidatePromoCode()
+    public void ValidatePromoCode(string _promoCode)
     {
         if (m_currentLogin == "")
         {
-            promoInformationText.enabled = true;
-            promoInformationText.text = "Not currently logged in";
-            promoInformationText.color = Color.red;
+            UIManager.Instance.AccountView.WriteError("Not currently logged in");
             return;
         }
 
+        inputPromoCode = _promoCode;
         StartCoroutine(PostPromoCode());
     }
-
-    public IEnumerator GetPortraitFromURL()
-    {
-        using (var request = UnityWebRequestTexture.GetTexture(imageUrl))
-        {
-            yield return request.SendWebRequest();
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError(request.error);
-                Debug.Log(request.downloadHandler.text);
-                yield break;
-            }
-
-            Texture2D texture = ((DownloadHandlerTexture)request.downloadHandler).texture;
-            UpdatePortrait(texture);
-        }
-    }
-
-    public IEnumerator SavePortraitToAccount()
-    {
-        string json = JsonConvert.SerializeObject(new { imageName, imageUrl });
-        using (var request = UnityWebRequest.Put($"https://parseapi.back4app.com/users/{userObjectId}", json))
-        {
-            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            request.SetRequestHeader("X-Parse-Session-Token", userSessionToken);
-            request.SetRequestHeader("Content-Type", "application/json");
-            
-            yield return request.SendWebRequest();
-            Debug.Log(request.downloadHandler.text);
-            
-            if (request.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError(request.error);
-            }
-        }
-    }
-
+    
     public IEnumerator PostAccount()
     {
         using (var request = new UnityWebRequest("https://parseapi.back4app.com/users", "POST"))
@@ -152,9 +119,9 @@ public class LoginManager : MonoBehaviour
 
             var data = new
             {
-                password = passwordInputField.text,
-                username = emailInputField.text,
-                email = emailInputField.text
+                password = inputPassword,
+                username = inputUsername,
+                email = inputEmail
             };
 
             var json = JsonConvert.SerializeObject(data);
@@ -167,24 +134,20 @@ public class LoginManager : MonoBehaviour
             {
                 var errorJObject = JObject.Parse(request.downloadHandler.text);
                 var error = errorJObject["error"]?.ToString();
-                loginInformationText.text = error;
-                loginInformationText.enabled = true;
-                loginInformationText.color = Color.red;
+                UIManager.Instance.LoginView.WriteError(error);
                 yield break;
             }
 
-            loginInformationText.enabled = true;
-            loginInformationText.text = "Account has been created successfully";
-            loginInformationText.color = Color.green;
+            UIManager.Instance.LoginView.WriteSuccess("Account has been created successfully");
             Debug.Log(request.downloadHandler.text);
         }
     }
 
-    public IEnumerator GetAccount(Action _callback)
+    public IEnumerator GetAccount()
     {
         WWWForm form = new WWWForm();
-        form.AddField("username", emailInputField.text);
-        form.AddField("password", passwordInputField.text);
+        form.AddField("username", inputEmail);
+        form.AddField("password", inputPassword);
 
         string loginUrl = "https://parseapi.back4app.com/login";
         string loginUrlWithParams = loginUrl + "?" + Encoding.UTF8.GetString(form.data);
@@ -203,15 +166,11 @@ public class LoginManager : MonoBehaviour
             {
                 var errorJObject = JObject.Parse(request.downloadHandler.text);
                 var error = errorJObject["error"]?.ToString();
-                loginInformationText.text = error;
-                loginInformationText.enabled = true;
-                loginInformationText.color = Color.red;
+                UIManager.Instance.LoginView.WriteError(error);
                 yield break;
             }
 
-            loginInformationText.enabled = true;
-            loginInformationText.text = "Login Successful";
-            loginInformationText.color = Color.green;
+            UIManager.Instance.LoginView.WriteSuccess("Login Successful");
             m_currentLogin = request.downloadHandler.text;
             
             var userJObject = JObject.Parse(request.downloadHandler.text);
@@ -235,12 +194,14 @@ public class LoginManager : MonoBehaviour
                 }
                 
                 var newJObject = JObject.Parse(newRequest.downloadHandler.text);
+                username = newJObject["username"]?.ToString();
                 imageName = newJObject["imageName"]?.ToString();
                 imageUrl = newJObject["imageUrl"]?.ToString();
-                UpdateVisual();
+                saveFileName = newJObject["saveFileName"]?.ToString();
+                saveFileUrl = newJObject["saveFileUrl"]?.ToString();
             }
-            
-            _callback?.Invoke();
+
+            UIManager.Instance.SwitchView(UIManager.Instance.AccountView);
         }
     }
 
@@ -268,7 +229,75 @@ public class LoginManager : MonoBehaviour
             imageName = imageJObject["name"]?.ToString();
             imageUrl = imageJObject["url"]?.ToString();
             StartCoroutine(SavePortraitToAccount());
-            UpdateVisual();
+            UIManager.Instance.AccountView.UpdateImageVisual();
+        }
+    }
+
+    public IEnumerator SavePortraitToAccount()
+    {
+        string json = JsonConvert.SerializeObject(new { imageName, imageUrl });
+        using (var request = UnityWebRequest.Put($"https://parseapi.back4app.com/users/{userObjectId}", json))
+        {
+            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
+            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
+            request.SetRequestHeader("X-Parse-Session-Token", userSessionToken);
+            request.SetRequestHeader("Content-Type", "application/json");
+            
+            yield return request.SendWebRequest();
+            Debug.Log(request.downloadHandler.text);
+            
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(request.error);
+            }
+        }
+    }
+    
+    public IEnumerator PostSaveFile()
+    {
+        using (var request = new UnityWebRequest("https://parseapi.back4app.com/files/saveFile.data", "POST"))
+        {
+            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
+            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
+            request.SetRequestHeader("Content-Type", "data");
+            string filePath = SaveManager.Instance.FilePath;
+
+            request.uploadHandler = new UploadHandlerFile(filePath);
+            request.downloadHandler = new DownloadHandlerBuffer();
+
+            yield return request.SendWebRequest();
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(request.error);
+                yield break;
+            }
+
+            Debug.Log(request.downloadHandler.text);
+            var imageJObject = JObject.Parse(request.downloadHandler.text);
+            saveFileName = imageJObject["name"]?.ToString();
+            saveFileUrl = imageJObject["url"]?.ToString();
+            StartCoroutine(SaveSaveFileToAccount());
+            UIManager.Instance.AccountView.UpdateImageVisual();
+        }
+    }
+    
+    public IEnumerator SaveSaveFileToAccount()
+    {
+        string json = JsonConvert.SerializeObject(new { saveFileName, saveFileUrl });
+        using (var request = UnityWebRequest.Put($"https://parseapi.back4app.com/users/{userObjectId}", json))
+        {
+            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
+            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
+            request.SetRequestHeader("X-Parse-Session-Token", userSessionToken);
+            request.SetRequestHeader("Content-Type", "application/json");
+            
+            yield return request.SendWebRequest();
+            Debug.Log(request.downloadHandler.text);
+            
+            if (request.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError(request.error);
+            }
         }
     }
 
@@ -276,7 +305,7 @@ public class LoginManager : MonoBehaviour
     {
         var promoCode = new
         {
-            code = promoCodeInputField.text,
+            code = inputPromoCode,
             username = "null"
         };
 
@@ -298,9 +327,7 @@ public class LoginManager : MonoBehaviour
 
             if (getRequest.result != UnityWebRequest.Result.Success)
             {
-                promoInformationText.enabled = true;
-                promoInformationText.text = "Invalid Promo Code";
-                promoInformationText.color = Color.red;
+                UIManager.Instance.AccountView.WriteError("Invalid Promo Code");
                 Debug.Log(getRequest.error);
                 yield break;
             }
@@ -311,9 +338,7 @@ public class LoginManager : MonoBehaviour
 
             if (usernameMatch.Count == 0)
             {
-                promoInformationText.enabled = true;
-                promoInformationText.text = "Promo Code as already been used";
-                promoInformationText.color = Color.red;
+                UIManager.Instance.AccountView.WriteError("Promo Code as already been used");
                 yield break;
             }
             
@@ -333,7 +358,7 @@ public class LoginManager : MonoBehaviour
 
                 var data = new
                 {
-                    code = promoCodeInputField.text,
+                    code = inputPromoCode,
                     username = currentUser
                 };
 
@@ -349,9 +374,7 @@ public class LoginManager : MonoBehaviour
                     yield break;
                 }
 
-                promoInformationText.enabled = true;
-                promoInformationText.text = "Promo Code was linked Successfully";
-                promoInformationText.color = Color.green;
+                UIManager.Instance.AccountView.WriteSuccess("Promo Code was linked Successfully");
                 Debug.Log(postRequest.downloadHandler.text);
             }
         }
