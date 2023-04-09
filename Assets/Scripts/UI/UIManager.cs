@@ -32,6 +32,7 @@ public class UIManager : MonoBehaviour
 
     [Header("Views")]
     [SerializeField] private TitleView m_titleView;
+    [SerializeField] private StartView m_startView;
     [SerializeField] private LoginView m_loginView;
     [SerializeField] private AccountView m_accountView;
     [SerializeField] private MainView m_mainView;
@@ -52,6 +53,7 @@ public class UIManager : MonoBehaviour
     public MenuController Controller => m_controller;
 
     public TitleView TitleView => m_titleView;
+    public StartView StartView => m_startView;
     public LoginView LoginView => m_loginView;
     public AccountView AccountView => m_accountView;
     public MainView MainView => m_mainView;
