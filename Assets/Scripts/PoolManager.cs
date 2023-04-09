@@ -33,9 +33,9 @@ public class PoolManager : MonoBehaviour
         vfxPool.Depool(_position, _rotation);
     }
 
-    public Pickup GetPickup(Vector3 _position, Quaternion _rotation)
+    public Pickup GetPickup()
     {
-        return (Pickup)pickupPool.Depool(_position, _rotation);
+        return (Pickup)pickupPool.Depool();
     }
 
     public Projectile GetProjectile()

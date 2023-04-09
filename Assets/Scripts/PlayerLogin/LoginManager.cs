@@ -91,9 +91,9 @@ public class LoginManager : MonoBehaviour
         StartCoroutine(PostPortrait());
     }
     
-    public void UploadSaveFile()
+    public void UploadSaveFile(Action _callback)
     {
-        StartCoroutine(PostSaveFile());
+        StartCoroutine(PostSaveFile(_callback));
     }
 
     public void ValidatePromoCode(string _promoCode)
@@ -253,7 +253,7 @@ public class LoginManager : MonoBehaviour
         }
     }
     
-    public IEnumerator PostSaveFile()
+    public IEnumerator PostSaveFile(Action _callback)
     {
         using (var request = new UnityWebRequest("https://parseapi.back4app.com/files/saveFile.data", "POST"))
         {
@@ -276,12 +276,11 @@ public class LoginManager : MonoBehaviour
             var imageJObject = JObject.Parse(request.downloadHandler.text);
             saveFileName = imageJObject["name"]?.ToString();
             saveFileUrl = imageJObject["url"]?.ToString();
-            StartCoroutine(SaveSaveFileToAccount());
-            UIManager.Instance.AccountView.UpdateImageVisual();
+            StartCoroutine(SaveSaveFileToAccount(_callback));
         }
     }
     
-    public IEnumerator SaveSaveFileToAccount()
+    public IEnumerator SaveSaveFileToAccount(Action _callback)
     {
         string json = JsonConvert.SerializeObject(new { saveFileName, saveFileUrl });
         using (var request = UnityWebRequest.Put($"https://parseapi.back4app.com/users/{userObjectId}", json))
@@ -299,6 +298,7 @@ public class LoginManager : MonoBehaviour
                 Debug.LogError(request.error);
             }
         }
+        _callback?.Invoke();
     }
 
     public IEnumerator PostPromoCode()

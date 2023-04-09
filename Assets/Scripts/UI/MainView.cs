@@ -1,47 +1,36 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class MainView : UIView
 {
     [SerializeField] private Image m_experienceBar;
+    [SerializeField] private TMP_Text m_goldText;
+    [SerializeField] private TMP_Text m_timerText;
+    [SerializeField] private TMP_Text m_levelText;
 
     public void UpdateExperience()
     {
         var fillAmount = (float) Player.Instance.CurrentExperience / Player.Instance.NextLevel;
         m_experienceBar.fillAmount = fillAmount;
     }
-}
 
-
-
-public class Switch
-{
-    private Railwork test;
-    private void Start()
+    public void UpdateGold()
     {
-        test.StartAnimation(OnAnimationEnd);
-    }
-    
-    private void OnAnimationEnd()
-    {
-        // sdkfsdkf
-    }
-}
-
-public class Railwork
-{
-    private Action action;
-    
-    public void StartAnimation(Action callback)
-    {
-        // sdfjkhdsf
-        // sdfjkhsdkjfh
-        action = callback;
+        m_goldText.text = "GOLD || " + SaveManager.Instance.SaveFile.gold;
     }
 
-    public void StopAnimation()
+    public void UpdateTimer()
     {
-        action();
+        var time = Player.Instance.TimeSurvived;
+        int minutes =  (int) time / 60;
+        int seconds = (int) time % 60;
+        m_timerText.text = minutes.ToString("00") + ":" + seconds.ToString("00");
+    }
+
+    public void UpdateLevel()
+    {
+        m_levelText.text = Player.Instance.CurrentLevel + " || LVL";
     }
 }

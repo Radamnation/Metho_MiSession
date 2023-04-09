@@ -132,6 +132,15 @@ public class UIManager : MonoBehaviour
         m_currentSelectable = _newSelectable;
     }
 
+    public void BackToTitle()
+    {
+        if (Player.Instance.TimeSurvived > SaveManager.Instance.SaveFile.bestTime)
+        {
+            SaveManager.Instance.SaveFile.bestTime = Player.Instance.TimeSurvived;
+        }
+        SaveManager.Instance.SaveGame(GoToTitleScreen);
+    }
+
     public void GoToTitleScreen()
     {
         Addressables.LoadAssetsAsync<Object>(new List<string> { "TitleScene" },
@@ -271,6 +280,15 @@ public class UIManager : MonoBehaviour
     }
 
     public void ReturnToDesktop()
+    {
+        if (Player.Instance.TimeSurvived > SaveManager.Instance.SaveFile.bestTime)
+        {
+            SaveManager.Instance.SaveFile.bestTime = Player.Instance.TimeSurvived;
+        }
+        SaveManager.Instance.SaveGame(Exit);
+    }
+
+    public void Exit()
     {
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;

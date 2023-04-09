@@ -1,6 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 public class Player : MonoBehaviour
 {
@@ -46,6 +49,8 @@ public class Player : MonoBehaviour
     private int m_currentExperience = 0;
     private int m_nextLevel = 8;
     
+    public float TimeSurvived;
+    
     private static readonly int MoveX = Animator.StringToHash("MoveX");
     private static readonly int MoveY = Animator.StringToHash("MoveY");
     private static readonly int Velocity = Animator.StringToHash("Velocity");
@@ -61,6 +66,12 @@ public class Player : MonoBehaviour
         m_currentHealth = maxHealth;
 
         UIManager.Instance.UpdateExperience();
+    }
+
+    private void Update()
+    {
+        TimeSurvived += Time.deltaTime;
+        UIManager.Instance.MainView.UpdateTimer();
     }
 
     private void FixedUpdate()
@@ -125,6 +136,16 @@ public class Player : MonoBehaviour
         AudioManager.Instance.SfxAudioSource.PlayOneShot(hitSFXList[Random.Range(0, hitSFXList.Count)]);
         StartCoroutine(StartInvulnerability());
     }
+    
+    public void IncreaseHealth(int _health)
+    {
+        m_currentHealth += _health;
+        if (m_currentHealth >= maxHealth)
+        {
+            m_currentHealth = maxHealth;
+        }
+        playerCanvas.UpdateHealth(m_currentHealth / maxHealth);
+    }
 
     private IEnumerator StartInvulnerability()
     {
@@ -172,6 +193,7 @@ public class Player : MonoBehaviour
         m_currentLevel++;
         m_currentExperience = 0;
         m_nextLevel = (int) (m_nextLevel * 1.2f);
+        UIManager.Instance.MainView.UpdateLevel();
         AudioManager.Instance.SfxAudioSource.PlayOneShot(levelUpSFX);
         UIManager.Instance.ToggleLevelUpView();
     }

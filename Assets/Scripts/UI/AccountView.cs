@@ -8,6 +8,10 @@ using UnityEngine.UI;
 public class AccountView : UIView
 {
     [SerializeField] private TMP_Text usernameText;
+    [SerializeField] private TMP_Text goldText;
+    [SerializeField] private TMP_Text bestTimeText;
+    [SerializeField] private TMP_Text unlockText;
+    
     [SerializeField] private TMP_Text currentLoginText;
     
     [SerializeField] private TMP_Text promoInformationText;
@@ -31,7 +35,26 @@ public class AccountView : UIView
         
         UpdateImageVisual();
 
-        SaveManager.Instance.LoadGame();
+        SaveManager.Instance.LoadGame(UpdateVisual);
+    }
+
+    private void UpdateVisual()
+    {
+        goldText.text = "Gold Amount : " + SaveManager.Instance.SaveFile.gold + " G";
+        bestTimeText.text = "Best Time : " + SaveManager.Instance.SaveFile.bestTime;
+        unlockText.text = "";
+        if (SaveManager.Instance.SaveFile.extraSkinUnlocked)
+        {
+            unlockText.text += "| Extra Skin |";
+        }
+        if (SaveManager.Instance.SaveFile.extraLevelUnlocked)
+        {
+            unlockText.text += "| Extra Level |";
+        }
+        if (SaveManager.Instance.SaveFile.doubleXPUnlocked)
+        {
+            unlockText.text += "| Double XP |";
+        }
     }
 
     public void Logout()

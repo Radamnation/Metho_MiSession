@@ -1180,6 +1180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 927903934}
+  - component: {fileID: 927903935}
   m_Layer: 0
   m_Name: PickupFactory
   m_TagString: Untagged
@@ -1202,6 +1203,20 @@ Transform:
   m_Father: {fileID: 1334011443}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &927903935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927903933}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 71fe22ecd6c40a5468cf524da91c35bb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experiencePickup: {fileID: 11400000, guid: 4091c50c1fc40494a91911f1adf9cb38, type: 2}
+  goldPickup: {fileID: 11400000, guid: 8ca33bbe5b296c4489653acecc9b66e2, type: 2}
 --- !u!1 &985445025
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,12 +1623,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b958174b83805643b4a04cd25f77a4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentUserText: {fileID: 0}
-  promoInformationText: {fileID: 0}
-  promoCodeInputField: {fileID: 0}
-  portraitImage: {fileID: 0}
-  defaultPortrait: {fileID: 0}
-  imageUploadButton: {fileID: 0}
 --- !u!4 &2130273362
 Transform:
   m_ObjectHideFlags: 0

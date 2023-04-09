@@ -27,6 +27,7 @@ public class SaveManager : MonoBehaviour
 
     private string saveFileUrl;
 
+    public SaveFile SaveFile => m_saveFile;
     public string FilePath => m_filePath;
     
     private void Initialize()
@@ -34,42 +35,45 @@ public class SaveManager : MonoBehaviour
         m_filePath = Application.persistentDataPath + "/SaveFile.data";
     }
 
-    public void CreateBlankSave()
+    // public void CreateBlankSave()
+    // {
+    //     FileStream dataStream = new FileStream(m_filePath, FileMode.Create);
+    //
+    //     BinaryFormatter converter = new BinaryFormatter();
+    //     converter.Serialize(dataStream, new SaveFile());
+    //
+    //     dataStream.Close();
+    // }
+
+    public void SaveGame(Action _callback)
     {
         FileStream dataStream = new FileStream(m_filePath, FileMode.Create);
 
         BinaryFormatter converter = new BinaryFormatter();
-        converter.Serialize(dataStream, new SaveFile());
-
-        dataStream.Close();
-    }
-
-    public void SaveGame(SaveFile _saveFile)
-    {
-        FileStream dataStream = new FileStream(m_filePath, FileMode.Create);
-
-        BinaryFormatter converter = new BinaryFormatter();
-        converter.Serialize(dataStream, _saveFile);
+        converter.Serialize(dataStream, m_saveFile);
 
         dataStream.Close();
         
-        LoginManager.Instance.UploadSaveFile();
+        LoginManager.Instance.UploadSaveFile(_callback);
     }
 
-    public void LoadGame()
+    public void LoadGame(Action _callback)
     {
         saveFileUrl = LoginManager.Instance.SaveFileURL;
+        Debug.Log(saveFileUrl);
         if (!string.IsNullOrEmpty(saveFileUrl))
         {
-            StartCoroutine(GetSaveFileFromURL());
+            Debug.Log("Fetching Saved File");
+            StartCoroutine(GetSaveFileFromURL(_callback));
         }
         else
         {
-            SaveGame(m_saveFile);
+            Debug.Log("Saving new Save File");
+            SaveGame(null);
         }
     }
 
-    public IEnumerator GetSaveFileFromURL()
+    public IEnumerator GetSaveFileFromURL(Action _callback)
     {
         using (var request = UnityWebRequest.Get(LoginManager.Instance.SaveFileURL))
         {
@@ -80,15 +84,8 @@ public class SaveManager : MonoBehaviour
                 Debug.Log(request.downloadHandler.text);
             }
             
-            // var data = request.downloadHandler.data;
             File.WriteAllBytes(m_filePath, request.downloadHandler.data);
         }
-        
-        // if (!File.Exists(m_filePath))
-        // {
-        //     Debug.Log("Save file not found in folder " + m_filePath + ", creating blank Save File");
-        //     CreateBlankSave();
-        // }
 
         FileStream dataStream = new FileStream(m_filePath, FileMode.Open);
 
@@ -97,5 +94,7 @@ public class SaveManager : MonoBehaviour
 
         dataStream.Close();
         m_saveFile = saveFile;
+        
+        _callback?.Invoke();
     }
 }

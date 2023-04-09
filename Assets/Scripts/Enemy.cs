@@ -146,7 +146,14 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
         m_animator.speed = 0;
         m_collider.enabled = false;
         m_spriteRenderer.color = new Color(0.75f, 0.75f, 0.75f);
-        PoolManager.Instance.GetPickup(transform.position, Quaternion.identity);
+        if (transform.localScale.x > 1)
+        {
+            PickupFactory.Instance.SpawnGoldPickup(transform.position, Quaternion.identity);
+        }
+        else
+        {
+            PickupFactory.Instance.SpawnExperiencePickup(transform.position, Quaternion.identity);
+        }
         StartCoroutine(RepoolAfterDelay());
     }
 
