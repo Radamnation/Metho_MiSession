@@ -35,15 +35,10 @@ public class SaveManager : MonoBehaviour
         m_filePath = Application.persistentDataPath + "/SaveFile.data";
     }
 
-    // public void CreateBlankSave()
-    // {
-    //     FileStream dataStream = new FileStream(m_filePath, FileMode.Create);
-    //
-    //     BinaryFormatter converter = new BinaryFormatter();
-    //     converter.Serialize(dataStream, new SaveFile());
-    //
-    //     dataStream.Close();
-    // }
+    public void CreateBlankSave()
+    {
+        m_saveFile = new();
+    }
 
     public void SaveGame(Action _callback)
     {
@@ -69,7 +64,7 @@ public class SaveManager : MonoBehaviour
         else
         {
             Debug.Log("Saving new Save File");
-            SaveGame(null);
+            SaveGame(_callback);
         }
     }
 

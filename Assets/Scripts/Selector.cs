@@ -3,23 +3,44 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class Selector : MonoBehaviour
 {
-    [SerializeField] private bool Enabled;
-    [SerializeField] private UnityEvent OnClick;
-
+    public bool Interactable;
+    
+    [SerializeField] private Image foreground;
     [SerializeField] private Image background;
+    
+    [SerializeField] private UnityEvent<Color> OnClick;
 
-    private void OnMouseUp()
+    public void Initialize()
     {
-        if (!Enabled) return;
-        ChangeColor(Color.green);
+        if (Interactable)
+        {
+            foreground.color = Color.white;
+            background.color = Color.white;
+        }
+        else
+        {
+            foreground.color = Color.black;
+            background.color = Color.grey;
+        }
     }
 
-    public void ChangeColor(Color _color)
+    public void Click()
     {
+        if (!Interactable) return;
+        
+        OnClick?.Invoke(Color.white);
+        ChangeBackgroundColor(Color.green);
+    }
+
+    public void ChangeBackgroundColor(Color _color)
+    {
+        if (!Interactable) return;
+        
         background.color = _color;
     }
 }

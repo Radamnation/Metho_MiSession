@@ -30,6 +30,10 @@ public class Pickup : PoolableObject, ICollidable
     {
         if (ExperienceValue > 0)
         {
+            if (SaveManager.Instance.SaveFile.doubleXPUnlocked)
+            {
+                ExperienceValue *= 2;
+            }
             _player.IncreaseExperience(ExperienceValue);
         }
         if (HealthValue > 0)

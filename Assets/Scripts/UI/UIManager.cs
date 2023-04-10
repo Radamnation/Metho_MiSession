@@ -123,6 +123,11 @@ public class UIManager : MonoBehaviour
     {
         SwitchView(m_titleView);
     }
+    
+    public void SwitchToStartView()
+    {
+        SwitchView(m_startView);
+    }
 
     public Selectable GetCurrentSelectable()
     {

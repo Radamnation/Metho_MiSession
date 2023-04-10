@@ -10,6 +10,12 @@ public class MainView : UIView
     [SerializeField] private TMP_Text m_timerText;
     [SerializeField] private TMP_Text m_levelText;
 
+    public override void OnShow()
+    {
+        base.OnShow();
+        UpdateGold();
+    }
+
     public void UpdateExperience()
     {
         var fillAmount = (float) Player.Instance.CurrentExperience / Player.Instance.NextLevel;

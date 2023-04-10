@@ -38,22 +38,25 @@ public class AccountView : UIView
         SaveManager.Instance.LoadGame(UpdateVisual);
     }
 
-    private void UpdateVisual()
+    public void UpdateVisual()
     {
         goldText.text = "Gold Amount : " + SaveManager.Instance.SaveFile.gold + " G";
-        bestTimeText.text = "Best Time : " + SaveManager.Instance.SaveFile.bestTime;
-        unlockText.text = "";
+        var time = SaveManager.Instance.SaveFile.bestTime;
+        int minutes =  (int) time / 60;
+        int seconds = (int) time % 60;
+        bestTimeText.text = "Best Time : " + minutes.ToString("00") + ":" + seconds.ToString("00");
+        unlockText.text = "Unlocks : ";
         if (SaveManager.Instance.SaveFile.extraSkinUnlocked)
         {
-            unlockText.text += "| Extra Skin |";
+            unlockText.text += "| Skin | ";
         }
         if (SaveManager.Instance.SaveFile.extraLevelUnlocked)
         {
-            unlockText.text += "| Extra Level |";
+            unlockText.text += "| Level | ";
         }
         if (SaveManager.Instance.SaveFile.doubleXPUnlocked)
         {
-            unlockText.text += "| Double XP |";
+            unlockText.text += "| 2XP |";
         }
     }
 
