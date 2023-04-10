@@ -8,12 +8,12 @@ public class MapManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
+        // if (Instance == null)
+        // {
             Instance = this;
-            return;
-        }
-        Destroy(gameObject);
+        //     return;
+        // }
+        // Destroy(gameObject);
     }
 
     [SerializeField] private List<AbstractMapFactory> mapList;

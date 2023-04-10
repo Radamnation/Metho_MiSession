@@ -23,7 +23,7 @@ MonoBehaviour:
     m_SerializedLabels:
     - GameScene
     FlaggedDuringContentUpdateRestriction: 0
-  - m_GUID: efe12c0501de1fa4e8f98f1a41e8ddf2
+  - m_GUID: 1ea9d05576a62a246a12e7c33d9adb4d
     m_Address: TitleScene
     m_ReadOnly: 0
     m_SerializedLabels:

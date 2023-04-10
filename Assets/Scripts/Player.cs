@@ -12,8 +12,8 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance == null)
-        {
+        // if (Instance == null)
+        // {
             Instance = this;
             m_rigidbody2D = GetComponent<Rigidbody2D>();
             m_collider2D = GetComponent<Collider2D>();
@@ -24,12 +24,13 @@ public class Player : MonoBehaviour
             {
                 Time.timeScale = 10;
             }
-
-            return;
-        }
-
-        Destroy(gameObject);
+            // return;
+        // }
+        //
+        // Destroy(gameObject);
     }
+
+    [SerializeField] private bool IsIntro;
 
     private Rigidbody2D m_rigidbody2D;
     private Collider2D m_collider2D;
@@ -92,6 +93,12 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if (IsIntro)
+        {
+            Move();
+            return;
+        }
+        
         TimeSurvived += Time.deltaTime;
         UIManager.Instance.MainView.UpdateTimer();
     }
@@ -143,6 +150,11 @@ public class Player : MonoBehaviour
                     horizontalMovement = Mathf.Sign(enemyTarget.transform.position.x - transform.position.x);
                 }
             }
+        }
+
+        if (IsIntro)
+        {
+            horizontalMovement = 1;
         }
 
         if (verticalMovement != 0)
