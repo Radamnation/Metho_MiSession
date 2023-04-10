@@ -60,7 +60,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Time.timeScale = 1;
+            if (TestManager.Instance.IsTesting)
+            {
+                Time.timeScale = 10;
+            }
+            else
+            {
+                Time.timeScale = 1;
+            }
             m_gameIsPaused = false;
             InputSystem.Instance.RemoveHandler(UIManager.Instance.Controller);
         }

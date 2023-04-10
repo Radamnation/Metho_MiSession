@@ -30,8 +30,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private bool m_isTitleScreen;
 
-    [Header("Views")]
-    [SerializeField] private TitleView m_titleView;
+    [Header("Views")] [SerializeField] private TitleView m_titleView;
     [SerializeField] private StartView m_startView;
     [SerializeField] private LoginView m_loginView;
     [SerializeField] private AccountView m_accountView;
@@ -97,6 +96,11 @@ public class UIManager : MonoBehaviour
         // }
     }
 
+    public void TestRun(bool _test)
+    {
+        TestManager.Instance.IsTesting = _test;
+    }
+
     public void SwitchView(UIView _newView = null, bool _additive = false)
     {
         if (_newView != null)
@@ -123,7 +127,7 @@ public class UIManager : MonoBehaviour
     {
         SwitchView(m_titleView);
     }
-    
+
     public void SwitchToStartView()
     {
         SwitchView(m_startView);
@@ -141,11 +145,18 @@ public class UIManager : MonoBehaviour
 
     public void BackToTitle()
     {
-        if (Player.Instance.TimeSurvived > SaveManager.Instance.SaveFile.bestTime)
+        if (LoginManager.Instance.IsLoggedIn(out _))
         {
-            SaveManager.Instance.SaveFile.bestTime = Player.Instance.TimeSurvived;
+            if (Player.Instance.TimeSurvived > SaveManager.Instance.SaveFile.bestTime)
+            {
+                SaveManager.Instance.SaveFile.bestTime = Player.Instance.TimeSurvived;
+            }
+
+            SaveManager.Instance.SaveGame(GoToTitleScreen);
+            return;
         }
-        SaveManager.Instance.SaveGame(GoToTitleScreen);
+
+        GoToTitleScreen();
     }
 
     public void GoToTitleScreen()
@@ -158,14 +169,14 @@ public class UIManager : MonoBehaviour
     {
         Addressables.LoadSceneAsync(titleSceneName, LoadSceneMode.Additive).Completed += StartTitleScene;
     }
-    
+
     private void StartTitleScene(AsyncOperationHandle<SceneInstance> _scene)
     {
         if (GameManager.Instance.currentScene != default)
         {
             SceneManager.UnloadSceneAsync(GameManager.Instance.currentScene).completed += ClearPools;
         }
-        
+
         GameManager.Instance.currentScene = SceneManager.GetSceneByName(titleSceneName);
         SwitchView(m_mainView);
         SwitchView(m_titleView);
@@ -196,7 +207,7 @@ public class UIManager : MonoBehaviour
         {
             SceneManager.UnloadSceneAsync(GameManager.Instance.currentScene);
         }
-        
+
         GameManager.Instance.currentScene = SceneManager.GetSceneByName(gameSceneName);
         SwitchView(m_mainView);
         InputSystem.Instance.ClearHandlers();
@@ -287,11 +298,18 @@ public class UIManager : MonoBehaviour
 
     public void ReturnToDesktop()
     {
-        if (Player.Instance.TimeSurvived > SaveManager.Instance.SaveFile.bestTime)
+        if (LoginManager.Instance.IsLoggedIn(out _))
         {
-            SaveManager.Instance.SaveFile.bestTime = Player.Instance.TimeSurvived;
+            if (Player.Instance.TimeSurvived > SaveManager.Instance.SaveFile.bestTime)
+            {
+                SaveManager.Instance.SaveFile.bestTime = Player.Instance.TimeSurvived;
+            }
+
+            SaveManager.Instance.SaveGame(Exit);
+            return;
         }
-        SaveManager.Instance.SaveGame(Exit);
+
+        Exit();
     }
 
     public void Exit()

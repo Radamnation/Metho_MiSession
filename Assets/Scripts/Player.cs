@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
@@ -19,8 +20,14 @@ public class Player : MonoBehaviour
             m_spriteRenderer = GetComponentInChildren<SpriteRenderer>();
             m_animator = GetComponentInChildren<Animator>();
             m_controller = GetComponent<PlayerController>();
+            if (TestManager.Instance.IsTesting)
+            {
+                Time.timeScale = 10;
+            }
+
             return;
         }
+
         Destroy(gameObject);
     }
 
@@ -45,19 +52,34 @@ public class Player : MonoBehaviour
 
     private bool canBeDamaged = true;
 
+    private Pickup pickupTarget;
+    private Enemy enemyTarget;
+
     private int m_currentLevel = 1;
     private int m_currentExperience = 0;
     private int m_nextLevel = 8;
-    
+
     public float TimeSurvived;
-    
+
     private static readonly int MoveX = Animator.StringToHash("MoveX");
     private static readonly int MoveY = Animator.StringToHash("MoveY");
     private static readonly int Velocity = Animator.StringToHash("Velocity");
 
-    public int CurrentLevel { get => m_currentLevel; }
-    public int CurrentExperience { get => m_currentExperience; }
-    public int NextLevel { get => m_nextLevel; }
+    public int CurrentLevel
+    {
+        get => m_currentLevel;
+    }
+
+    public int CurrentExperience
+    {
+        get => m_currentExperience;
+    }
+
+    public int NextLevel
+    {
+        get => m_nextLevel;
+    }
+
     public Transform VisualTransform => m_visualTransform;
 
     private void Start()
@@ -84,7 +106,45 @@ public class Player : MonoBehaviour
         var moved = false;
         var verticalMovement = Input.GetAxisRaw("Vertical");
         var horizontalMovement = Input.GetAxisRaw("Horizontal");
-        
+
+        if (TestManager.Instance.IsTesting)
+        {
+            if (pickupTarget == null || !Pickup.ActivePickupList.ContainsValue(pickupTarget))
+            {
+                if (Pickup.ActivePickupList.Count > 0)
+                {
+                    pickupTarget = Pickup.ActivePickupList.ElementAt(Random.Range(0, Pickup.ActivePickupList.Count))
+                        .Value;
+                }
+            }
+
+            if (enemyTarget == null || !Enemy.EnemyOnScreenList.ContainsValue(enemyTarget))
+            {
+                if (Enemy.EnemyOnScreenList.Count > 0)
+                {
+                    enemyTarget = Enemy.EnemyOnScreenList.ElementAt(Random.Range(0, Enemy.EnemyOnScreenList.Count))
+                        .Value;
+                }
+            }
+
+            if (pickupTarget != null && Pickup.ActivePickupList.ContainsValue(pickupTarget))
+            {
+                if (Vector3.Distance(transform.position, pickupTarget.transform.position) > 0)
+                {
+                    verticalMovement = Mathf.Sign(pickupTarget.transform.position.y - transform.position.y);
+                    horizontalMovement = Mathf.Sign(pickupTarget.transform.position.x - transform.position.x);
+                }
+            }
+            else if (enemyTarget != null && Enemy.EnemyOnScreenList.ContainsValue(enemyTarget))
+            {
+                if (Vector3.Distance(transform.position, enemyTarget.transform.position) > 2)
+                {
+                    verticalMovement = Mathf.Sign(enemyTarget.transform.position.y - transform.position.y);
+                    horizontalMovement = Mathf.Sign(enemyTarget.transform.position.x - transform.position.x);
+                }
+            }
+        }
+
         if (verticalMovement != 0)
         {
             m_rigidbody2D.velocity = new Vector2(m_rigidbody2D.velocity.x, verticalMovement * movementSpeed);
@@ -99,7 +159,7 @@ public class Player : MonoBehaviour
 
         if (horizontalMovement != 0)
         {
-            m_rigidbody2D.velocity = new Vector2(horizontalMovement * movementSpeed , m_rigidbody2D.velocity.y);
+            m_rigidbody2D.velocity = new Vector2(horizontalMovement * movementSpeed, m_rigidbody2D.velocity.y);
             m_visualTransform.localScale = new Vector3(-horizontalMovement, 1, 1);
             m_animator.SetFloat(MoveX, horizontalMovement);
             m_animator.SetFloat(MoveY, 0);
@@ -124,8 +184,12 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(float _damage)
     {
-        if (!canBeDamaged) { return; }
-        
+        if (TestManager.Instance.IsTesting) return;
+        if (!canBeDamaged)
+        {
+            return;
+        }
+
         m_currentHealth -= _damage;
         playerCanvas.UpdateHealth(m_currentHealth / maxHealth);
         if (m_currentHealth <= 0)
@@ -133,10 +197,11 @@ public class Player : MonoBehaviour
             Death();
             return;
         }
+
         AudioManager.Instance.SfxAudioSource.PlayOneShot(hitSFXList[Random.Range(0, hitSFXList.Count)]);
         StartCoroutine(StartInvulnerability());
     }
-    
+
     public void IncreaseHealth(int _health)
     {
         m_currentHealth += _health;
@@ -144,6 +209,7 @@ public class Player : MonoBehaviour
         {
             m_currentHealth = maxHealth;
         }
+
         playerCanvas.UpdateHealth(m_currentHealth / maxHealth);
     }
 
@@ -185,6 +251,7 @@ public class Player : MonoBehaviour
         {
             LevelUp();
         }
+
         UIManager.Instance.UpdateExperience();
     }
 
@@ -192,7 +259,7 @@ public class Player : MonoBehaviour
     {
         m_currentLevel++;
         m_currentExperience = 0;
-        m_nextLevel = (int) (m_nextLevel * 1.2f);
+        m_nextLevel = (int)(m_nextLevel * 1.2f);
         UIManager.Instance.MainView.UpdateLevel();
         AudioManager.Instance.SfxAudioSource.PlayOneShot(levelUpSFX);
         UIManager.Instance.ToggleLevelUpView();

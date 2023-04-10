@@ -14,5 +14,10 @@ public class LevelUpView : UIView
         {
             upgradeButton.UpdateButton(GameManager.Instance.GetRandomAttack());
         }
+
+        if (TestManager.Instance.IsTesting)
+        {
+            upgradeButtonList[Random.Range(0, upgradeButtonList.Count)].GetComponent<Button>().onClick.Invoke();
+        }
     }
 }

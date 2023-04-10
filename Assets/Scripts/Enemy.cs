@@ -63,7 +63,10 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
         m_isDead = false;
         m_dissolveValue = 1;
         m_spriteRenderer.material.SetFloat(Dissolve, m_dissolveValue);
-        ActiveEnemyList.Add(gameObject, this);
+        if (!ActiveEnemyList.ContainsKey(gameObject))
+        {
+            ActiveEnemyList.Add(gameObject, this);
+        }
         m_shield.Initialize(ShieldHealth, ShieldChance);
         m_currentHealth = MaxHealth;
         m_currentScale = transform.localScale;
@@ -127,7 +130,10 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
     public void AddForce(Vector3 _impact)
     {
         var direction = (transform.position - Player.Instance.transform.position).normalized;
-        StartCoroutine(Stunt(direction));
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(Stunt(direction));
+        }
     }
     
     private IEnumerator Stunt(Vector3 _direction)
@@ -154,7 +160,15 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
         {
             PickupFactory.Instance.SpawnExperiencePickup(transform.position, Quaternion.identity);
         }
-        StartCoroutine(RepoolAfterDelay());
+
+        if (gameObject.activeInHierarchy)
+        {
+            StartCoroutine(RepoolAfterDelay());
+        }
+        else
+        {
+            Repool();
+        }
     }
 
     public IEnumerator RepoolAfterDelay()
@@ -178,19 +192,29 @@ public class Enemy : PoolableObject, ICollidable, IDamagable
 
     public override void Repool()
     {
-        ActiveEnemyList.Remove(gameObject);
+        if (ActiveEnemyList.ContainsKey(gameObject))
+        {
+            ActiveEnemyList.Remove(gameObject);
+        }
         base.Repool();
     }
 
     private void OnBecameVisible()
     {
         m_isVisible = true;
-        EnemyOnScreenList.Add(gameObject, this);
+        if (!EnemyOnScreenList.ContainsKey(gameObject))
+        {
+            EnemyOnScreenList.Add(gameObject, this);
+        }
+        
     }
 
     private void OnBecameInvisible()
     {
         m_isVisible = false;
-        EnemyOnScreenList.Remove(gameObject);
+        if (EnemyOnScreenList.ContainsKey(gameObject))
+        {
+            EnemyOnScreenList.Remove(gameObject);
+        }
     }
 }

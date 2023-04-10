@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Pickup : PoolableObject, ICollidable
 {
+    public static readonly Dictionary<GameObject, Pickup> ActivePickupList = new();
+    
     // [SerializeField] private int m_experienceValue;
     // [SerializeField] private int m_healthValue;
     // [SerializeField] private int m_goldValue;
@@ -49,11 +51,24 @@ public class Pickup : PoolableObject, ICollidable
         m_circleCollider2D.enabled = false;
         Repool();
     }
-
+    
     public override void Initialize()
     {
         base.Initialize();
         
         m_circleCollider2D.enabled = true;
+        if (!ActivePickupList.ContainsKey(gameObject))
+        {
+            ActivePickupList.Add(gameObject, this);
+        }
+    }
+
+    public override void Repool()
+    {
+        if (ActivePickupList.ContainsKey(gameObject))
+        {
+            ActivePickupList.Remove(gameObject);
+        }
+        base.Repool();
     }
 }

@@ -16,7 +16,14 @@ public class MapBlock : MonoBehaviour
 
         for (int i = 0; i < obstacles.Count; i++)
         {
-            obstacles[i].SetActive(Random.Range(0, 100) < 10);
+            if (TestManager.Instance.IsTesting)
+            {
+                obstacles[i].SetActive(false);
+            }
+            else
+            {
+                obstacles[i].SetActive(Random.Range(0, 100) < 10);
+            }
         }
     }
 }

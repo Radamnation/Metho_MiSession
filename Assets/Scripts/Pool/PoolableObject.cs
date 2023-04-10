@@ -11,12 +11,18 @@ public abstract class PoolableObject : MonoBehaviour
 
     public virtual void Initialize()
     {
-        ActivePoolableObjects.Add(gameObject, this);
+        if (!ActivePoolableObjects.ContainsKey(gameObject))
+        {
+            ActivePoolableObjects.Add(gameObject, this);
+        }
     }
 
     public virtual void Repool()
     {
-        ActivePoolableObjects.Remove(gameObject);
+        if (ActivePoolableObjects.ContainsKey(gameObject))
+        {
+            ActivePoolableObjects.Remove(gameObject);
+        }
         m_pool.Repool(this);
     }
 }

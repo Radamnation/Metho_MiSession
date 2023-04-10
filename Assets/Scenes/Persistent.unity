@@ -235,7 +235,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObjectPrefab: {fileID: 179879035017597515, guid: 9af8294b71ef2f04d9494264b80f55ae, type: 3}
-  poolObjectCount: 1000
+  poolObjectCount: 2000
 --- !u!1 &391846068
 GameObject:
   m_ObjectHideFlags: 0
@@ -333,7 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObjectPrefab: {fileID: 8063354733524884897, guid: 40cc74bf886800e429fef77d58580186, type: 3}
-  poolObjectCount: 50
+  poolObjectCount: 500
 --- !u!1 &471472767 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3251279777998412294, guid: 615195653266ad24b8349b7f9a162acd, type: 3}
@@ -1755,6 +1755,51 @@ Transform:
   m_Father: {fileID: 1334011443}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1967784044
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1967784046}
+  - component: {fileID: 1967784045}
+  m_Layer: 0
+  m_Name: TestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1967784045
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967784044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ac22e195902d7c4e833b9ad5548419e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  IsTesting: 0
+--- !u!4 &1967784046
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1967784044}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2014615553
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,7 +1845,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   poolObjectPrefab: {fileID: 215850936402079953, guid: 4fccc23a27466b84dae85c8df5bec6e8, type: 3}
-  poolObjectCount: 200
+  poolObjectCount: 1000
 --- !u!1 &2045485287
 GameObject:
   m_ObjectHideFlags: 0
