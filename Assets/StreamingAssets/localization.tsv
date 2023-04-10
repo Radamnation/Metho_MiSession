@@ -1,4 +1,17 @@
-Key	Notes	Date	English	French	Spanish
-start_button	Something	Today	Start Game	Démarrer le jeu	Iniciar juego
-options_button	Something	Today	Options	Options	Opciones
-exit_button	Something	Today	Exit Game	Quitter le jeu	Salir del juego
+Key	Notes	Date	English	French	Spanish	Russian	Simplified Chinese
+login_button	Something	Today	Login	Connexion	Inicio de sesión	вход	登录
+account_button	Something	Today	Account	Compte	Cuenta	учетная запись	帐户
+playOffline_button	Something	Today	Play Offline	Jouer hors ligne	Jugar sin conexión	Автономная игра	离线玩
+play_button	Something	Today	Play	Jouer	Reproducir	Воспроизвести	播放
+options_button	Something	Today	Options	Options	Opciones	Параметры	选项
+quit_button	Something	Today	Quit	Quitter	Salir	выход	退出
+back_button	Something	Today	Back	Retour	Atrás	Назад	回退
+start_button	Something	Today	Start	Démarrer	Iniciar	запустить	启动
+validate_button	Something	Today	Validate	Valider	Validar	проверить	验证
+logOut_button	Something	Today	Log Off	Fermer Session	Cerrar sesión	выйти из системы	退出登录
+upload_button	Something	Today	Upload	Charger	Cargar	передать	上载
+createAccount_button	Something	Today	Create Account	Créer Compte	Crear cuenta	Создать учетную запись	创建帐户
+logIn_button	Something	Today	Log In	Ouvrir Session	Iniciar sesión	войти в систему	登录
+email_field	Something	Today	Email	E-mail	Correo electrónico	написать	电子邮件
+password_field	Something	Today	Password	Mot de Passe	Contrasena	пароль	密码
+enterPromoCode_field	Something	Today	Enter Promo Code	Taper le Code Promo	Escriba el código promocional	Введите промокод	输入促销代码

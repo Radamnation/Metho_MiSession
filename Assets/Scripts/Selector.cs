@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class Selector : MonoBehaviour
 {
     public bool Interactable;
+    public bool IsDefault;
     
     [SerializeField] private Image foreground;
     [SerializeField] private Image background;
@@ -20,7 +21,7 @@ public class Selector : MonoBehaviour
         if (Interactable)
         {
             foreground.color = Color.white;
-            background.color = Color.white;
+            background.color = IsDefault ? Color.green : Color.white;
         }
         else
         {

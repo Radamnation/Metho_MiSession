@@ -257,7 +257,6 @@ public class UIManager : MonoBehaviour
 
     public void ReturnFromOptionsView()
     {
-        m_optionsView.SaveOptions();
         ReturnToPreviousView();
     }
 

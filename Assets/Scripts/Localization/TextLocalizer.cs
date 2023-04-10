@@ -12,6 +12,7 @@ public class TextLocalizer : MonoBehaviour
     private void Awake()
     {
         m_text = GetComponent<TMP_Text>();
+        Localization.Instance.Subscribe(Localize);
     }
 
     private void Localize()
@@ -19,12 +20,7 @@ public class TextLocalizer : MonoBehaviour
         m_text.text = Localization.Instance.GetLocalization(key);
     }
 
-    private void OnEnable()
-    {
-        Localization.Instance.Subscribe(Localize);
-    }
-
-    private void OnDisable()
+    private void OnDestroy()
     {
         Localization.Instance.Unsubscribe(Localize);
     }

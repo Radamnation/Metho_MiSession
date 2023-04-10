@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class StartView : UIView
@@ -9,6 +10,8 @@ public class StartView : UIView
     
     [SerializeField] private Selector levelSelector1;
     [SerializeField] private Selector levelSelector2;
+    
+    [SerializeField] private TMP_Text currentLoginText;
     
     private int currentPlayerChoice;
     private int currentLevelChoice;
@@ -26,5 +29,14 @@ public class StartView : UIView
         levelSelector1.Initialize();
         levelSelector2.Interactable = SaveManager.Instance.SaveFile.extraLevelUnlocked;
         levelSelector2.Initialize();
+        
+        if (LoginManager.Instance.IsLoggedIn(out var userName))
+        {
+            currentLoginText.text = "Currently logged as " + userName;
+        }
+        else
+        {
+            currentLoginText.text = "Not currently logged in";
+        }
     }
 }

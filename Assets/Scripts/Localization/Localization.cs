@@ -51,6 +51,8 @@ public class Localization
             LocalizationDictionary.Add(columns[0] + "-en", columns[3]);
             LocalizationDictionary.Add(columns[0] + "-fr", columns[4]);
             LocalizationDictionary.Add(columns[0] + "-es", columns[5]);
+            LocalizationDictionary.Add(columns[0] + "-ru", columns[6]);
+            LocalizationDictionary.Add(columns[0] + "-sc", columns[7]);
         }
 
         _onLanguageChange?.Invoke();
@@ -85,6 +87,8 @@ public class LanguageData
     public string en;
     public string fr;
     public string es;
+    public string ru;
+    public string sc;
 }
 
 [Serializable]

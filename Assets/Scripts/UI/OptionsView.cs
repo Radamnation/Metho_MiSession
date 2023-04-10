@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -6,34 +7,18 @@ using UnityEngine.UI;
 
 public class OptionsView : UIView
 {
-    [SerializeField] private Slider m_masterVolumeSlider;
-    private float m_masterVolume;
+    [SerializeField] private Selector[] selectors;
 
-    public override void Start()
+    private void Awake()
     {
-        base.Start();
-        LoadOptions();
+        foreach (var selector in selectors)
+        {
+            selector.Initialize();
+        }
     }
 
-    public override void OnShow()
+    public void ChangeLanguage(string _language)
     {
-        base.OnShow();
-    }
-
-    private void LoadOptions()
-    {
-        m_masterVolume = PlayerPrefs.GetFloat("MasterVolume", 0.7f);
-        m_masterVolumeSlider.value = m_masterVolume;
-    }
-
-    public void SaveOptions()
-    {
-        PlayerPrefs.SetFloat("MasterVolume", m_masterVolume);
-        PlayerPrefs.Save();
-    }
-
-    public void UpdateMasterVolume(float _volume)
-    {
-        m_masterVolume = _volume;
+        Localization.Instance.ChangeLanguage(_language);
     }
 }
