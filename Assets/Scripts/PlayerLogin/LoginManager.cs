@@ -33,10 +33,7 @@ public class LoginManager : MonoBehaviour
     private string inputPassword;
     private string inputUsername;
     private string inputEmail;
-
     private string inputPromoCode;
-
-    private string m_currentLogin = "";
 
     private string userObjectId = "";
     private string userSessionToken = "";
@@ -49,15 +46,6 @@ public class LoginManager : MonoBehaviour
     public string Username => username;
     public string ImageUrl => imageUrl;
     public string SaveFileURL => saveFileUrl;
-
-    private void Start()
-    {
-        // currentUserText.text = "Not currently logged in";
-
-        // promoInformationText.enabled = false;
-        // UpdatePortrait(defaultPortrait);
-        // imageUploadButton.gameObject.SetActive(false);
-    }
 
     public bool IsLoggedIn(out string _userName)
     {
@@ -104,7 +92,7 @@ public class LoginManager : MonoBehaviour
     public void ValidatePromoCode(string _promoCode)
     {
         inputPromoCode = _promoCode;
-        
+
         if (inputPromoCode[0] == 'S' && SaveManager.Instance.SaveFile.extraSkinUnlocked ||
             inputPromoCode[0] == 'L' && SaveManager.Instance.SaveFile.extraLevelUnlocked ||
             inputPromoCode[0] == 'X' && SaveManager.Instance.SaveFile.doubleXPUnlocked)
@@ -112,23 +100,25 @@ public class LoginManager : MonoBehaviour
             UIManager.Instance.AccountView.WriteError("You've already unlocked this Promo Code");
             return;
         }
-        
+
         if (!codesDictionary.ContainsKey(inputPromoCode))
         {
             UIManager.Instance.AccountView.WriteError("Invalid Promo Code");
             return;
         }
-        
+
         StartCoroutine(PostPromoCode());
 
         if (inputPromoCode[0] == 'S')
         {
             SaveManager.Instance.SaveFile.extraSkinUnlocked = true;
         }
+
         if (inputPromoCode[0] == 'L')
         {
             SaveManager.Instance.SaveFile.extraLevelUnlocked = true;
         }
+
         if (inputPromoCode[0] == 'X')
         {
             SaveManager.Instance.SaveFile.doubleXPUnlocked = true;
@@ -140,24 +130,12 @@ public class LoginManager : MonoBehaviour
 
     public IEnumerator PostAccount()
     {
-        using (var request = new UnityWebRequest("https://parseapi.back4app.com/users", "POST"))
+        using (var request = new WebRequestBuilder()
+                   .SetUrl("users")
+                   .Revocable()
+                   .SetJSON(new { password = inputPassword, username = inputUsername, email = inputEmail })
+                   .Build())
         {
-            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            request.SetRequestHeader("X-Parse-Revocable-Session", "1");
-            request.SetRequestHeader("Content-Type", "application/json");
-
-            var data = new
-            {
-                password = inputPassword,
-                username = inputUsername,
-                email = inputEmail
-            };
-
-            var json = JsonConvert.SerializeObject(data);
-            request.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
-            request.downloadHandler = new DownloadHandlerBuffer();
-
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
@@ -178,18 +156,14 @@ public class LoginManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", inputEmail);
         form.AddField("password", inputPassword);
+        string urlParameters = Encoding.UTF8.GetString(form.data);
 
-        string loginUrl = "https://parseapi.back4app.com/login";
-        string loginUrlWithParams = loginUrl + "?" + Encoding.UTF8.GetString(form.data);
-
-        using (var request = new UnityWebRequest(loginUrlWithParams, "GET"))
+        using (var request = new WebRequestBuilder()
+                   .SetUrl($"login?{urlParameters}")
+                   .SetMethod("GET")
+                   .Revocable()
+                   .Build())
         {
-            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            request.SetRequestHeader("X-Parse-Revocable-Session", "1");
-
-            request.downloadHandler = new DownloadHandlerBuffer();
-
             yield return request.SendWebRequest();
 
             if (request.result != UnityWebRequest.Result.Success)
@@ -200,36 +174,30 @@ public class LoginManager : MonoBehaviour
                 yield break;
             }
 
-            UIManager.Instance.LoginView.WriteSuccess("Login Successful");
-            m_currentLogin = request.downloadHandler.text;
-
             var userJObject = JObject.Parse(request.downloadHandler.text);
             userSessionToken = userJObject["sessionToken"]?.ToString();
             userObjectId = userJObject["objectId"]?.ToString();
+        }
 
-            Debug.Log(request.downloadHandler.text);
+        using (var request = new WebRequestBuilder()
+                   .SetUrl($"users/{userObjectId}")
+                   .SetMethod("GET")
+                   .Build())
+        {
+            yield return request.SendWebRequest();
 
-            using (var newRequest = new UnityWebRequest($"https://parseapi.back4app.com/users/{userObjectId}", "GET"))
+            if (request.result != UnityWebRequest.Result.Success)
             {
-                newRequest.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-                newRequest.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-
-                newRequest.downloadHandler = new DownloadHandlerBuffer();
-                yield return newRequest.SendWebRequest();
-
-                if (newRequest.result != UnityWebRequest.Result.Success)
-                {
-                    Debug.Log(newRequest.downloadHandler.text);
-                    yield break;
-                }
-
-                var newJObject = JObject.Parse(newRequest.downloadHandler.text);
-                username = newJObject["username"]?.ToString();
-                imageName = newJObject["imageName"]?.ToString();
-                imageUrl = newJObject["imageUrl"]?.ToString();
-                saveFileName = newJObject["saveFileName"]?.ToString();
-                saveFileUrl = newJObject["saveFileUrl"]?.ToString();
+                Debug.Log(request.downloadHandler.text);
+                yield break;
             }
+
+            var newJObject = JObject.Parse(request.downloadHandler.text);
+            username = newJObject["username"]?.ToString();
+            imageName = newJObject["imageName"]?.ToString();
+            imageUrl = newJObject["imageUrl"]?.ToString();
+            saveFileName = newJObject["saveFileName"]?.ToString();
+            saveFileUrl = newJObject["saveFileUrl"]?.ToString();
         }
 
         StartCoroutine(GetPromoCode());
@@ -238,17 +206,13 @@ public class LoginManager : MonoBehaviour
 
     public IEnumerator PostPortrait()
     {
-        using (var request = new UnityWebRequest("https://parseapi.back4app.com/files/portrait.png", "POST"))
+        using (var request = new WebRequestBuilder()
+                   .SetUrl("files/portrait.png")
+                   .SetPNG(Path.Combine(Application.streamingAssetsPath, "portrait.png"))
+                   .Build())
         {
-            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            request.SetRequestHeader("Content-Type", "image/png");
-            string filePath = Path.Combine(Application.streamingAssetsPath, "portrait.png");
-
-            request.uploadHandler = new UploadHandlerFile(filePath);
-            request.downloadHandler = new DownloadHandlerBuffer();
-
             yield return request.SendWebRequest();
+
             if (request.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError(request.error);
@@ -266,15 +230,15 @@ public class LoginManager : MonoBehaviour
 
     public IEnumerator SavePortraitToAccount()
     {
-        string json = JsonConvert.SerializeObject(new { imageName, imageUrl });
-        using (var request = UnityWebRequest.Put($"https://parseapi.back4app.com/users/{userObjectId}", json))
+        using (var request = new WebRequestBuilder()
+                   .SetUrl($"users/{userObjectId}")
+                   .SetMethod("PUT")
+                   .SetSessionToken(userSessionToken)
+                   .SetJSON(new { imageName, imageUrl })
+                   .Build())
         {
-            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            request.SetRequestHeader("X-Parse-Session-Token", userSessionToken);
-            request.SetRequestHeader("Content-Type", "application/json");
-
             yield return request.SendWebRequest();
+
             Debug.Log(request.downloadHandler.text);
 
             if (request.result != UnityWebRequest.Result.Success)
@@ -286,17 +250,13 @@ public class LoginManager : MonoBehaviour
 
     public IEnumerator PostSaveFile(Action _callback)
     {
-        using (var request = new UnityWebRequest("https://parseapi.back4app.com/files/saveFile.data", "POST"))
+        using (var request = new WebRequestBuilder()
+                   .SetUrl("files/saveFile.data")
+                   .SetSaveFile(SaveManager.Instance.FilePath)
+                   .Build())
         {
-            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            request.SetRequestHeader("Content-Type", "data");
-            string filePath = SaveManager.Instance.FilePath;
-
-            request.uploadHandler = new UploadHandlerFile(filePath);
-            request.downloadHandler = new DownloadHandlerBuffer();
-
             yield return request.SendWebRequest();
+
             if (request.result != UnityWebRequest.Result.Success)
             {
                 Debug.LogError(request.error);
@@ -313,16 +273,14 @@ public class LoginManager : MonoBehaviour
 
     public IEnumerator SaveSaveFileToAccount(Action _callback)
     {
-        string json = JsonConvert.SerializeObject(new { saveFileName, saveFileUrl });
-        using (var request = UnityWebRequest.Put($"https://parseapi.back4app.com/users/{userObjectId}", json))
+        using (var request = new WebRequestBuilder()
+                   .SetUrl($"users/{userObjectId}")
+                   .SetMethod("PUT")
+                   .SetSessionToken(userSessionToken)
+                   .SetJSON(new { saveFileName, saveFileUrl })
+                   .Build())
         {
-            request.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            request.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            request.SetRequestHeader("X-Parse-Session-Token", userSessionToken);
-            request.SetRequestHeader("Content-Type", "application/json");
-
             yield return request.SendWebRequest();
-            Debug.Log(request.downloadHandler.text);
 
             if (request.result != UnityWebRequest.Result.Success)
             {
@@ -333,116 +291,27 @@ public class LoginManager : MonoBehaviour
         _callback?.Invoke();
     }
 
-    // public IEnumerator PostPromoCode()
-    // {
-    //     var promoCode = new
-    //     {
-    //         code = inputPromoCode,
-    //         username = "null"
-    //     };
-    //
-    //     WWWForm form = new WWWForm();
-    //     form.AddField("where", JsonConvert.SerializeObject(promoCode));
-    //
-    //     string loginUrl = "https://parseapi.back4app.com/classes/PromoCode";
-    //     string loginUrlWithParams = loginUrl + "?" + Encoding.UTF8.GetString(form.data);
-    //     Debug.Log(loginUrlWithParams);
-    //
-    //     using (var getRequest = new UnityWebRequest(loginUrlWithParams, "GET"))
-    //     {
-    //         getRequest.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-    //         getRequest.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-    //
-    //         getRequest.downloadHandler = new DownloadHandlerBuffer();
-    //
-    //         yield return getRequest.SendWebRequest();
-    //
-    //         if (getRequest.result != UnityWebRequest.Result.Success)
-    //         {
-    //             UIManager.Instance.AccountView.WriteError("Invalid Promo Code");
-    //             Debug.Log(getRequest.error);
-    //             yield break;
-    //         }
-    //
-    //         Debug.Log(getRequest.downloadHandler.text);
-    //         var usernameMatch = Regex.Matches(getRequest.downloadHandler.text, "\"username\":\"(\\w+)",
-    //             RegexOptions.Multiline);
-    //
-    //         if (usernameMatch.Count == 0)
-    //         {
-    //             UIManager.Instance.AccountView.WriteError("Promo Code as already been used");
-    //             yield break;
-    //         }
-    //         
-    //         var objectIdMatch = Regex.Matches(getRequest.downloadHandler.text, "\"objectId\":\"(\\w+)",
-    //             RegexOptions.Multiline);
-    //         var objectId = objectIdMatch.First().Groups[1].Value;
-    //
-    //         using (var postRequest = new UnityWebRequest(loginUrl + "/" + objectId, "PUT"))
-    //         {
-    //             postRequest.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-    //             postRequest.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-    //             postRequest.SetRequestHeader("Content-Type", "application/json");
-    //
-    //             var currentUserMatch = Regex.Matches(m_currentLogin, "\"username\":\"(\\w+@\\w+.\\w+)",
-    //                 RegexOptions.Multiline);
-    //             var currentUser = currentUserMatch.First().Groups[1].Value;
-    //
-    //             var data = new
-    //             {
-    //                 code = inputPromoCode,
-    //                 username = currentUser
-    //             };
-    //
-    //             var json = JsonConvert.SerializeObject(data);
-    //             postRequest.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
-    //             postRequest.downloadHandler = new DownloadHandlerBuffer();
-    //
-    //             yield return postRequest.SendWebRequest();
-    //
-    //             if (postRequest.result != UnityWebRequest.Result.Success)
-    //             {
-    //                 Debug.Log(postRequest.error);
-    //                 yield break;
-    //             }
-    //
-    //             UIManager.Instance.AccountView.WriteSuccess("Promo Code was linked Successfully");
-    //             Debug.Log(postRequest.downloadHandler.text);
-    //         }
-    //     }
-    // }
-    
     public IEnumerator GetPromoCode()
     {
-        var promoCode = new
-        {
-            used = false
-        };
-
         WWWForm form = new WWWForm();
-        form.AddField("where", JsonConvert.SerializeObject(promoCode));
+        form.AddField("where", JsonConvert.SerializeObject(new { used = false }));
+        string urlParameters = Encoding.UTF8.GetString(form.data);
 
-        string loginUrl = "https://parseapi.back4app.com/classes/PromoCode";
-        string loginUrlWithParams = loginUrl + "?" + Encoding.UTF8.GetString(form.data);
-        Debug.Log(loginUrlWithParams);
-
-        using (var getRequest = new UnityWebRequest(loginUrlWithParams, "GET"))
+        using (var request = new WebRequestBuilder()
+                   .SetUrl("classes/PromoCode?" + urlParameters)
+                   .SetMethod("GET")
+                   .Build())
         {
-            getRequest.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            getRequest.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
+            yield return request.SendWebRequest();
 
-            getRequest.downloadHandler = new DownloadHandlerBuffer();
-
-            yield return getRequest.SendWebRequest();
-
-            if (getRequest.result != UnityWebRequest.Result.Success)
+            if (request.result != UnityWebRequest.Result.Success)
             {
-                Debug.Log(getRequest.error);
+                Debug.Log(request.error);
                 yield break;
             }
 
             codesDictionary.Clear();
-            var jObjects = JObject.Parse(getRequest.downloadHandler.text);
+            var jObjects = JObject.Parse(request.downloadHandler.text);
             var results = jObjects["results"]?.ToArray();
             foreach (var result in results)
             {
@@ -453,38 +322,26 @@ public class LoginManager : MonoBehaviour
             }
         }
     }
-    
+
     public IEnumerator PostPromoCode()
     {
-        string loginUrl = "https://parseapi.back4app.com/classes/PromoCode";
-
-        using (var postRequest = new UnityWebRequest(loginUrl + "/" + codesDictionary[inputPromoCode], "PUT"))
+        using (var request = new WebRequestBuilder()
+                   .SetUrl($"classes/PromoCode/{codesDictionary[inputPromoCode]}")
+                   .SetMethod("PUT")
+                   .SetSessionToken(userSessionToken)
+                   .SetJSON(new { code = inputPromoCode, username, used = true })
+                   .Build())
         {
-            postRequest.SetRequestHeader("X-Parse-Application-Id", Secrets.ApplicationId);
-            postRequest.SetRequestHeader("X-Parse-REST-API-Key", Secrets.RestApiKey);
-            postRequest.SetRequestHeader("Content-Type", "application/json");
+            yield return request.SendWebRequest();
 
-            var data = new
+            if (request.result != UnityWebRequest.Result.Success)
             {
-                code = inputPromoCode,
-                username,
-                used = true
-            };
-
-            var json = JsonConvert.SerializeObject(data);
-            postRequest.uploadHandler = new UploadHandlerRaw(Encoding.UTF8.GetBytes(json));
-            postRequest.downloadHandler = new DownloadHandlerBuffer();
-
-            yield return postRequest.SendWebRequest();
-
-            if (postRequest.result != UnityWebRequest.Result.Success)
-            {
-                Debug.Log(postRequest.error);
+                Debug.Log(request.error);
                 yield break;
             }
 
             UIManager.Instance.AccountView.WriteSuccess("Promo Code was linked Successfully");
-            Debug.Log(postRequest.downloadHandler.text);
+            Debug.Log(request.downloadHandler.text);
         }
     }
 }

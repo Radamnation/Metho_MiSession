@@ -100,6 +100,23 @@ public class Player : MonoBehaviour
         }
         
         TimeSurvived += Time.deltaTime;
+        if (TimeSurvived >= 300 && !GameManager.Instance.IsPaused())
+        {
+            TimeSurvived = 300;
+            if (TestManager.Instance.IsTesting)
+            {
+                UIManager.Instance.DeathView.ChangeText("Test Complete...");
+            }
+            else
+            {
+                UIManager.Instance.DeathView.ChangeText("You Win...");
+            }
+            GameManager.Instance.PauseGame();
+            UIManager.Instance.ToggleDeathView();
+            UIManager.Instance.MainView.UpdateTimer();
+            enabled = false;
+            return;
+        }
         UIManager.Instance.MainView.UpdateTimer();
     }
 
@@ -246,6 +263,7 @@ public class Player : MonoBehaviour
         AudioManager.Instance.SfxAudioSource.PlayOneShot(deathSFXList[Random.Range(0, deathSFXList.Count)]);
         m_spriteRenderer.enabled = false;
         playerCanvas.gameObject.SetActive(false);
+        UIManager.Instance.DeathView.ChangeText("You Died...");
         StartCoroutine(ShowDeathView());
         enabled = false;
     }

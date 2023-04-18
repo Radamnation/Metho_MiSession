@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
 using Random = UnityEngine.Random;
 
 public class GameManager : MonoBehaviour
@@ -22,14 +19,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] private int enemyLimit;
     [SerializeField] private List<PlayerAttackSO> playerAttackList;
-    // private List<Enemy> m_enemyList = new();
-    // private List<Enemy> m_enemyOnScreenList = new();
-    
+
     private bool m_gameIsPaused;
     public Scene currentScene;
-
-    // public List<Enemy> EnemyList { get => m_enemyList; set => m_enemyList = value; }
-    // public List<Enemy> EnemyOnScreenList { get => m_enemyOnScreenList; set => m_enemyOnScreenList = value; }
 
     private void Start()
     {
@@ -48,6 +40,11 @@ public class GameManager : MonoBehaviour
     public bool CanSpawnEnemy()
     {
         return Enemy.ActiveEnemyList.Count < enemyLimit * Player.Instance.CurrentLevel;
+    }
+
+    public bool IsPaused()
+    {
+        return m_gameIsPaused;
     }
 
     public void PauseGame()
