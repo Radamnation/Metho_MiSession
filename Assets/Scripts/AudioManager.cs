@@ -7,8 +7,6 @@ public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance;
 
-
-
     private void Awake()
     {
         if (Instance == null)
@@ -30,5 +28,15 @@ public class AudioManager : MonoBehaviour
         musicAudioSource.clip = mainSong;
         musicAudioSource.loop = true;
         musicAudioSource.Play();
+    }
+
+    public void StopMusic()
+    {
+        musicAudioSource.volume = 0;
+    }
+
+    public void StartMusic()
+    {
+        musicAudioSource.volume = 0.1f;
     }
 }

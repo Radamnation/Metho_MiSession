@@ -15,7 +15,7 @@ MonoBehaviour:
   m_DefaultGroup: 6e5fad92acf1dfa4aa012771cb03105b
   m_CachedHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 34dd39c2e9b28175164665a04d6666ba
   m_OptimizeCatalogSize: 0
   m_BuildRemoteCatalog: 0
   m_BundleLocalCatalog: 0
@@ -53,6 +53,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 0915536e4bd553b4da644701dc866fa1, type: 2}
   - {fileID: 11400000, guid: ddd6a6a6da112644199b3f514c8c54dd, type: 2}
   - {fileID: 11400000, guid: f558849b240b22149b1f1a87b0528f1a, type: 2}
+  - {fileID: 11400000, guid: fc5ee98e4233b854da9cf2334ca89437, type: 2}
   m_BuildSettings:
     m_CompileScriptsInVirtualMode: 0
     m_CleanupStreamingAssetsAfterBuilds: 1
@@ -96,6 +97,7 @@ MonoBehaviour:
     - default
     - TitleScene
     - GameScene
+    - EndScene
   m_SchemaTemplates: []
   m_GroupTemplateObjects:
   - {fileID: 11400000, guid: 1400fc3516d53cd46afc76388ee0260f, type: 2}

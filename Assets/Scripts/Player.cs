@@ -126,6 +126,7 @@ public class Player : MonoBehaviour
             GameManager.Instance.PauseGame();
             UIManager.Instance.ToggleDeathView();
             UIManager.Instance.MainView.UpdateTimer();
+            UIManager.Instance.GoToEndScreen();
             enabled = false;
             return;
         }
@@ -282,8 +283,9 @@ public class Player : MonoBehaviour
 
     private IEnumerator ShowDeathView()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(0f);
         UIManager.Instance.ToggleDeathView();
+        UIManager.Instance.GoToEndScreen();
     }
 
     public void IncreaseExperience(int _experience)

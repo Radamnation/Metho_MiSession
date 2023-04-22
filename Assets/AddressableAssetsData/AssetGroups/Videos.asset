@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Videos
+  m_EditorClassIdentifier: 
+  m_GroupName: Videos
+  m_Data:
+    m_SerializedData: []
+  m_GUID: 9db82e476e1ad25488c6e7d192862e19
+  m_SerializeEntries:
+  - m_GUID: c285eaa6038513847ab185dbb259d958
+    m_Address: Nyan Cat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - EndScene
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 64c3edba57d88764eaef7cffe55163f7, type: 2}
+    - {fileID: 11400000, guid: 4d7200fcf1adc294d94b901547f244e2, type: 2}

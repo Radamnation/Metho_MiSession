@@ -4318,8 +4318,7 @@ MonoBehaviour:
   m_deathView: {fileID: 1577442387536716947}
   m_titleScene: {fileID: 11400000, guid: 8e7bb9c8693f1d74a9ceb1e350f67c29, type: 2}
   m_gameScene: {fileID: 11400000, guid: e57a8db4ad52e7d4a95b4681c6d16086, type: 2}
-  titleSceneName: TitleScene
-  gameSceneName: GameScene
+  m_endScene: {fileID: 11400000, guid: b6dd3a0d4861bec4396ced97a2ca50d6, type: 2}
 --- !u!1 &3251279778055681285
 GameObject:
   m_ObjectHideFlags: 0
@@ -5003,7 +5002,6 @@ GameObject:
   - component: {fileID: 7290594614561699357}
   - component: {fileID: 1886876592488122733}
   - component: {fileID: 633627162838656022}
-  - component: {fileID: 5729314180126141976}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -5128,19 +5126,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &5729314180126141976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3292621304619251851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ea9e01f703af1b4ebb06081429661f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  key: start_button
 --- !u!1 &3407669018606240039
 GameObject:
   m_ObjectHideFlags: 0
@@ -5798,7 +5783,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 1000, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4268277310319567231
 CanvasRenderer:
@@ -5830,8 +5815,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level Up!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
-  m_sharedMaterial: {fileID: 2777541580472264833, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d17be065d00074441b27403fa5fc4a6a, type: 2}
+  m_sharedMaterial: {fileID: 5016922271666448107, guid: d17be065d00074441b27403fa5fc4a6a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5855,8 +5840,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10593,7 +10578,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 1000, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6853276559091630749
 CanvasRenderer:
@@ -10625,8 +10610,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Paused
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
-  m_sharedMaterial: {fileID: 2777541580472264833, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d17be065d00074441b27403fa5fc4a6a, type: 2}
+  m_sharedMaterial: {fileID: 5016922271666448107, guid: d17be065d00074441b27403fa5fc4a6a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10650,8 +10635,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -10728,7 +10713,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 400, y: 50}
+  m_SizeDelta: {x: 1000, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2226804880404040073
 CanvasRenderer:
@@ -10760,8 +10745,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: You Died...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
-  m_sharedMaterial: {fileID: 2777541580472264833, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: d17be065d00074441b27403fa5fc4a6a, type: 2}
+  m_sharedMaterial: {fileID: 5016922271666448107, guid: d17be065d00074441b27403fa5fc4a6a, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10785,8 +10770,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18

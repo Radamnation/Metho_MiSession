@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: TitleScene
   m_EditorClassIdentifier: 
   SceneName: TitleScene
-  sceneAsset: {fileID: 102900000, guid: efe12c0501de1fa4e8f98f1a41e8ddf2, type: 3}
+  sceneAsset: {fileID: 102900000, guid: 1ea9d05576a62a246a12e7c33d9adb4d, type: 3}

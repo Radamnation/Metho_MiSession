@@ -42,9 +42,7 @@ public class UIManager : MonoBehaviour
 
     [SerializeField] private SceneData m_titleScene;
     [SerializeField] private SceneData m_gameScene;
-
-    [SerializeField] private string titleSceneName;
-    [SerializeField] private string gameSceneName;
+    [SerializeField] private SceneData m_endScene;
 
     private UIView m_previousView;
 
@@ -182,12 +180,37 @@ public class UIManager : MonoBehaviour
         SwitchView(m_titleView);
         InputSystem.Instance.ClearHandlers();
         InputSystem.Instance.AddHandler(Controller);
+        AudioManager.Instance.StartMusic();
         GameManager.Instance.UnpauseGame();
     }
 
     private void ClearPools(AsyncOperation _operation)
     {
         PoolManager.Instance.ResetPools();
+    }
+    
+    public void GoToEndScreen()
+    {
+        AudioManager.Instance.StopMusic();
+        Addressables.LoadAssetsAsync<Object>(new List<string> { m_endScene.SceneName },
+            _x => { }, Addressables.MergeMode.Union).Completed += LoadEndScreen;
+    }
+
+    private void LoadEndScreen(AsyncOperationHandle<IList<Object>> _object)
+    {
+        Addressables.LoadSceneAsync(m_endScene.SceneName, LoadSceneMode.Additive).Completed += StartEndScene;
+    }
+
+    private void StartEndScene(AsyncOperationHandle<SceneInstance> _scene)
+    {
+        if (GameManager.Instance.currentScene != default)
+        {
+            SceneManager.UnloadSceneAsync(GameManager.Instance.currentScene).completed += ClearPools;
+        }
+
+        GameManager.Instance.currentScene = SceneManager.GetSceneByName(m_endScene.SceneName);
+        InputSystem.Instance.ClearHandlers();
+        GameManager.Instance.UnpauseGame();
     }
 
     public void GoToGameScreen()
