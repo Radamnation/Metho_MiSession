@@ -5695,8 +5695,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Quit To Desktop
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-  m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
+  m_sharedMaterial: {fileID: 2777541580472264833, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5720,8 +5720,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -5830,8 +5830,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Level Up!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-  m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
+  m_sharedMaterial: {fileID: 2777541580472264833, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -5855,8 +5855,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -7986,8 +7986,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Retry
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-  m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
+  m_sharedMaterial: {fileID: 2777541580472264833, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -8011,8 +8011,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -9046,8 +9046,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Back To Title
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-  m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
+  m_sharedMaterial: {fileID: 2777541580472264833, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -9071,8 +9071,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 24
+  m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -10745,8 +10745,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: You Died...
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-  m_sharedMaterial: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
+  m_sharedMaterial: {fileID: 2777541580472264833, guid: 447f4ba729af9fe43af8cfabd61824e8, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -10770,8 +10770,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 48
-  m_fontSizeBase: 48
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -13027,21 +13027,9 @@ PrefabInstance:
       value: LevelUpButton (4)
       objectReference: {fileID: 0}
     - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_fontSizeBase
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
     - target: {fileID: 7477961865930120673, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13127,21 +13115,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_fontSizeBase
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
@@ -13178,21 +13154,9 @@ PrefabInstance:
       value: LevelUpButton (2)
       objectReference: {fileID: 0}
     - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_fontSizeBase
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
     - target: {fileID: 7477961865930120673, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13278,21 +13242,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_fontSizeBase
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
@@ -13855,21 +13807,9 @@ PrefabInstance:
       value: LevelUpButton (1)
       objectReference: {fileID: 0}
     - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_fontSizeBase
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
     - target: {fileID: 7477961865930120673, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -13955,21 +13895,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_fontSizeBase
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
@@ -14547,21 +14475,9 @@ PrefabInstance:
       value: LevelUpButton (3)
       objectReference: {fileID: 0}
     - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_fontSizeBase
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 5656720185498010747, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
     - target: {fileID: 7477961865930120673, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -14647,21 +14563,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontSize
-      value: 36
-      objectReference: {fileID: 0}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
       propertyPath: m_fontSizeBase
       value: 36
       objectReference: {fileID: 0}
-    - target: {fileID: 8294634229651575137, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: 2071079705263215816, guid: 40a39006c230c38488f943c82883cb1b, type: 2}
     m_RemovedComponents: []
     m_AddedGameObjects: []
   m_SourcePrefab: {fileID: 100100000, guid: 290bc2cbd6dc68a4abd6d4e3ba4699cb, type: 3}

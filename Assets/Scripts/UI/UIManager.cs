@@ -161,13 +161,13 @@ public class UIManager : MonoBehaviour
 
     public void GoToTitleScreen()
     {
-        Addressables.LoadAssetsAsync<Object>(new List<string> { "TitleScene" },
+        Addressables.LoadAssetsAsync<Object>(new List<string> { m_titleScene.SceneName },
             _x => { }, Addressables.MergeMode.Union).Completed += LoadTitleScreen;
     }
 
     private void LoadTitleScreen(AsyncOperationHandle<IList<Object>> _object)
     {
-        Addressables.LoadSceneAsync(titleSceneName, LoadSceneMode.Additive).Completed += StartTitleScene;
+        Addressables.LoadSceneAsync(m_titleScene.SceneName, LoadSceneMode.Additive).Completed += StartTitleScene;
     }
 
     private void StartTitleScene(AsyncOperationHandle<SceneInstance> _scene)
@@ -177,7 +177,7 @@ public class UIManager : MonoBehaviour
             SceneManager.UnloadSceneAsync(GameManager.Instance.currentScene).completed += ClearPools;
         }
 
-        GameManager.Instance.currentScene = SceneManager.GetSceneByName(titleSceneName);
+        GameManager.Instance.currentScene = SceneManager.GetSceneByName(m_titleScene.SceneName);
         SwitchView(m_mainView);
         SwitchView(m_titleView);
         InputSystem.Instance.ClearHandlers();
@@ -192,13 +192,13 @@ public class UIManager : MonoBehaviour
 
     public void GoToGameScreen()
     {
-        Addressables.LoadAssetsAsync<Object>(new List<string> { "GameScene" },
+        Addressables.LoadAssetsAsync<Object>(new List<string> { m_gameScene.SceneName },
             _x => { }, Addressables.MergeMode.Union).Completed += LoadGameScene;
     }
 
     private void LoadGameScene(AsyncOperationHandle<IList<Object>> _object)
     {
-        Addressables.LoadSceneAsync(gameSceneName, LoadSceneMode.Additive).Completed += StartGameScene;
+        Addressables.LoadSceneAsync(m_gameScene.SceneName, LoadSceneMode.Additive).Completed += StartGameScene;
     }
 
     private void StartGameScene(AsyncOperationHandle<SceneInstance> _scene)
@@ -208,7 +208,7 @@ public class UIManager : MonoBehaviour
             SceneManager.UnloadSceneAsync(GameManager.Instance.currentScene);
         }
 
-        GameManager.Instance.currentScene = SceneManager.GetSceneByName(gameSceneName);
+        GameManager.Instance.currentScene = SceneManager.GetSceneByName(m_gameScene.SceneName);
         SwitchView(m_mainView);
         InputSystem.Instance.ClearHandlers();
         InputSystem.Instance.AddHandler(Player.Instance.Controller);

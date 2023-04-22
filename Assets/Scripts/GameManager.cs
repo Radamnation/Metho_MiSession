@@ -23,15 +23,6 @@ public class GameManager : MonoBehaviour
     private bool m_gameIsPaused;
     public Scene currentScene;
 
-    private void Start()
-    {
-        foreach (var playerAttack in playerAttackList)
-        {
-            playerAttack.Initialize();
-        }
-        playerAttackList[Random.Range(0, playerAttackList.Count)].LevelUp();
-    }
-
     public PlayerAttackSO GetRandomAttack()
     {
         return playerAttackList[Random.Range(0, playerAttackList.Count)];

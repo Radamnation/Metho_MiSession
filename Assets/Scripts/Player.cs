@@ -89,6 +89,15 @@ public class Player : MonoBehaviour
         m_currentHealth = maxHealth;
 
         UIManager.Instance.UpdateExperience();
+        
+        foreach (var attack in attackList)
+        {
+            attack.Initialize();
+        }
+        attackList[Random.Range(0, attackList.Count)].LevelUp();
+        
+        m_currentLevel = 0;
+        UIManager.Instance.MainView.UpdateLevel();
     }
 
     private void Update()
@@ -100,16 +109,16 @@ public class Player : MonoBehaviour
         }
         
         TimeSurvived += Time.deltaTime;
-        if (TimeSurvived >= 300 && !GameManager.Instance.IsPaused())
+        if (TimeSurvived >= 1800 && !GameManager.Instance.IsPaused())
         {
-            TimeSurvived = 300;
+            TimeSurvived = 1800;
             if (TestManager.Instance.IsTesting)
             {
-                UIManager.Instance.DeathView.ChangeText("Test Complete...");
+                UIManager.Instance.DeathView.ChangeText("Test Complete!");
             }
             else
             {
-                UIManager.Instance.DeathView.ChangeText("You Win...");
+                UIManager.Instance.DeathView.ChangeText("You Win!");
             }
             GameManager.Instance.PauseGame();
             UIManager.Instance.ToggleDeathView();
