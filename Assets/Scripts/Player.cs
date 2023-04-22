@@ -89,14 +89,17 @@ public class Player : MonoBehaviour
         m_currentHealth = maxHealth;
 
         UIManager.Instance.UpdateExperience();
-        
-        foreach (var attack in attackList)
+
+        if (attackList.Count > 0)
         {
-            attack.Initialize();
+            foreach (var attack in attackList)
+            {
+                attack.Initialize();
+            }
+            attackList[Random.Range(0, attackList.Count)].LevelUp();
         }
-        attackList[Random.Range(0, attackList.Count)].LevelUp();
         
-        m_currentLevel = 0;
+        m_currentLevel = 1;
         UIManager.Instance.MainView.UpdateLevel();
     }
 
