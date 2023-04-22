@@ -36,6 +36,7 @@ public class Selector : MonoBehaviour
         
         OnClick?.Invoke(Color.white);
         ChangeBackgroundColor(Color.green);
+        onChange?.Invoke();
     }
 
     public void ChangeBackgroundColor(Color _color)
@@ -44,4 +45,9 @@ public class Selector : MonoBehaviour
         
         background.color = _color;
     }
+    
+    private Action onChange;
+    
+    internal void Subscribe(Action onChange)
+        => this.onChange += onChange;
 }
