@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
     }
 
     [SerializeField] private bool IsIntro;
+    [SerializeField] private RuntimeAnimatorController character1Controller;
+    [SerializeField] private RuntimeAnimatorController character2Controller;
 
     private Rigidbody2D m_rigidbody2D;
     private Collider2D m_collider2D;
@@ -85,6 +87,15 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        if (GameManager.Instance.CharacterSelected > 0)
+        {
+            m_animator.runtimeAnimatorController = character2Controller;
+        }
+        else
+        {
+            m_animator.runtimeAnimatorController = character1Controller;
+        }
+        
         m_visualTransform = m_animator.transform;
         m_currentHealth = maxHealth;
 

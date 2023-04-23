@@ -16,7 +16,12 @@ MonoBehaviour:
   m_Data:
     m_SerializedData: []
   m_GUID: 6e5fad92acf1dfa4aa012771cb03105b
-  m_SerializeEntries: []
+  m_SerializeEntries:
+  - m_GUID: 047d43bc2aaedeb4793b76a57ba4a84b
+    m_Address: Assets/Sprites/Player-0002.png
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}
   m_SchemaSet:

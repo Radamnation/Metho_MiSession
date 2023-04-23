@@ -1127,6 +1127,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   IsIntro: 0
+  character1Controller: {fileID: 9100000, guid: 06c2c34cbace9a045bb784aacaa22eb0, type: 2}
+  character2Controller: {fileID: 9100000, guid: c39f4d9c3b8adbb4092f30eb22575602, type: 2}
   movementSpeed: 4
   attackList:
   - {fileID: 11400000, guid: 7c91cf80870b41541bef99b282eb024d, type: 2}
