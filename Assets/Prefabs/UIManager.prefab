@@ -12479,6 +12479,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1779793974741569641}
@@ -12487,7 +12491,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8112372143590624384}
     - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Target
+      value: 
+      objectReference: {fileID: 8112372143590624384}
+    - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
@@ -12499,6 +12511,10 @@ PrefabInstance:
       value: Click
       objectReference: {fileID: 0}
     - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_MethodName
+      value: Click
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: StartView, KittySurvivor
       objectReference: {fileID: 0}
@@ -12507,11 +12523,19 @@ PrefabInstance:
       value: Selector, KittySurvivor
       objectReference: {fileID: 0}
     - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_TargetAssemblyTypeName
+      value: Selector, KittySurvivor
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
+      value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6567091086665803453, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[2].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
     - target: {fileID: 7107665071676458989, guid: 877f6a5b12645104eba7d6cc8afb9a2d, type: 3}

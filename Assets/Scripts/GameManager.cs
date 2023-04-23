@@ -17,11 +17,24 @@ public class GameManager : MonoBehaviour
         Destroy(gameObject);
     }
 
+    public int CharacterSelected = -1;
+    public int LevelSelected = -1;
+
     [SerializeField] private int enemyLimit;
     [SerializeField] private List<PlayerAttackSO> playerAttackList;
 
     private bool m_gameIsPaused;
     public Scene currentScene;
+
+    public void SetCharactedSelection(int _selection)
+    {
+        CharacterSelected = _selection;
+    }
+
+    public void SetLevelSelection(int _selection)
+    {
+        LevelSelected = _selection;
+    }
 
     public PlayerAttackSO GetRandomAttack()
     {

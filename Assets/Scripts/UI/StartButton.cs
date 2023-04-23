@@ -20,8 +20,8 @@ public class StartButton : MonoBehaviour
 
     public void UpdateInteractability()
     {
-        if (UIManager.Instance.StartView.CharacterSelected
-            && UIManager.Instance.StartView.LevelSelected)
+        if (GameManager.Instance.CharacterSelected > -1
+            && GameManager.Instance.LevelSelected > -1)
         {
             m_button.interactable = true;
             return;

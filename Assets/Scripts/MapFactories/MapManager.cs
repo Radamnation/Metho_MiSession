@@ -25,10 +25,9 @@ public class MapManager : MonoBehaviour
 
     private void Start()
     {
-        if (currentMap == null)
-        {
-            currentMap = mapList[Random.Range(0, mapList.Count)];
-        }
+        currentMap = GameManager.Instance.LevelSelected == -1
+            ? mapList[Random.Range(0, mapList.Count)]
+            : mapList[GameManager.Instance.LevelSelected];
         mapBlocks = currentMap.GenerateMap();
     }
 

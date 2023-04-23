@@ -18,21 +18,6 @@ public class StartView : UIView
     [SerializeField] private StartButton m_startButton;
 
     public List<Selector> Selectors;
-    private bool characterSelected;
-    private bool levelSelected;
-    
-    public bool CharacterSelected
-    {
-        get => characterSelected;
-    }
-    
-    public bool LevelSelected
-    {
-        get => levelSelected;
-    }
-    
-    private int currentPlayerChoice;
-    private int currentLevelChoice;
 
     private void Awake()
     {
@@ -42,16 +27,6 @@ public class StartView : UIView
         Selectors.Add(levelSelector2);
     }
 
-    public void SetCharacterSelected()
-    {
-        characterSelected = true;
-    }
-
-    public void SetLevelSelected()
-    {
-        levelSelected = true;
-    }
-
     public override void OnShow()
     {
         characterSelector1.Interactable = true;
@@ -59,8 +34,8 @@ public class StartView : UIView
         characterSelector2.Interactable = SaveManager.Instance.SaveFile.extraSkinUnlocked;
         characterSelector2.Initialize();
 
-        characterSelected = false;
-        levelSelected = false;
+        GameManager.Instance.SetCharactedSelection(-1);
+        GameManager.Instance.SetLevelSelection( -1);
         
         m_startButton.UpdateInteractability();
         
