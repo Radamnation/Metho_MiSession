@@ -23,6 +23,12 @@ MonoBehaviour:
     m_SerializedLabels:
     - EndScene
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8260cdbc7164d3347bf057721e4eff37
+    m_Address: NyanCat
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - EndScene
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}
   m_SchemaSet:

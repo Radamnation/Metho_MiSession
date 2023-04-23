@@ -2,8 +2,6 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Collections;
 using System;
-using PlasticGui.Configuration.CloudEdition;
-using TMPro;
 using UnityEngine;
 using UnityEngine.Networking;
 

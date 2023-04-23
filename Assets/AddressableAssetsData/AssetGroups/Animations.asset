@@ -451,6 +451,54 @@ MonoBehaviour:
     - GameScene
     - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 047d43bc2aaedeb4793b76a57ba4a84b
+    m_Address: Player-0002
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c39f4d9c3b8adbb4092f30eb22575602
+    m_Address: Player0002Animator
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9b9d13513c92062459dcf5ef7eef5e33
+    m_Address: Player0002BackIdle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: faaa647cdb775c4478aa56da05aaca4f
+    m_Address: Player0002BackRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: a64e8c65217f13144965e718e85b9142
+    m_Address: Player0002FrontIdle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0e05941a8cf2e8f4091c4d1548a4a216
+    m_Address: Player0002FrontRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 596fbcb3aee889c4e9cc29878c90b821
+    m_Address: Player0002SideIdle
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: be654bf30b92d1640b3191a65c275b79
+    m_Address: Player0002SideRun
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}
   m_SchemaSet:

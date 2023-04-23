@@ -66,6 +66,12 @@ MonoBehaviour:
     - GameScene
     - TitleScene
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 877f6a5b12645104eba7d6cc8afb9a2d
+    m_Address: Selector
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - TitleScene
+    FlaggedDuringContentUpdateRestriction: 0
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: b298ed5f3bf540c4f9bb7085713ee4df, type: 2}
   m_SchemaSet:
