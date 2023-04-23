@@ -17,8 +17,8 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 9db82e476e1ad25488c6e7d192862e19
   m_SerializeEntries:
-  - m_GUID: c285eaa6038513847ab185dbb259d958
-    m_Address: Nyan Cat
+  - m_GUID: 8938e5d03245d5249a71b4fa1430ef04
+    m_Address: Nyan-Cat
     m_ReadOnly: 0
     m_SerializedLabels:
     - EndScene
